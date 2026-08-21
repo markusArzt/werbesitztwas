@@ -1,0 +1,7 @@
+---
+const { titel = 'Das sagt die Gegenseite' } = Astro.props;
+---
+<section class="abschnitt abschnitt--gegenseite">
+  <h2>{titel}</h2>
+  <slot />
+</section>

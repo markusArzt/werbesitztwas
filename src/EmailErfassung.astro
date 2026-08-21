@@ -1,0 +1,22 @@
+---
+import { pfad } from '../lib/pfad';
+const { titel = 'Alle zwei Wochen eine Zahl und eine Grafik' } = Astro.props;
+---
+<aside class="mail">
+  <p>
+    <strong class="mail__titel">{titel}</strong>
+    Kein Spam, keine Weitergabe, jederzeit abbestellbar.
+  </p>
+  <!-- GitHub Pages kann keine Formulare entgegennehmen. Vor dem Livegang hier
+       die Action des E-Mail-Dienstes eintragen oder eine externe Funktion anbinden.
+       Niemals einen API-Schluessel im Browser-Code hinterlegen. -->
+  <form method="post" action="#" novalidate>
+    <label class="sr-only" for="mail">E-Mail-Adresse</label>
+    <input id="mail" type="email" name="email" required autocomplete="email" placeholder="name@beispiel.at" />
+    <button type="submit">Eintragen</button>
+  </form>
+  <small>
+    Anmeldung mit Bestätigungsmail (Double-Opt-in). Details in der
+    <a href={pfad('/datenschutz/')}>Datenschutzerklärung</a>.
+  </small>
+</aside>

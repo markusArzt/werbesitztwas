@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import Basis from '../../layouts/Basis.astro';
+import EmailErfassung from '../../components/EmailErfassung.astro';
+import { MARKE, EMAIL_AKTIV } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const alle = await getCollection('mythen');
+  return alle.map((eintrag) => ({ params: { slug: eintrag.id }, props: { eintrag } }));
+}
+
+const { eintrag } = Astro.props;
+const { Content } = await render(eintrag);
+const d = eintrag.data;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [{
+    '@type': 'Question',
+    name: d.frage,
+    acceptedAnswer: { '@type': 'Answer', text: d.kurzantwort },
+  }],
+};
+---
+<Basis title={`${d.title} | ${MARKE}`} beschreibung={d.beschreibung}>
+  <div class="apparat" slot="rand">
+    <p class="etikett">Mythos</p>
+    <p class="etikett apparat__stand">Stand {d.stand}</p>
+  </div>
+
+  <h1>{d.frage}</h1>
+  <div class="kasten kasten--kurz">
+    <p class="etikett">Kurz</p>
+    <p class="lead">{d.kurzantwort}</p>
+  </div>
+  <Content />
+  {EMAIL_AKTIV && <EmailErfassung />}
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</Basis>

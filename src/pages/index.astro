@@ -1,0 +1,331 @@
+---
+import { getCollection } from 'astro:content';
+import Basis from '../layouts/Basis.astro';
+import EmailErfassung from '../components/EmailErfassung.astro';
+import { quellen } from '../lib/quellen';
+import { pfad } from '../lib/pfad';
+import { MARKE, UNTERTITEL, EMAIL_AKTIV } from '../lib/site';
+
+const module = (await getCollection('argumente')).sort((a, b) =>
+  a.data.modul.localeCompare(b.data.modul)
+);
+const median = quellen.at_median_nettovermoegen;
+const mittel = quellen.at_mittelwert_nettovermoegen;
+const top10 = quellen.at_schwelle_top10;
+const top5 = quellen.at_schwelle_top5;
+---
+<Basis title={`${MARKE} | Vermögen in Österreich`} beschreibung={UNTERTITEL}>
+  <p class="etikett" slot="rand">Startseite</p>
+
+  <h1>Der Durchschnitt beschreibt niemanden</h1>
+
+  <!-- Der Abstand zwischen den beiden Werten ist die Aussage der Seite,
+       deshalb ist er hier das groesste Element. Beide Werte stammen aus der
+       Registry und verweisen dorthin. -->
+  <figure class="paar">
+    <div class="paar__zeile">
+      <p class="etikett">{median.beschreibung}</p>
+      <p class="paar__wert"><a href={pfad('/daten/#at_median_nettovermoegen')}>{median.wert}</a></p>
+    </div>
+    <div class="paar__abstand">
+      <p>Dieser Abstand ist die Ungleichheit.</p>
+    </div>
+    <div class="paar__zeile">
+      <p class="etikett">{mittel.beschreibung}</p>
+      <p class="paar__wert"><a href={pfad('/daten/#at_mittelwert_nettovermoegen')}>{mittel.wert}</a></p>
+    </div>
+    <figcaption>
+      Das mittlere Haushaltsvermögen in Österreich liegt bei <strong>{median.wert}</strong>.
+      Der Durchschnitt liegt bei <strong>{mittel.wert}</strong>.
+    </figcaption>
+  </figure>
+
+  <!-- Schätz-Widget: einzige JavaScript-Insel der Seite.
+       Die vier Schwellen kommen aus der Registry und werden zur Bauzeit
+       als data-Attribute eingebettet - nicht die Datei selbst. -->
+  <section
+    class="rechner"
+    id="rechner"
+    aria-labelledby="rechner-titel"
+    data-median={median.zahl}
+    data-mittel={mittel.zahl}
+    data-top10={top10.zahl}
+    data-top5={top5.zahl}
+  >
+    <h2 id="rechner-titel">Wo stehst du?</h2>
+
+    <!-- Schritt 1: Vermögen eingeben -->
+    <div class="rechner__schritt" id="rechner-s1">
+      <label class="rechner__frage" for="vermoegen">
+        Wie hoch ist euer Haushaltsvermögen, grob geschätzt?
+      </label>
+      <p class="rechner__hilfe">
+        Immobilien, Erspartes, Wertpapiere — minus Schulden.
+      </p>
+      <div class="rechner__feld">
+        <input
+          id="vermoegen"
+          type="text"
+          inputmode="numeric"
+          autocomplete="off"
+          placeholder="z.&thinsp;B. 200.000"
+        />
+        <span class="rechner__euro" aria-hidden="true">€</span>
+      </div>
+      <p class="rechner__fehler" id="rechner-fehler" hidden></p>
+      <button type="button" class="rechner__knopf" id="rechner-weiter">
+        Weiter
+      </button>
+    </div>
+
+    <!-- Schritt 2: Selbsteinschätzung -->
+    <div class="rechner__schritt" id="rechner-s2" hidden>
+      <p class="rechner__frage" tabindex="-1">
+        Wo, glaubst du, stehst du damit im Vergleich zu anderen
+        österreichischen Haushalten?
+      </p>
+      <div
+        class="rechner__optionen"
+        role="group"
+        aria-label="Selbsteinschätzung"
+        id="rechner-optionen"
+      >
+        <button type="button" data-band="0">Untere Hälfte</button>
+        <button type="button" data-band="1">Mitte</button>
+        <button type="button" data-band="2">Oberes Zehntel</button>
+        <button type="button" data-band="3">Oberste 5 Prozent</button>
+      </div>
+    </div>
+
+    <!-- Schritt 3: Auflösung -->
+    <div class="rechner__schritt" id="rechner-s3" hidden aria-live="polite">
+    </div>
+  </section>
+
+  <script is:inline define:vars={{ MEDIAN: median.zahl, MITTEL: mittel.zahl, TOP10: top10.zahl, TOP5: top5.zahl, LINK_MODUL_A: pfad('/argumente/verteilung-oesterreich/'), LINK_DATEN: pfad('/daten/') }}>
+  (function () {
+    'use strict';
+
+    /* --- Hilfsfunktionen ------------------------------------------------- */
+
+    // Zahl parsen: deutsche Eingabe (Punkte als Tausender, Komma als Dezimal)
+    function parse(str) {
+      if (!str) return NaN;
+      var s = str.trim().replace(/\s/g, '').replace(/\./g, '');
+      // Komma als Dezimaltrenner
+      s = s.replace(',', '.');
+      var n = parseFloat(s);
+      return (isFinite(n) && n >= 0) ? Math.round(n) : NaN;
+    }
+
+    // Zahl deutsch formatieren: 1200000 → "1.200.000"
+    function fmt(n) {
+      if (n < 0) return '−' + fmt(-n);
+      var s = Math.round(n).toString();
+      var out = '';
+      for (var i = s.length - 1, c = 0; i >= 0; i--, c++) {
+        if (c > 0 && c % 3 === 0) out = '.' + out;
+        out = s[i] + out;
+      }
+      return out;
+    }
+
+    // Band ermitteln: 0–4
+    // 0 = unter Median, 1 = Median–Mittel, 2 = Mittel–Top10,
+    // 3 = Top10–Top5, 4 = über Top5
+    function band(v) {
+      if (v < MEDIAN) return 0;
+      if (v < MITTEL) return 1;
+      if (v < TOP10) return 2;
+      if (v < TOP5) return 3;
+      return 4;
+    }
+
+    var BANDNAMEN = [
+      'Unter dem Median',
+      'Zwischen Median und Durchschnitt',
+      'Über dem Durchschnitt',
+      'Im reichsten Zehntel',
+      'In den reichsten 5\u00A0Prozent'
+    ];
+
+    // Schätzoptionen → Band-Bereiche, die als „richtig" gelten
+    // 0 = Untere Hälfte → Band 0
+    // 1 = Mitte → Band 1 oder 2
+    // 2 = Oberes Zehntel → Band 3
+    // 3 = Oberste 5 % → Band 4
+    function schaetzungRichtig(schaetzung, tatsaechlich) {
+      if (schaetzung === 0) return tatsaechlich === 0;
+      if (schaetzung === 1) return tatsaechlich === 1 || tatsaechlich === 2;
+      if (schaetzung === 2) return tatsaechlich === 3;
+      return tatsaechlich === 4;
+    }
+
+    var SCHAETZ_NAMEN = [
+      'in der unteren Hälfte',
+      'in der Mitte',
+      'im oberen Zehntel',
+      'in den obersten 5\u00A0Prozent'
+    ];
+
+    // Klasse für sanftes Einblenden hinzufügen (nur wenn Bewegung erlaubt)
+    var darfBewegen = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function einblenden(el) {
+      el.hidden = false;
+      if (darfBewegen) el.classList.add('rechner--einblenden');
+    }
+
+    /* --- DOM-Referenzen -------------------------------------------------- */
+
+    var schritt1 = document.getElementById('rechner-s1');
+    var schritt2 = document.getElementById('rechner-s2');
+    var schritt3 = document.getElementById('rechner-s3');
+    var eingabe  = document.getElementById('vermoegen');
+    var fehlerEl = document.getElementById('rechner-fehler');
+    var weiterKnopf = document.getElementById('rechner-weiter');
+    var optionen = document.getElementById('rechner-optionen');
+
+    var wert = 0;
+
+    /* --- Schritt 1: Weiter-Knopf ----------------------------------------- */
+
+    function zeigeSchritt2() {
+      wert = parse(eingabe.value);
+      if (isNaN(wert)) {
+        fehlerEl.textContent = 'Bitte eine Zahl eingeben — grob reicht.';
+        fehlerEl.hidden = false;
+        eingabe.focus();
+        return;
+      }
+      fehlerEl.hidden = true;
+      // Eingabe sperren, damit klar ist, dass der Wert fixiert ist
+      eingabe.readOnly = true;
+      weiterKnopf.hidden = true;
+      einblenden(schritt2);
+      // Fokus auf die Frage legen
+      schritt2.querySelector('.rechner__frage').focus();
+    }
+
+    weiterKnopf.addEventListener('click', zeigeSchritt2);
+    eingabe.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); zeigeSchritt2(); }
+    });
+
+    /* --- Schritt 2: Schätzung wählen ------------------------------------- */
+
+    optionen.addEventListener('click', function (e) {
+      var knopf = e.target.closest('button[data-band]');
+      if (!knopf) return;
+      var schaetzung = parseInt(knopf.getAttribute('data-band'), 10);
+      zeigeErgebnis(schaetzung);
+    });
+
+    /* --- Schritt 3: Ergebnis aufbauen ------------------------------------ */
+
+    function zeigeErgebnis(schaetzung) {
+      var tatsaechlich = band(wert);
+      var richtig = schaetzungRichtig(schaetzung, tatsaechlich);
+
+      var html = '';
+
+      // Trennlinie
+      html += '<hr class="rechner__trennlinie">';
+
+      // Band-Einordnung
+      html += '<p class="rechner__band">' + BANDNAMEN[tatsaechlich] + '</p>';
+
+      // Formatierter Wert, groß wie das Zahlenpaar
+      html += '<p class="rechner__wert">' + fmt(wert) + '\u00A0€</p>';
+
+      // Vergleich mit Selbsteinschätzung
+      if (richtig) {
+        html += '<p class="rechner__vergleich"><strong>Richtig eingeschätzt.</strong> ';
+        html += 'Du hast dich ' + SCHAETZ_NAMEN[schaetzung] + ' gesehen — das stimmt.</p>';
+      } else {
+        html += '<p class="rechner__vergleich">Du hast dich ';
+        html += SCHAETZ_NAMEN[schaetzung] + ' eingeschätzt — ';
+        html += 'tatsächlich liegst du laut den Daten ';
+        // Obere Grenze jeder Schätzung (Band-Index):
+        // 0→0, 1→2 (Mitte umfasst Band 1+2), 2→3, 3→4
+        var oben = [0, 2, 3, 4][schaetzung];
+        if (tatsaechlich > oben) {
+          html += '<strong>höher</strong>.';
+        } else {
+          html += '<strong>niedriger</strong>.';
+        }
+        html += '</p>';
+      }
+
+      // Kontextzeile mit den vier Schwellen
+      html += '<p class="rechner__kontext">';
+      html += 'Der Median liegt bei ' + fmt(MEDIAN) + '\u00A0€, ';
+      html += 'der Durchschnitt bei ' + fmt(MITTEL) + '\u00A0€. ';
+      html += 'Ab ' + fmt(TOP10) + '\u00A0€ gehört ein Haushalt zum reichsten Zehntel, ';
+      html += 'ab ' + fmt(TOP5) + '\u00A0€ zu den reichsten 5\u00A0Prozent.';
+      html += '</p>';
+
+      // Datenlücke: nur bei Band 4 (über 5-%-Schwelle), in Messing
+      if (tatsaechlich === 4) {
+        html += '<p class="rechner__luecke">';
+        html += 'Oberhalb von ' + fmt(TOP5) + '\u00A0€ gibt es keine amtliche ';
+        html += 'Einordnung mehr — wie viel die reichsten Haushalte genau ';
+        html += 'besitzen, ist in Österreich nicht erhoben. ';
+        html += '<a href="' + LINK_MODUL_A + '">Warum das so ist\u00A0→</a>';
+        html += '</p>';
+      }
+
+      // Verweis auf Modul A (wenn nicht schon in der Lücke verlinkt)
+      if (tatsaechlich < 4) {
+        html += '<p class="rechner__weiter-link">';
+        html += '<a href="' + LINK_MODUL_A + '">Die ganze Verteilung im Detail\u00A0→</a>';
+        html += '</p>';
+      }
+
+      // Nochmal-Knopf
+      html += '<button type="button" class="rechner__nochmal" id="rechner-nochmal">';
+      html += 'Nochmal versuchen';
+      html += '</button>';
+
+      schritt3.innerHTML = html;
+      einblenden(schritt3);
+      // Optionen ausblenden
+      schritt2.hidden = true;
+
+      // Nochmal-Knopf verdrahten
+      document.getElementById('rechner-nochmal').addEventListener('click', zuruecksetzen);
+    }
+
+    /* --- Zurücksetzen ---------------------------------------------------- */
+
+    function zuruecksetzen() {
+      schritt3.hidden = true;
+      schritt3.innerHTML = '';
+      schritt2.hidden = true;
+      eingabe.readOnly = false;
+      eingabe.value = '';
+      weiterKnopf.hidden = false;
+      fehlerEl.hidden = true;
+      eingabe.focus();
+    }
+  })();
+  </script>
+
+  {EMAIL_AKTIV && <EmailErfassung titel="Bleib dran" />}
+
+  <h2>Die Fakten in sechs Modulen</h2>
+  <ul class="karten">
+    {module.map((m) => (
+      <li>
+        <a href={pfad(`/argumente/${m.id}/`)}>
+          <span class="karten__marke" aria-hidden="true">{m.data.modul}</span>
+          <strong><span class="sr-only">Modul {m.data.modul}: </span>{m.data.title}</strong>
+          <span>{m.data.beschreibung}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <p class="fuss__pfad">
+    <a href={pfad('/daten/')}>Alle Zahlen mit Quelle und Datenstand ansehen</a>
+  </p>
+</Basis>

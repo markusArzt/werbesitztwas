@@ -1,0 +1,1299 @@
+/* ===========================================================================
+   Wer besitzt was? — Gestaltungsschicht
+   ---------------------------------------------------------------------------
+   Bildidee: ein amtliches Register mit einer sichtbaren Leerstelle.
+   Papier statt Weiß, Stempelviolett für die eigene Stimme, Messing für alles,
+   was nicht gemessen ist. Die Schraffur ist das Signaturelement und bedeutet
+   an jeder Stelle dasselbe: hier hört das Wissen auf.
+
+   Schriften liegen in src/schrift/ und werden hier über relative Pfade
+   eingebunden. Vite hasht sie und setzt den Basispfad — kein Google-CDN.
+   =========================================================================== */
+
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  src: url('../schrift/archivo-latin.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  src: url('../schrift/archivo-latin-ext.woff2') format('woff2-variations');
+  unicode-range: U+0100-017F, U+018F, U+0192, U+01A0-01A1, U+01AF-01B0,
+    U+0218-021B, U+2020-2021, U+2113, U+20A0-20BF;
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('../schrift/sourceserif-latin.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('../schrift/sourceserif-latin-ext.woff2') format('woff2-variations');
+  unicode-range: U+0100-017F, U+018F, U+0192, U+01A0-01A1, U+01AF-01B0,
+    U+0218-021B, U+2020-2021, U+2113, U+20A0-20BF;
+}
+
+/* --- Token: Farbe -------------------------------------------------------- */
+
+:root {
+  /* Bestehende Namen, neue Werte. Die Grafiken lesen sie unverändert. */
+  --text: #191d18;
+  --text-leise: #555c53;
+  --linie: #c4c8bb;
+  --flaeche: #edeee7;
+  --flaeche-ruhig: #dde0d5;
+  --akzent: #46356f;
+  --warnung: #7a5f06;
+
+  /* Neu, klar getrennt von den --daten-*-Variablen der Grafiken. */
+  --linie-stark: #8a9182;
+  --akzent-flaeche: #ddd7ee;
+  --akzent-text: #f4f4ef;
+
+  /* Maße */
+  --breite: 34rem;      /* Textmaß, war 42rem */
+  --rand: 9.5rem;       /* Marginalspalte links */
+  --lh: 1.62;
+  --radius: 3px;
+  --stufe: 2.75rem;     /* Abstand zwischen Abschnitten */
+
+  /* Schrift */
+  --schrift-display: 'Archivo', 'Archivo Variable', system-ui, sans-serif;
+  --schrift-text: 'Source Serif 4', 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
+  --schrift-kennung: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Signatur: die Leerstelle. Dieselbe Geometrie wie das Muster in den SVGs. */
+  --schraffur: repeating-linear-gradient(45deg,
+    var(--warnung) 0 2.4px, transparent 2.4px 7px);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #e8eae2;
+    --text-leise: #a2aa9c;
+    --linie: #383d36;
+    --flaeche: #171916;
+    --flaeche-ruhig: #22261f;
+    --akzent: #b6a6ea;
+    --warnung: #d9b752;
+
+    --linie-stark: #6a7166;
+    --akzent-flaeche: #2b2547;
+    --akzent-text: #14120f;
+
+    color-scheme: dark;
+  }
+}
+
+/* --- Token: Datengrafiken ------------------------------------------------
+   Namen unverändert, damit src/lib/grafiken.mjs nicht angefasst werden muss.
+   --daten-1 ist die Masse der Haushalte, --daten-3 der konzentrierte Anteil,
+   --daten-unbekannt gehört zur Schraffur und heißt überall „nicht gemessen". */
+
+:root {
+  --daten-1: #c9ccc0;
+  --daten-2: #7f8a7c;
+  --daten-3: #46356f;
+  --daten-unbekannt: #7a5f06;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --daten-1: #333831;
+    --daten-2: #79857a;
+    --daten-3: #8f7fd0;
+    --daten-unbekannt: #d9b752;
+  }
+}
+
+/* --- Grundlage ----------------------------------------------------------- */
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--flaeche);
+  color: var(--text);
+  font-family: var(--schrift-text);
+  font-size: 1.0625rem;
+  line-height: var(--lh);
+  font-variant-numeric: proportional-nums;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Zahlenvergleiche brauchen gleich breite Ziffern. Überall dort, wo Zahlen
+   untereinander stehen, ist tnum eingeschaltet. */
+.zahl, table, .register, .kennwert, .etikett,
+h1, h2, h3, .kopf, .fuss, .marke {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* --- Raster --------------------------------------------------------------
+   Marginalspalte links für den Apparat (Modulkennung, Stand, Wegweiser),
+   daneben die Textbahn. Die Textbahn steht auf jedem Seitentyp an derselben
+   Stelle, damit beim Wechsel nichts springt. */
+
+.raster {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 2.5rem;
+  max-width: calc(var(--breite) + 2.5rem);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+.rand { min-width: 0; }
+.bahn { min-width: 0; }
+
+@media (min-width: 62rem) {
+  .raster {
+    grid-template-columns: var(--rand) minmax(0, var(--breite));
+    max-width: calc(var(--rand) + var(--breite) + 2.5rem + 2.5rem);
+  }
+}
+
+/* Kopf und Fuß nutzen dieselbe Bahn, damit die linke Kante durchläuft. */
+.wrap {
+  width: 100%;
+  max-width: calc(var(--breite) + 2.5rem);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+@media (min-width: 62rem) {
+  .wrap { max-width: calc(var(--rand) + var(--breite) + 5rem); }
+}
+
+/* --- Typografie ---------------------------------------------------------- */
+
+h1, h2, h3 {
+  font-family: var(--schrift-display);
+  font-weight: 620;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2rem, 1.25rem + 3.1vw, 2.9rem);
+  font-stretch: 92%;
+  line-height: 1.05;
+  letter-spacing: -0.021em;
+  margin: 0 0 0.4rem;
+}
+
+/* Signatur: unter jeder Seitenüberschrift läuft eine Regel, die zu einem
+   Fünftel schraffiert endet. Sie sagt dasselbe wie jede Grafik der Seite —
+   der letzte Teil ist nicht gemessen. */
+h1::after {
+  content: '';
+  display: block;
+  height: 6px;
+  margin: 0.85rem 0 1.4rem;
+  background:
+    linear-gradient(to right, var(--text) 0 78%, transparent 78%),
+    var(--schraffur);
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-stretch: 96%;
+  line-height: 1.2;
+  margin: var(--stufe) 0 0.7rem;
+}
+h2::before {
+  content: '';
+  display: block;
+  width: 2.25rem;
+  height: 3px;
+  margin-bottom: 0.7rem;
+  background: var(--text);
+}
+h3 {
+  font-size: 1.08rem;
+  font-weight: 680;
+  margin: 1.9rem 0 0.4rem;
+}
+
+@media (min-width: 40rem) {
+  h2 { font-size: 1.55rem; }
+}
+
+p { margin: 0 0 1.05rem; }
+
+ul, ol { padding-left: 1.15rem; }
+li { margin: 0.35rem 0; }
+
+strong { font-weight: 650; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--linie);
+  margin: var(--stufe) 0;
+}
+
+/* Etikett: die Sprache des Apparats. Archivo breitlaufend, gesperrt, klein —
+   die Anmutung von Formularfeldbezeichnungen, ohne Aktenstaub. */
+.etikett {
+  font-family: var(--schrift-display);
+  font-size: 0.7rem;
+  font-weight: 640;
+  font-stretch: 116%;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--text-leise);
+  line-height: 1.4;
+}
+
+/* Kennwert: große Zahl im Lauftext, tabellarisch gesetzt. */
+.kennwert {
+  font-family: var(--schrift-display);
+  font-weight: 660;
+  font-stretch: 96%;
+  letter-spacing: -0.01em;
+}
+
+.kennung {
+  font-family: var(--schrift-kennung);
+  font-size: 0.78em;
+  letter-spacing: -0.01em;
+  color: var(--text-leise);
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--linie-stark);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+a:hover { text-decoration-color: var(--akzent); }
+
+:focus-visible {
+  outline: 2px solid var(--akzent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  margin: 1.5rem 0;
+}
+th, td {
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--linie);
+  vertical-align: top;
+}
+th {
+  font-family: var(--schrift-display);
+  font-weight: 640;
+  font-size: 0.8rem;
+  font-stretch: 108%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-leise);
+}
+
+/* --- Sprungmarke --------------------------------------------------------- */
+
+.sprung {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 20;
+}
+.sprung:focus {
+  left: 0.75rem;
+  top: 0.75rem;
+  background: var(--akzent);
+  color: var(--akzent-text);
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+
+/* --- Entwurfshinweis ----------------------------------------------------- */
+
+.entwurf {
+  background: var(--flaeche-ruhig);
+  border-bottom: 1px solid var(--linie);
+  padding: 0.45rem 0;
+}
+.entwurf p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--schrift-display);
+  font-size: 0.8rem;
+  color: var(--text-leise);
+}
+.entwurf p::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 1.6rem;
+  height: 0.7rem;
+  background: var(--schraffur);
+  border: 1px solid var(--warnung);
+}
+
+/* --- Kopf ---------------------------------------------------------------- */
+
+.kopf {
+  border-bottom: 2px solid var(--text);
+  margin-bottom: 2rem;
+}
+.kopf__zeile {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  padding-block: 1.1rem 0.9rem;
+}
+.kopf__marke {
+  font-family: var(--schrift-display);
+  font-weight: 700;
+  font-stretch: 88%;
+  font-size: 1.22rem;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+.kopf nav {
+  display: flex;
+  gap: 1.1rem;
+}
+.kopf nav a {
+  font-family: var(--schrift-display);
+  font-size: 0.78rem;
+  font-weight: 640;
+  font-stretch: 112%;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+.kopf nav a:hover { border-bottom-color: var(--linie-stark); }
+.kopf nav a[aria-current='page'] {
+  border-bottom-color: var(--akzent);
+  color: var(--akzent);
+}
+
+/* --- Marginalspalte ------------------------------------------------------ */
+
+.apparat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.1rem;
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--linie);
+}
+.apparat__kennung {
+  font-family: var(--schrift-display);
+  font-weight: 700;
+  font-stretch: 112%;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  padding: 0.1rem 0.45rem;
+  border: 2px solid var(--text);
+  border-radius: 2px;
+}
+.apparat__stand { margin: 0; }
+
+/* Wegweiser durch die sechs Module. Die Reihenfolge ist echt: jedes Modul
+   verweist im Frontmatter auf das nächste. */
+.spur {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.spur a {
+  display: block;
+  min-width: 1.75rem;
+  padding: 0.2rem 0;
+  text-align: center;
+  font-family: var(--schrift-display);
+  font-size: 0.8rem;
+  font-weight: 640;
+  font-stretch: 110%;
+  text-decoration: none;
+  color: var(--text-leise);
+  border: 1px solid var(--linie);
+  border-radius: 2px;
+}
+.spur a:hover { border-color: var(--linie-stark); color: var(--text); }
+.spur__hier a,
+.spur a[aria-current='page'] {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--flaeche);
+}
+
+@media (min-width: 62rem) {
+  .apparat {
+    display: block;
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin-top: 0.3rem;
+  }
+  .apparat__kennung { display: inline-block; margin-bottom: 0.75rem; }
+  .apparat__stand { margin-bottom: 1.1rem; }
+  .spur { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+  .spur a { text-align: left; padding: 0.15rem 0.5rem; }
+}
+
+/* --- Belegverweise ------------------------------------------------------
+   Das Remark-Plugin setzt <sup class="beleg"><a>Quelle</a></sup>. Der Text
+   bleibt lesbar für Screenreader und Druck, tritt visuell aber zurück. */
+
+.beleg {
+  font-size: 0.58em;
+  line-height: 0;
+  margin-left: 0.12em;
+  white-space: nowrap;
+  font-family: var(--schrift-display);
+  font-stretch: 112%;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.beleg a {
+  color: var(--text-leise);
+  text-decoration: none;
+  border-bottom: 1px solid var(--linie-stark);
+}
+.beleg a:hover { color: var(--akzent); border-bottom-color: var(--akzent); }
+.beleg--strittig a {
+  color: var(--warnung);
+  border-bottom-style: dashed;
+  border-bottom-color: var(--warnung);
+}
+.beleg--fehlt {
+  color: var(--akzent);
+  font-weight: 700;
+  font-size: 0.7em;
+}
+
+/* --- Kästen und Abschnitte ---------------------------------------------- */
+
+.kasten {
+  border-left: 3px solid var(--linie-stark);
+  padding: 0.1rem 0 0.1rem 1.25rem;
+  margin: 1.9rem 0;
+}
+.kasten h2::before, .kasten h3::before { display: none; }
+.kasten h2, .kasten h3 { margin-top: 0; }
+.kasten > :first-child { margin-top: 0; }
+.kasten > :last-child { margin-bottom: 0; }
+.kasten--kurz { border-left-color: var(--akzent); }
+.kasten--kurz .lead { margin-bottom: 0; }
+
+/* Abschnitte, die das Modul-Template aus den Überschriften bildet
+   (src/lib/remark-abschnitte.mjs). Die Namen sind Projektkonvention:
+   jedes Modul hat „In 20 Sekunden" und „Das sagt die Gegenseite". */
+
+.abschnitt { margin: var(--stufe) 0; }
+.abschnitt > hr:last-child { display: none; }
+.abschnitt h2 { margin-top: 0; }
+
+/* Die Kurzfassung ist der meistgelesene Teil der Seite. Sie bekommt Papier,
+   größere Schrift und Messingmarken an den Punkten. */
+.abschnitt--kurzfassung {
+  background: var(--flaeche-ruhig);
+  border: 1px solid var(--linie);
+  border-top: 2px solid var(--linie-stark);
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 1.2rem 1.4rem 1.35rem;
+}
+.abschnitt--kurzfassung h2 {
+  font-size: 0.72rem;
+  font-weight: 640;
+  font-stretch: 116%;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-leise);
+  margin-bottom: 0.9rem;
+}
+.abschnitt--kurzfassung h2::before { display: none; }
+.abschnitt--kurzfassung ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.05rem;
+}
+.abschnitt--kurzfassung li {
+  position: relative;
+  padding-left: 1.35rem;
+  margin: 0.65rem 0;
+}
+.abschnitt--kurzfassung li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--daten-3);
+}
+.abschnitt--kurzfassung > :last-child { margin-bottom: 0; }
+
+/* Der Gegenseite-Abschnitt ist kein Zugeständnis, sondern der Grund, warum
+   die Seite in einer Fachdiskussion standhält. Also gestaltet wie ein
+   Aktenvermerk: eigene Kante, jede Einwandzeile als eigene Zeile. */
+.abschnitt--gegenseite {
+  border: 1px solid var(--linie);
+  border-left: 3px solid var(--linie-stark);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.25rem 1.4rem 0.4rem;
+  background: var(--flaeche-ruhig);
+}
+.abschnitt--gegenseite h2 { font-size: 1.25rem; }
+.abschnitt--gegenseite h2::before { background: var(--linie-stark); }
+.abschnitt--gegenseite p { margin-bottom: 1.15rem; }
+.abschnitt--gegenseite p > strong:first-child {
+  display: block;
+  font-family: var(--schrift-display);
+  font-weight: 620;
+  font-stretch: 98%;
+  font-size: 1.02rem;
+  letter-spacing: -0.005em;
+  margin-bottom: 0.15rem;
+}
+
+/* Quellen- und Weiter-Abschnitt am Fuß eines Moduls: leiser als der Text. */
+.abschnitt--quellen,
+.abschnitt--weiter {
+  font-size: 0.94rem;
+  color: var(--text-leise);
+}
+.abschnitt--quellen h2,
+.abschnitt--weiter h2 {
+  font-size: 0.72rem;
+  font-weight: 640;
+  font-stretch: 116%;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-leise);
+}
+.abschnitt--quellen h2::before,
+.abschnitt--weiter h2::before {
+  width: 100%;
+  height: 1px;
+  background: var(--linie);
+}
+.abschnitt--quellen code,
+.abschnitt--weiter code {
+  font-family: var(--schrift-kennung);
+  font-size: 0.85em;
+}
+
+/* --- Startseite: das Zahlenpaar ----------------------------------------
+   Median und Durchschnitt, dazwischen die Schraffur. Der Abstand ist die
+   Aussage — deshalb ist er hier das größte Element der Seite. */
+
+.paar {
+  margin: 0 0 1.6rem;
+  border-top: 2px solid var(--text);
+  border-bottom: 1px solid var(--linie);
+}
+.paar__zeile {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+}
+.paar__zeile + .paar__zeile { border-top: 1px solid var(--linie); }
+.paar__wert {
+  font-family: var(--schrift-display);
+  font-size: clamp(1.75rem, 1.1rem + 2.6vw, 2.5rem);
+  font-weight: 680;
+  font-stretch: 94%;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+/* Kein Messing: dieser Abstand ist gemessen. Messing bleibt der Leerstelle. */
+.paar__abstand {
+  padding: 1rem 0 1.05rem;
+  border-top: 3px solid var(--akzent);
+}
+.paar__abstand p {
+  margin: 0;
+  font-family: var(--schrift-display);
+  font-weight: 640;
+  font-size: 1.02rem;
+  font-stretch: 100%;
+  color: var(--akzent);
+}
+
+/* --- Kartenraster: die sechs Module als Register ------------------------ */
+
+.karten {
+  display: grid;
+  padding: 0;
+  list-style: none;
+  margin: 1.4rem 0 2rem;
+  border-top: 2px solid var(--text);
+  border-bottom: 1px solid var(--linie);
+}
+.karten li + li { border-top: 1px solid var(--linie); }
+.karten a {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0 1rem;
+  height: 100%;
+  padding: 0.9rem 0.5rem 1rem 0;
+  text-decoration: none;
+}
+.karten a:hover { background: var(--flaeche-ruhig); }
+.karten__marke {
+  grid-row: span 2;
+  font-family: var(--schrift-display);
+  font-size: 0.82rem;
+  font-weight: 680;
+  font-stretch: 112%;
+  text-align: center;
+  padding: 0.1rem 0;
+  border: 1px solid var(--linie-stark);
+  border-radius: 2px;
+  color: var(--text-leise);
+  align-self: start;
+}
+.karten a:hover .karten__marke {
+  border-color: var(--akzent);
+  color: var(--akzent);
+}
+.karten strong {
+  font-family: var(--schrift-display);
+  font-weight: 640;
+  font-stretch: 96%;
+  font-size: 1.16rem;
+  letter-spacing: -0.012em;
+  line-height: 1.25;
+  align-self: center;
+}
+.karten span {
+  font-size: 0.93rem;
+  color: var(--text-leise);
+  line-height: 1.45;
+  margin-top: 0.25rem;
+}
+.karten--ohne-marke a { grid-template-columns: minmax(0, 1fr); }
+.karten--ohne-marke strong { grid-column: 1; }
+.karten--ohne-marke span { grid-column: 1; }
+
+/* --- E-Mail-Erfassung: Formularsprache, ohne Amtsstube ------------------ */
+
+.mail {
+  border: 1px solid var(--linie);
+  border-top: 3px solid var(--akzent);
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 1.25rem 1.3rem 1.35rem;
+  margin: var(--stufe) 0;
+  background: var(--flaeche-ruhig);
+}
+.mail__titel {
+  display: block;
+  font-family: var(--schrift-display);
+  font-size: 1.05rem;
+  font-weight: 640;
+  font-stretch: 98%;
+  margin-bottom: 0.15rem;
+}
+.mail p { margin: 0 0 0.9rem; font-size: 0.95rem; }
+.mail form { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.mail input[type='email'] {
+  flex: 1 1 13rem;
+  min-width: 0;
+  padding: 0.6rem 0.7rem;
+  font-family: var(--schrift-display);
+  font-size: 1rem;
+  border: 1px solid var(--linie-stark);
+  border-radius: 2px;
+  background: var(--flaeche);
+  color: var(--text);
+}
+.mail input[type='email']::placeholder { color: var(--text-leise); }
+.mail button {
+  padding: 0.6rem 1.2rem;
+  font-family: var(--schrift-display);
+  font-size: 0.85rem;
+  font-weight: 640;
+  font-stretch: 110%;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  border: 1px solid var(--akzent);
+  border-radius: 2px;
+  background: var(--akzent);
+  color: var(--akzent-text);
+  cursor: pointer;
+}
+.mail button:hover { background: var(--text); border-color: var(--text); color: var(--flaeche); }
+.mail small {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--text-leise);
+  font-size: 0.82rem;
+}
+
+/* --- Weiterführung ------------------------------------------------------ */
+
+.weiter {
+  display: grid;
+  gap: 0.2rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  text-decoration: none;
+  margin: 2rem 0;
+  background: var(--flaeche);
+}
+.weiter:hover { background: var(--flaeche-ruhig); border-color: var(--linie-stark); }
+.weiter span { display: block; }
+.weiter strong {
+  font-family: var(--schrift-display);
+  font-weight: 640;
+  font-stretch: 96%;
+  font-size: 1.12rem;
+  letter-spacing: -0.012em;
+}
+.weiter strong::after { content: ' →'; color: var(--text-leise); }
+
+/* --- Das Register unter /daten ----------------------------------------- */
+
+.register__kopf {
+  border-top: 2px solid var(--text);
+  border-bottom: 1px solid var(--linie);
+  padding: 0.8rem 0;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.4rem;
+}
+.register__legende {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--schrift-display);
+  font-size: 0.78rem;
+  color: var(--text-leise);
+}
+.register__legende::before {
+  content: '';
+  width: 0.7rem;
+  height: 0.7rem;
+  flex: 0 0 auto;
+  border: 1px solid var(--linie-stark);
+}
+.register__legende--hoch::before { background: var(--text); border-color: var(--text); }
+.register__legende--mittel::before {
+  background: linear-gradient(to right, var(--text) 0 50%, transparent 50%);
+}
+.register__legende--strittig::before {
+  background: var(--schraffur);
+  border-color: var(--warnung);
+}
+
+.register { margin: 0 0 var(--stufe); }
+
+.register__gruppe {
+  font-family: var(--schrift-display);
+  font-size: 0.72rem;
+  font-weight: 640;
+  font-stretch: 116%;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-leise);
+  margin: 2rem 0 0;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--linie-stark);
+  position: sticky;
+  top: 0;
+  background: var(--flaeche);
+  z-index: 2;
+}
+.register__gruppe:first-child { margin-top: 1rem; }
+
+.quelle {
+  border-bottom: 1px solid var(--linie);
+  padding: 0.95rem 0 0.95rem 1.15rem;
+  border-left: 3px solid transparent;
+  scroll-margin-top: 3.5rem;
+}
+.quelle:target {
+  background: var(--akzent-flaeche);
+  border-left-color: var(--akzent);
+  padding-left: 0.9rem;
+}
+.quelle dt {
+  font-family: var(--schrift-display);
+  font-weight: 660;
+  font-stretch: 96%;
+  font-size: 1.12rem;
+  letter-spacing: -0.012em;
+  line-height: 1.25;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.quelle dd { margin: 0.3rem 0 0; font-size: 0.9rem; color: var(--text-leise); }
+.quelle dd:first-of-type { color: var(--text); font-size: 0.97rem; }
+.quelle__kennung {
+  font-family: var(--schrift-kennung);
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-leise);
+  letter-spacing: -0.02em;
+  margin-left: auto;
+  align-self: center;
+}
+/* Der Hinweis ist eine Anmerkung zur Zahl, nicht die Zahl: eingerückt und
+   leiser, damit die Wertzeile die Zeile bleibt, die man zuerst liest. */
+.quelle__hinweis {
+  font-size: 0.86rem;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--linie);
+}
+
+/* Konfidenzmarke. Dieselbe Logik wie in den Grafiken: ausgefüllt ist
+   gemessen, halb ist mit Einschränkung, schraffiert ist geschätzt. */
+.marke {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--schrift-display);
+  font-size: 0.68rem;
+  font-weight: 620;
+  font-stretch: 112%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-leise);
+  white-space: nowrap;
+}
+.marke::before {
+  content: '';
+  width: 0.65rem;
+  height: 0.65rem;
+  flex: 0 0 auto;
+  border: 1px solid var(--linie-stark);
+}
+.marke--hoch::before { background: var(--text); border-color: var(--text); }
+.marke--mittel::before {
+  background: linear-gradient(to right, var(--text) 0 50%, transparent 50%);
+}
+.marke--strittig {
+  color: var(--warnung);
+}
+.marke--strittig::before {
+  background: var(--schraffur);
+  border-color: var(--warnung);
+}
+
+/* --- Grafiken ----------------------------------------------------------- */
+
+.grafik {
+  margin: var(--stufe) 0;
+  padding: 1.1rem 0 0;
+  border-top: 1px solid var(--linie);
+}
+.grafik svg { display: block; width: 100%; height: auto; }
+.grafik figcaption {
+  margin-top: 0.7rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--linie);
+  font-family: var(--schrift-display);
+  font-size: 0.78rem;
+  color: var(--text-leise);
+}
+
+/* Texte in den generierten SVGs. Die Klassennamen kommen aus
+   src/lib/grafiken.mjs und bleiben unverändert; hier stehen nur Werte. */
+/* Grafiktitel und Unterzeilen laufen bei einigen Grafiken bis an den Rand des
+   viewBox (400 Einheiten). Statt die Koordinaten in grafiken.mjs anzufassen,
+   nutzt die Schrift hier ihre Breitenachse: schmaler gesetzt passt derselbe
+   Text in dieselbe Zeile. */
+.g-titel {
+  font-family: var(--schrift-display);
+  font-size: 14px;
+  font-weight: 660;
+  font-stretch: 89%;
+  letter-spacing: -0.15px;
+  fill: var(--text);
+}
+.g-unter {
+  font-family: var(--schrift-display);
+  font-size: 9.8px;
+  font-weight: 480;
+  font-stretch: 92%;
+  fill: var(--text-leise);
+}
+.g-hinweis {
+  font-family: var(--schrift-display);
+  font-size: 10.8px;
+  font-weight: 480;
+  font-stretch: 96%;
+  fill: var(--text);
+}
+.g-hinweis--stark { font-weight: 660; }
+.g-legende {
+  font-family: var(--schrift-display);
+  font-size: 10.6px;
+  font-weight: 480;
+  font-stretch: 96%;
+  fill: var(--text);
+}
+.g-quelle {
+  font-family: var(--schrift-display);
+  font-size: 8.8px;
+  font-weight: 450;
+  font-stretch: 94%;
+  fill: var(--text-leise);
+}
+.g-frage {
+  font-family: var(--schrift-display);
+  font-size: 22px;
+  font-weight: 700;
+  fill: var(--daten-unbekannt);
+}
+.g-titel, .g-unter, .g-hinweis, .g-legende, .g-quelle, .g-frage {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* --- Fuß ---------------------------------------------------------------- */
+
+.fuss {
+  border-top: 2px solid var(--text);
+  margin-top: 4rem;
+  padding: 1.6rem 0 3rem;
+  font-size: 0.88rem;
+  color: var(--text-leise);
+}
+.fuss p { margin: 0 0 0.6rem; }
+.fuss a { color: inherit; }
+.fuss__pfad {
+  font-family: var(--schrift-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-stretch: 110%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.fuss__pfad a { text-decoration: none; border-bottom: 1px solid var(--linie-stark); }
+
+/* --- Hilfsklassen ------------------------------------------------------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.leise { color: var(--text-leise); }
+
+.lead {
+  font-family: var(--schrift-text);
+  font-size: 1.16rem;
+  line-height: 1.5;
+}
+
+/* --- Bewegung ----------------------------------------------------------
+   Nur beim ersten Erscheinen einer Grafik, nur wenn niemand widersprochen
+   hat, nur 260 ms. Ohne JavaScript ist alles sofort sichtbar. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js-motion .grafik {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .js-motion .grafik.ist-sichtbar {
+    opacity: 1;
+    transform: none;
+    transition: opacity 260ms ease-out, transform 260ms ease-out;
+  }
+}
+
+/* --- Druck -------------------------------------------------------------
+   Papier ist weiß, Ziffern bleiben tabellarisch, die Schraffur bleibt
+   erkennbar, weil sie in den Grafiken eine Bedeutung trägt. */
+
+@media print {
+  :root {
+    --text: #000;
+    --text-leise: #333;
+    --linie: #999;
+    --linie-stark: #666;
+    --flaeche: #fff;
+    --flaeche-ruhig: #fff;
+    --akzent-flaeche: #fff;
+  }
+  body { font-size: 10.5pt; }
+  .kopf nav, .mail, .weiter, .entwurf, .spur, .sprung, .register__kopf { display: none; }
+  .kasten, .abschnitt--kurzfassung, .abschnitt--gegenseite {
+    background: none;
+    border-color: #999;
+  }
+  .register__gruppe { position: static; }
+  .grafik, .quelle, .abschnitt { break-inside: avoid; }
+  a { text-decoration: none; }
+  .fuss { margin-top: 1.5rem; }
+}
+
+/* --- Rechner: Schätz-Widget auf der Startseite ---------------------------
+   Formularpanel wie .mail: violette Oberkante, Papierfläche, dieselben
+   Eingabe- und Knopf-Stile. */
+
+.rechner {
+  border: 1px solid var(--linie);
+  border-top: 3px solid var(--akzent);
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 1.25rem 1.3rem 1.35rem;
+  margin: var(--stufe) 0;
+  background: var(--flaeche-ruhig);
+}
+.rechner h2 { margin-top: 0; }
+.rechner h2::before { display: none; }
+
+.rechner__frage {
+  display: block;
+  font-family: var(--schrift-display);
+  font-size: 1.05rem;
+  font-weight: 640;
+  font-stretch: 98%;
+  margin-bottom: 0.15rem;
+}
+
+.rechner__hilfe {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-leise);
+}
+
+.rechner__feld {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.rechner__feld input {
+  flex: 1 1 10rem;
+  min-width: 0;
+  padding: 0.6rem 0.7rem;
+  font-family: var(--schrift-display);
+  font-size: 1.15rem;
+  font-weight: 580;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--linie-stark);
+  border-radius: 2px;
+  background: var(--flaeche);
+  color: var(--text);
+}
+.rechner__feld input::placeholder { color: var(--text-leise); font-weight: 400; }
+.rechner__euro {
+  font-family: var(--schrift-display);
+  font-size: 1.15rem;
+  font-weight: 580;
+  color: var(--text-leise);
+  flex: 0 0 auto;
+}
+
+.rechner__fehler {
+  font-size: 0.88rem;
+  color: var(--text);
+  margin: -0.35rem 0 0.75rem;
+}
+
+/* Hauptknopf: violett wie .mail button */
+.rechner__knopf {
+  padding: 0.6rem 1.2rem;
+  font-family: var(--schrift-display);
+  font-size: 0.85rem;
+  font-weight: 640;
+  font-stretch: 110%;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  border: 1px solid var(--akzent);
+  border-radius: 2px;
+  background: var(--akzent);
+  color: var(--akzent-text);
+  cursor: pointer;
+}
+.rechner__knopf:hover { background: var(--text); border-color: var(--text); color: var(--flaeche); }
+
+/* Schritt 2: Schätzoptionen als Registerzeilen */
+.rechner__optionen {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0.5rem 0 0;
+  border-top: 1px solid var(--linie);
+}
+.rechner__optionen button {
+  display: block;
+  width: 100%;
+  padding: 0.65rem 0.7rem;
+  font-family: var(--schrift-display);
+  font-size: 0.95rem;
+  font-weight: 580;
+  font-stretch: 98%;
+  text-align: left;
+  border: 0;
+  border-bottom: 1px solid var(--linie);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+.rechner__optionen button:hover {
+  background: var(--flaeche);
+  color: var(--akzent);
+}
+
+/* Schritt 3: Ergebnis */
+.rechner__schritt { margin-top: 1.1rem; }
+.rechner__schritt:first-child { margin-top: 0; }
+.rechner__trennlinie {
+  border: 0;
+  border-top: 2px solid var(--text);
+  margin: 0 0 0.6rem;
+}
+
+.rechner__band {
+  font-family: var(--schrift-display);
+  font-weight: 640;
+  font-stretch: 96%;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.25rem;
+  color: var(--akzent);
+}
+.rechner__wert {
+  font-family: var(--schrift-display);
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.1rem);
+  font-weight: 680;
+  font-stretch: 94%;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 0.85rem;
+}
+.rechner__vergleich {
+  margin: 0 0 0.65rem;
+  font-size: 0.95rem;
+}
+.rechner__vergleich strong {
+  color: var(--akzent);
+}
+
+.rechner__kontext {
+  font-size: 0.9rem;
+  color: var(--text-leise);
+  margin: 0 0 0.65rem;
+}
+
+/* Messing: nur für die Datenlücke oberhalb der 5-%-Schwelle */
+.rechner__luecke {
+  border-left: 3px solid var(--warnung);
+  padding-left: 0.9rem;
+  margin: 0.85rem 0;
+  font-size: 0.9rem;
+  color: var(--warnung);
+}
+.rechner__luecke a { color: inherit; }
+
+.rechner__weiter-link {
+  font-family: var(--schrift-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-stretch: 110%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0.85rem 0 0;
+}
+.rechner__weiter-link a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--linie-stark);
+}
+.rechner__weiter-link a:hover { color: var(--akzent); border-bottom-color: var(--akzent); }
+
+.rechner__nochmal {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0;
+  font-family: var(--schrift-display);
+  font-size: 0.82rem;
+  font-weight: 580;
+  color: var(--text-leise);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--linie-stark);
+  cursor: pointer;
+}
+.rechner__nochmal:hover { color: var(--akzent); border-bottom-color: var(--akzent); }
+
+/* Übergang beim Aufdecken — nur wenn Bewegung erlaubt */
+@media (prefers-reduced-motion: no-preference) {
+  .rechner__schritt[hidden] { display: none; }
+  .rechner__schritt.rechner--einblenden {
+    animation: rechnerEin 260ms ease-out;
+  }
+  @keyframes rechnerEin {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: none; }
+  }
+}
+
+/* --- Nachtrag: Kleinteile ------------------------------------------------ */
+
+.paar__wert a {
+  text-decoration: none;
+  border-bottom: 2px solid var(--linie-stark);
+}
+.paar__wert a:hover { border-bottom-color: var(--akzent); color: var(--akzent); }
+.paar__zeile .etikett { margin: 0; max-width: 12rem; }
+
+/* Der Lauftext unter dem Zahlenpaar ist dessen Bildunterschrift, nicht eine
+   zweite Behauptung: kleiner, leiser, direkt an der Grafik. */
+.paar figcaption {
+  padding: 0.9rem 0 0;
+  font-size: 0.97rem;
+  color: var(--text-leise);
+}
+.paar figcaption strong { color: var(--text); }

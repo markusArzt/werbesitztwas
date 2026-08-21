@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Basis from '../../layouts/Basis.astro';
+import { pfad } from '../../lib/pfad';
+import { MARKE } from '../../lib/site';
+
+const eintraege = await getCollection('mythen');
+---
+<Basis title={`Mythen im Faktencheck | ${MARKE}`} beschreibung="Die häufigsten Einwände gegen eine Besteuerung grosser Vermögen, sachlich beantwortet.">
+  <p class="etikett" slot="rand">Faktencheck</p>
+
+  <h1>Mythen im Faktencheck</h1>
+  <p class="lead">Die häufigsten Einwände. Jeder bekommt eine eigene Seite, damit er auffindbar ist.</p>
+  <ul class="karten karten--ohne-marke">
+    {eintraege.map((e) => (
+      <li>
+        <a href={pfad(`/mythen/${e.id}/`)}>
+          <strong>{e.data.frage}</strong>
+          <span>{e.data.kurzantwort}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Basis>

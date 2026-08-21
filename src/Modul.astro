@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import Basis from './Basis.astro';
+import EmailErfassung from '../components/EmailErfassung.astro';
+import { pfad } from '../lib/pfad';
+import { MARKE, EMAIL_AKTIV } from '../lib/site';
+
+const { eintrag, naechstes } = Astro.props;
+const d = eintrag.data;
+
+// Der Wegweiser zeigt die sechs Module in ihrer echten Reihenfolge. Sie steht
+// im Frontmatter (naechstes_modul) und ist keine Dekoration: die Module bauen
+// aufeinander auf.
+const module = (await getCollection('argumente')).sort((a, b) =>
+  a.data.modul.localeCompare(b.data.modul)
+);
+---
+<Basis title={`${d.title} | ${MARKE}`} beschreibung={d.beschreibung} ogTitle={d.og_title}>
+  <div class="apparat" slot="rand">
+    <p class="etikett">Modul {d.modul}</p>
+    <p class="etikett apparat__stand">Stand {d.stand}</p>
+    <nav aria-label="Die sechs Module">
+      <ol class="spur">
+        {module.map((m) => (
+          <li class={m.id === eintrag.id ? 'spur__hier' : undefined}>
+            <a
+              href={pfad(`/argumente/${m.id}/`)}
+              aria-current={m.id === eintrag.id ? 'page' : undefined}
+            >
+              <span aria-hidden="true">{m.data.modul}</span>
+              <span class="sr-only">Modul {m.data.modul}: {m.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  </div>
+
+  <article>
+    <slot />
+  </article>
+
+  {EMAIL_AKTIV && <EmailErfassung />}
+
+  {naechstes && (
+    <a class="weiter" href={pfad(`/argumente/${naechstes.id}/`)}>
+      <span class="etikett">Nächstes Modul &middot; {naechstes.data.modul}</span>
+      <strong>{naechstes.data.title}</strong>
+    </a>
+  )}
+</Basis>

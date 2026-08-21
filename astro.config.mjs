@@ -4,10 +4,17 @@ import { remarkQuellen } from './src/lib/remark-quellen.mjs';
 import { remarkGrafik } from './src/lib/remark-grafik.mjs';
 import { remarkAbschnitte } from './src/lib/remark-abschnitte.mjs';
 
-// GitHub Pages, Project Page: die Seite liegt unter einem Unterpfad.
-// Bei Umzug auf eine eigene Domain: site aendern und base auf '/' setzen.
-const site = 'https://markusarzt.github.io';
-const base = '/werbesitztwas';
+// GitHub Pages, Project Page: die Seite liegt dort unter einem Unterpfad
+// (markusarzt.github.io/werbesitztwas/). Cloudflare Workers liefert dagegen
+// direkt an der Domain-Wurzel aus (werbesitztwas.xxx.workers.dev/, ohne
+// Unterpfad) - deshalb sind site/base hier ueber Umgebungsvariablen
+// steuerbar, mit den GitHub-Pages-Werten als Standard. Fuer die
+// Cloudflare-Vorschau in den Projekteinstellungen unter "Environment
+// variables" (Build) setzen: SITE_BASE=/ und SITE_URL=<die workers.dev-URL>.
+// Ohne diese Variablen (z.B. im GitHub-Actions-Workflow) gelten die
+// bisherigen Standardwerte unveraendert.
+const site = process.env.SITE_URL ?? 'https://markusarzt.github.io';
+const base = process.env.SITE_BASE ?? '/werbesitztwas';
 
 const sourcesPath = fileURLToPath(new URL('./data/sources.yml', import.meta.url));
 

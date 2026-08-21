@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from 'astro:content';
+import Modul from '../../layouts/Modul.astro';
+
+export async function getStaticPaths() {
+  const alle = await getCollection('argumente');
+  return alle.map((eintrag) => ({
+    params: { slug: eintrag.id },
+    props: {
+      eintrag,
+      naechstes: alle.find((k) => k.id === eintrag.data.naechstes_modul) ?? null,
+    },
+  }));
+}
+
+const { eintrag, naechstes } = Astro.props;
+const { Content } = await render(eintrag);
+---
+<Modul eintrag={eintrag} naechstes={naechstes}>
+  <Content />
+</Modul>

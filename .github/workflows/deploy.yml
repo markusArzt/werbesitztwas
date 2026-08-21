@@ -1,32 +1,38 @@
-   name: deploy
+name: deploy
 
-   on:
-     push:
-       branches: [main]
-     workflow_dispatch:
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
 
-   permissions:
-     contents: read
-     pages: write
-     id-token: write
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-   concurrency:
-     group: pages
-     cancel-in-progress: false
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
-   jobs:
-     build:
-       runs-on: ubuntu-latest
-       steps:
-         - uses: actions/checkout@v4
-         - uses: withastro/action@v3
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: withastro/action@v6
+        with:
+          node-version: 24
+        # Laeuft npm ci und npm run build. Der Quellen-Check haengt als
+        # prebuild daran: eine Zahl ohne Quelle laesst den Deploy scheitern.
+        # node-version explizit gesetzt statt dem Default der Action zu
+        # vertrauen - Astro >= 5.13 verlangt mindestens Node 22.12.
 
-     deploy:
-       needs: build
-       runs-on: ubuntu-latest
-       environment:
-         name: github-pages
-         url: ${{ steps.deployment.outputs.page_url }}
-       steps:
-         - id: deployment
-           uses: actions/deploy-pages@v4
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

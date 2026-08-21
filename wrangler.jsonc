@@ -1,0 +1,14 @@
+{
+  // Erklaert Cloudflare Workers explizit, dass dies eine reine statische
+  // Seite ist - kein Server, kein Adapter, keine Laufzeit-Logik.
+  // Ohne diese Datei versucht Cloudflares automatische Projekterkennung,
+  // "hilfreich" einen Astro-SSR-Adapter zu installieren (astro add
+  // cloudflare), was die Seite von statisch auf serverseitig umbaut und
+  // an Stellen bricht, die auf ein normales Dateisystem zugreifen
+  // (z.B. data/sources.yml fuer die Datenseite).
+  "name": "werbesitztwas",
+  "compatibility_date": "2026-08-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}

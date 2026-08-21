@@ -25,4 +25,14 @@ export default defineConfig({
     shikiConfig: { theme: 'github-light' },
   },
   build: { format: 'directory' },
+  // CSS-Minimierung explizit auf esbuild statt des Astro-Standards
+  // (lightningcss) umgestellt. Auf GitHub Actions brach der Produktions-Build
+  // mit "[lightningcss minify] Invalid empty selector" ab, lokal liess sich
+  // das trotz identischer global.css nicht reproduzieren - vermutlich eine
+  // Paketversions-Differenz zwischen den Umgebungen (der Fehler lief ueber
+  // Vites experimentellen rolldown-Pfad). esbuild minimiert CSS ebenso,
+  // ohne diesen Codepfad zu durchlaufen.
+  vite: {
+    build: { cssMinify: 'esbuild' },
+  },
 });

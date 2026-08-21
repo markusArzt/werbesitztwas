@@ -1,0 +1,38 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { MARKE } from '../lib/site';
+---
+<Basis title={`Impressum und Offenlegung | ${MARKE}`} beschreibung="Angaben nach Mediengesetz und E-Commerce-Gesetz.">
+  <p class="etikett" slot="rand">Offenlegung</p>
+
+  <h1>Impressum und Offenlegung</h1>
+
+  <div class="kasten">
+    <strong>Vor dem Livegang ausfüllen.</strong> Diese Seite ist eine Kampagnenseite und damit
+    eine &bdquo;große Website&ldquo; im Sinn des Mediengesetzes: Sie geht über Selbstdarstellung
+    hinaus und ist geeignet, die öffentliche Meinungsbildung zu beeinflussen. Die eingeschränkte
+    Offenlegung für kleine Websites gilt hier nicht. Verstöße gegen die Offenlegungspflicht
+    können mit bis zu 20.000 Euro bestraft werden.
+  </div>
+
+  <h2>Medieninhaber und Herausgeber</h2>
+  <p>
+    [Name bzw. Verein]<br />
+    [Anschrift &ndash; keine private Wohnadresse verwenden, wenn vermeidbar]<br />
+    [ZVR-Zahl, falls Verein]<br />
+    [E-Mail]
+  </p>
+
+  <h2>Vertretungsbefugte Organe</h2>
+  <p>[Vorstand bzw. verantwortliche Person]</p>
+
+  <h2>Grundlegende Richtung</h2>
+  <p>
+    [Blattlinie. Beispiel: Diese Website informiert über die Verteilung von Vermögen in
+    Österreich und tritt für eine stärkere Besteuerung sehr großer Vermögen und
+    Erbschaften ein. Sie ist parteipolitisch unabhängig.]
+  </p>
+
+  <h2>Finanzierung</h2>
+  <p>[Freiwillige Angabe. Bei diesem Thema wird zuerst gefragt, wer das bezahlt.]</p>
+</Basis>

@@ -1,0 +1,20 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { MARKE } from '../lib/site';
+---
+<Basis title={`Datenschutz | ${MARKE}`} beschreibung="Informationen zur Verarbeitung personenbezogener Daten.">
+  <p class="etikett" slot="rand">Datenschutz</p>
+
+  <h1>Datenschutz</h1>
+  <div class="kasten">
+    <strong>Vor dem Livegang ausfüllen und juristisch prüfen lassen.</strong>
+    Mindestens abzudecken: Verantwortlicher, Zweck und Rechtsgrundlage der Newsletter-Verarbeitung
+    (Art. 6 Abs. 1 lit. a DSGVO), Double-Opt-in, Speicherdauer, Auftragsverarbeiter (E-Mail-Dienst,
+    Hosting), Betroffenenrechte, Beschwerderecht bei der Datenschutzbehörde.
+  </div>
+  <h2>Reichweitenmessung</h2>
+  <p>
+    Es werden keine Cookies gesetzt und keine personenbezogenen Profile gebildet.
+    Eingesetzt wird eine cookielose Statistik ohne Übermittlung in Drittstaaten.
+  </p>
+</Basis>

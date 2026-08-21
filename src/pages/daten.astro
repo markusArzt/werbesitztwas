@@ -1,0 +1,90 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { quellenListe } from '../lib/quellen';
+import { MARKE } from '../lib/site';
+
+// Gruppen aus dem Praefix der Quellen-ID. Die IDs sind ASCII und stabil
+// (Konvention im README), die Liste ist alphabetisch sortiert - damit stehen
+// die Gruppen schon zusammen.
+const GRUPPEN = [
+  ['at_', 'Österreich'],
+  ['eu_', 'Europäische Union'],
+  ['welt_', 'Weltweit'],
+] as const;
+
+const gruppiert = GRUPPEN.map(([praefix, titel]) => ({
+  praefix,
+  titel,
+  id: `gruppe-${praefix.replace(/_$/, '')}`,
+  eintraege: quellenListe.filter(([id]) => id.startsWith(praefix)),
+})).filter((g) => g.eintraege.length > 0);
+
+const rest = quellenListe.filter(
+  ([id]) => !GRUPPEN.some(([p]) => id.startsWith(p))
+);
+if (rest.length > 0) {
+  gruppiert.push({ praefix: '', titel: 'Weitere', id: 'gruppe-weitere', eintraege: rest });
+}
+
+const KONFIDENZ = { hoch: 'hoch', mittel: 'mittel', strittig: 'strittig' } as const;
+---
+<Basis title={`Daten und Quellen | ${MARKE}`} beschreibung="Alle auf dieser Seite verwendeten Zahlen mit Quelle, Datenstand und Einschätzung der Belastbarkeit.">
+  <nav class="apparat" slot="rand" aria-label="Gruppen im Register">
+    <p class="etikett">Register</p>
+    <ol class="spur">
+      {gruppiert.map((g) => (
+        <li><a href={`#${g.id}`}>{g.titel}</a></li>
+      ))}
+    </ol>
+  </nav>
+
+  <h1>Daten und Quellen</h1>
+  <p class="lead">
+    Jede Zahl auf dieser Website hat hier einen Eintrag. Der Build der Seite bricht ab,
+    wenn eine Zahl ohne Quelle veröffentlicht werden soll. Alles nachnutzbar unter CC BY 4.0.
+  </p>
+
+  <!-- Legende der Konfidenzmarke. Sie steht ueber dem Register, weil die
+       Marke an jedem Eintrag wiederkehrt und in den Grafiken dieselbe
+       Bedeutung hat: schraffiert heisst geschaetzt, nicht gemessen. -->
+  <div class="register__kopf">
+    <p class="etikett">{quellenListe.length} Einträge &middot; Konfidenz</p>
+    <p class="register__legende register__legende--hoch">hoch</p>
+    <p class="register__legende register__legende--mittel">mittel</p>
+    <p class="register__legende register__legende--strittig">strittig</p>
+  </div>
+
+  {gruppiert.map((g) => (
+    <section class="register">
+      <h2 class="register__gruppe" id={g.id}>
+        {g.titel} <span class="leise">&middot; {g.eintraege.length}</span>
+      </h2>
+      <dl>
+        {g.eintraege.map(([id, q]) => (
+          <div class="quelle" id={id}>
+            <dt>
+              {q.wert}
+              {q.konfidenz && (
+                <span class={`marke marke--${q.konfidenz}`}>
+                  <span class="sr-only">Konfidenz </span>
+                  <span class:list={['marke__text', { 'sr-only': q.konfidenz !== 'strittig' }]}
+                    >{KONFIDENZ[q.konfidenz] ?? q.konfidenz}</span>
+                </span>
+              )}
+              <span class="quelle__kennung">{id}</span>
+            </dt>
+            <dd>{q.beschreibung}</dd>
+            <dd>
+              Quelle: {q.url ? <a href={q.url} rel="nofollow noopener">{q.quelle}</a> : q.quelle}
+              {q.erhebungsjahr && <> &middot; Erhebung {q.erhebungsjahr}</>}
+              {q.veroeffentlicht && <> &middot; veröffentlicht {q.veroeffentlicht}</>}
+              &middot; abgerufen {q.abgerufen}
+            </dd>
+            {q.spanne && <dd>Publizierte Spanne: {q.spanne}</dd>}
+            {q.hinweis && <dd class="quelle__hinweis"><strong>Hinweis:</strong> {q.hinweis}</dd>}
+          </div>
+        ))}
+      </dl>
+    </section>
+  ))}
+</Basis>

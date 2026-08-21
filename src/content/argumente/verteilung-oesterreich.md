@@ -1,4 +1,4 @@
----
+6AA0-810F---
 modul: A
 title: "Österreich weiß nicht, wem es gehört"
 og_title: "Österreich misst das Vermögen der Reichsten nicht – und weiß deshalb nicht, wo die wirtschaftliche Macht liegt"

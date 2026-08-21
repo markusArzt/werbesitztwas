@@ -1,0 +1,109 @@
+---
+import '../styles/global.css';
+import { pfad } from '../lib/pfad';
+import { MARKE, INDEXIERBAR } from '../lib/site';
+
+interface Props {
+  title: string;
+  beschreibung: string;
+  ogTitle?: string;
+}
+const { title, beschreibung, ogTitle } = Astro.props;
+const kanonisch = new URL(Astro.url.pathname, Astro.site);
+const JAHR = new Date().getFullYear();
+
+// Aktive Navigation. Astro.url.pathname enthaelt den Basispfad, deshalb wird
+// gegen pfad() verglichen und nicht gegen '/argumente/'.
+const hier = Astro.url.pathname;
+const aktiv = (ziel: string) => (hier.startsWith(pfad(ziel)) ? 'page' : undefined);
+---
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={beschreibung} />
+  {!INDEXIERBAR && <meta name="robots" content="noindex, nofollow" />}
+  <link rel="canonical" href={kanonisch} />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="de_AT" />
+  <meta property="og:site_name" content={MARKE} />
+  <meta property="og:title" content={ogTitle ?? title} />
+  <meta property="og:description" content={beschreibung} />
+  <meta property="og:url" content={kanonisch} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#edeee7" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#171916" media="(prefers-color-scheme: dark)" />
+  <!-- Grafiken erscheinen beim Scrollen. Die Klasse wird nur gesetzt, wenn
+       niemand widersprochen hat und der Browser den Observer kennt; ohne
+       JavaScript ist alles von Anfang an sichtbar. -->
+  <script is:inline>
+    if (
+      'IntersectionObserver' in window &&
+      !matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      document.documentElement.classList.add('js-motion');
+      var zeigen = function (el) { el.classList.add('ist-sichtbar'); };
+      document.addEventListener('DOMContentLoaded', function () {
+        var beobachter = new IntersectionObserver(function (eintraege) {
+          eintraege.forEach(function (e) {
+            if (e.isIntersecting) { zeigen(e.target); beobachter.unobserve(e.target); }
+          });
+        }, { rootMargin: '0px 0px -10% 0px' });
+        var grafiken = document.querySelectorAll('.grafik');
+        grafiken.forEach(function (g) { beobachter.observe(g); });
+        // Sicherheitsnetz: was nach dem Laden noch verborgen ist, wird gezeigt.
+        addEventListener('load', function () {
+          setTimeout(function () { grafiken.forEach(zeigen); }, 1200);
+        });
+      });
+    }
+  </script>
+  <!-- Analytics: cookieless. Vor dem Livegang aktivieren.
+       <script defer data-domain="werbesitztwas.at" src="https://plausible.io/js/script.js"></script> -->
+</head>
+<body>
+  <a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+
+  {!INDEXIERBAR && (
+    <div class="entwurf">
+      <div class="wrap">
+        <p>Entwurf. Inhalte teilweise unfertig, Seite ist nicht für Suchmaschinen freigegeben.</p>
+      </div>
+    </div>
+  )}
+
+  <header class="kopf">
+    <div class="wrap kopf__zeile">
+      <a class="kopf__marke" href={pfad('/')}>{MARKE}</a>
+      <nav aria-label="Hauptnavigation">
+        <a href={pfad('/argumente/')} aria-current={aktiv('/argumente/')}>Argumente</a>
+        <a href={pfad('/mythen/')} aria-current={aktiv('/mythen/')}>Mythen</a>
+        <a href={pfad('/daten/')} aria-current={aktiv('/daten/')}>Daten</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="raster">
+    <div class="rand"><slot name="rand" /></div>
+    <main class="bahn" id="inhalt">
+      <slot />
+    </main>
+  </div>
+
+  <footer class="fuss">
+    <div class="wrap">
+      <p class="fuss__pfad">
+        <a href={pfad('/impressum/')}>Impressum und Offenlegung</a> &middot;
+        <a href={pfad('/datenschutz/')}>Datenschutz</a> &middot;
+        <a href={pfad('/daten/')}>Quellen und Downloads</a>
+      </p>
+      <p>
+        Inhalte unter CC BY 4.0 nachnutzbar. Stand {JAHR}.
+        Offenlegung nach &sect;&sect; 24 und 25 Mediengesetz siehe Impressum.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

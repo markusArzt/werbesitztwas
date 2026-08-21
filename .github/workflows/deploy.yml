@@ -19,13 +19,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: withastro/action@v6
+
+      # Node-Setup komplett selbst gemacht, ohne withastro/action dafuer zu
+      # verwenden. Grund: die Fehlermeldung "Node.js v20.20.2 is not
+      # supported" trat trotz "node-version: 24" bei withastro/action@v6
+      # weiterhin auf. Diese Version ist unabhaengig vom Innenleben jeder
+      # dritten Action ueberpruefbar - im Actions-Log erscheint eine eigene
+      # Zeile "Setup Node.js", deren Ergebnis sich direkt ablesen laesst.
+      - uses: actions/setup-node@v5
         with:
           node-version: 24
-        # Laeuft npm ci und npm run build. Der Quellen-Check haengt als
-        # prebuild daran: eine Zahl ohne Quelle laesst den Deploy scheitern.
-        # node-version explizit gesetzt statt dem Default der Action zu
-        # vertrauen - Astro >= 5.13 verlangt mindestens Node 22.12.
+
+      - run: npm ci
+      - run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
 
   deploy:
     needs: build

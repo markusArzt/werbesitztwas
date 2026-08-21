@@ -1,0 +1,6 @@
+# Achtung: Bei einer GitHub-Pages-Project-Page liegt die Seite unter einem
+# Unterpfad. Suchmaschinen lesen robots.txt aber nur unter der Domain-Wurzel,
+# also unter markusarzt.github.io/robots.txt - und die gehört diesem Repo nicht.
+# Der wirksame Schutz ist deshalb das noindex-Meta-Tag aus src/lib/site.ts.
+User-agent: *
+Disallow: /

@@ -1,0 +1,2230 @@
+# Quellen-Registry — Modul A
+# Regel: Jede Zahl auf der Website hat hier einen Eintrag.
+# Der Build bricht ab, wenn im Content eine Zahl ohne gueltige source_id steht.
+#
+# Feld "konfidenz":
+#   hoch    = mehrfach bestaetigt, stabil über Datenstaende
+#   mittel  = eine Primaerquelle, aber Datenstand-abhaengig
+#   strittig = Werte variieren je nach Methode -> im Text immer als Spanne fuehren
+
+at_median_nettovermoegen:
+  zahl: 125000
+  wert: "125.000 EUR"
+  beschreibung: "Median-Nettovermögen je Haushalt"
+  quelle: "OeNB, HFCS Austria 2023"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12-04"
+  url: "https://www.oenb.at/dam/jcr:b2f4eea3-44a1-4791-bc56-c2b5901dec3b/PK-2025-12-04-Handout_FINAL.pdf"
+  abgerufen: "2026-07-23"
+  konfidenz: hoch
+  hinweis: "Gegenüber Welle 2021 leicht gesunken."
+
+at_mittelwert_nettovermoegen:
+  zahl: 336000
+  wert: "336.000 EUR"
+  beschreibung: "Durchschnittliches Nettovermögen je Haushalt"
+  quelle: "OeNB, HFCS Austria 2023"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12-04"
+  url: "https://www.oenb.at/dam/jcr:b2f4eea3-44a1-4791-bc56-c2b5901dec3b/PK-2025-12-04-Handout_FINAL.pdf"
+  abgerufen: "2026-07-23"
+  konfidenz: hoch
+  hinweis: "Immer gemeinsam mit dem Median verwenden. Die Differenz ist die Aussage."
+
+at_schwelle_top10:
+  zahl: 795000
+  wert: "795.000 EUR"
+  beschreibung: "Nettovermögen, ab dem ein Haushalt zum reichsten Zehntel zählt"
+  quelle: "OeNB, HFCS Austria 2023"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12-04"
+  abgerufen: "2026-07-23"
+  konfidenz: mittel
+  hinweis: >
+    ACHTUNG: Ältere Momentum-Publikationen nennen 500.000 EUR für dieselbe
+    Schwelle. Das ist ein veralteter Datenstand, nicht zitieren.
+
+at_schwelle_top5:
+  zahl: 1200000
+  wert: "1.200.000 EUR"
+  beschreibung: "Nettovermögen, ab dem ein Haushalt zu den reichsten 5 Prozent zählt"
+  quelle: "OeNB HFCS Austria 2023, aufbereitet im A&W-Blog (AK Wien)"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12-11"
+  url: "https://www.awblog.at/Wirtschaft/Neuer-HFCS-hohe-Vermögenskonzentration"
+  abgerufen: "2026-07-23"
+  konfidenz: hoch
+  hinweis: "In Welle 2021 lag die Schwelle noch bei rund 1 Mio. EUR."
+
+at_anteil_top5:
+  zahl: 55
+  wert: "über 50 Prozent"
+  spanne: "53,5 bis 59 Prozent je nach DWA-Datenstand"
+  beschreibung: "Anteil der reichsten 5 Prozent der Haushalte am privaten Nettovermögen"
+  quelle: "EZB, Distributional Wealth Accounts; Auswertungen Momentum Institut, Attac, AK"
+  abgerufen: "2026-07-23"
+  konfidenz: strittig
+  hinweis: >
+    NIE eine Punktzahl ohne Datenstand nennen. Publizierte Werte: 53,5 % (Mitte 2024),
+    55 % (spätere Aktualisierung), 59 % (Lesart Schnetzer). Auch die Platzierung
+    schwankt zwischen Platz 1 und Platz 2 der Eurozone (Lettland). Auf der Website
+    daher: "mehr als die Hälfte" plus Fußnote mit Datenstand.
+
+at_anteil_untere_haelfte:
+  zahl: 4
+  wert: "rund 3,5 bis 4 Prozent"
+  beschreibung: "Anteil der ärmeren Hälfte der Haushalte am gesamten Nettovermögen"
+  quelle: "EZB, Distributional Wealth Accounts; Auswertung Momentum Institut"
+  abgerufen: "2026-07-23"
+  konfidenz: mittel
+  hinweis: "Eurozonen-Durchschnitt rund 5 Prozent. In Deutschland niedriger (2 bis 2,3 Prozent)."
+
+
+at_anteil_top1_roh:
+  zahl: 17
+  wert: "rund 17 Prozent"
+  beschreibung: "Anteil des reichsten Prozents laut HFCS-Rohdaten"
+  quelle: "OeNB HFCS Austria 2023, dargestellt im A&W-Blog"
+  veroeffentlicht: "2025-12-11"
+  url: "https://www.awblog.at/Wirtschaft/Neuer-HFCS-hohe-Vermögenskonzentration"
+  abgerufen: "2026-07-23"
+  konfidenz: hoch
+  hinweis: "Nur gemeinsam mit at_anteil_top1_hochgeschaetzt verwenden. Einzeln irreführend."
+
+at_anteil_top1_hochgeschaetzt:
+  wert: "über 40 Prozent"
+  beschreibung: "Anteil des reichsten Prozents nach Hinzuschätzung der Spitzenvermögen"
+  quelle: "Hochschätzungen u. a. Heck/Krenek/Schnetzer; Kennickell/Lindner/Schürz bis 47,5 Prozent"
+  abgerufen: "2026-07-23"
+  konfidenz: strittig
+  hinweis: >
+    Methodisch angreifbar, weil auf Reichenlisten (trend, Forbes) gestützt.
+    Immer als Schätzung kennzeichnen, nie als Messung.
+
+
+at_ungleichheit_stabil:
+  wert: "seit 2010 weitgehend unverändert"
+  beschreibung: "Entwicklung der Vermögensungleichheit in Österreich"
+  quelle: "OeNB, HFCS Austria 2023, Präsentation vom 4.12.2025"
+  abgerufen: "2026-07-23"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT. Gehört verpflichtend in den Kasten "Das sagt die Gegenseite".
+    Wer das weglässt, verliert die erste Fachdiskussion.
+
+
+# ---------------------------------------------------------------------------
+# Die Spitze der Verteilung. Achtung: Ab hier wird die Datenlage duenn.
+# Mehrere Eintraege stammen aus Sekundaerquellen (kontrast.at, moment.at) und
+# muessen vor dem Livegang auf die Primaerstudie zurueckgefuehrt werden.
+# Genau diese Luecke ist das Argument des Moduls - umso wichtiger, dass wir
+# sie bei uns selbst sauber ausweisen.
+# ---------------------------------------------------------------------------
+
+at_dwa_grenze_top5:
+  wert: "keine Daten unterhalb der Top 5 Prozent"
+  beschreibung: "Die EZB weist in den Distributional Wealth Accounts höchstens Werte zu den reichsten 5 Prozent aus; zum obersten Prozent wird nichts veröffentlicht"
+  quelle: "Momentum Institut, Auswertung der Distributional Wealth Accounts"
+  url: "https://www.momentum-institut.at/news/oesterreich-hat-hoechste-vermoegensungleichheit-im-euroraum/"
+  abgerufen: "2026-07-23"
+  konfidenz: hoch
+  hinweis: "Trägt das ganze Modul. Der Beleg für die Aussage, dass die Lücke strukturell ist und nicht an uns liegt."
+
+at_anteil_top1_oenb_simulation:
+  zahl: 50
+  wert: "knapp die Hälfte"
+  beschreibung: "Geschätzter Anteil des reichsten Prozents am gesamten Nettovermögen laut Simulationsstudie der Nationalbank"
+  quelle: "OeNB-Studie, referiert bei kontrast.at"
+  url: "https://kontrast.at/wie-ist-das-vermoegen-in-oesterreich-verteilt/"
+  abgerufen: "2026-07-23"
+  konfidenz: strittig
+  sekundaerquelle: true
+  hinweis: >
+    Simulation, keine Messung. Vor Veröffentlichung die OeNB-Studie selbst
+    beschaffen und daraus zitieren. kontrast.at ist als Quelle für eine Seite,
+    die mit Quellendisziplin wirbt, nicht ausreichend.
+
+at_gini_simulation:
+  wert: "0,76 gemessen, rund 0,9 geschätzt"
+  beschreibung: "Vermögens-Gini für Österreich, gemessen gegenüber der Simulation mit hinzugeschätzter Spitze"
+  quelle: "OeNB-Studie, referiert bei kontrast.at"
+  url: "https://kontrast.at/wie-ist-das-vermoegen-in-oesterreich-verteilt/"
+  abgerufen: "2026-07-23"
+  konfidenz: strittig
+  sekundaerquelle: true
+  hinweis: >
+    Nur im Quellenteil verwenden, nie in der Kommunikation. Niemand fühlt einen
+    Gini-Koeffizienten. Die Spreizung 0,76 zu 0,9 ist aber ein starkes Argument
+    dafür, wie groß die Messlücke ist.
+
+at_hfcs_reichster_teilnehmer:
+  wert: "70 Millionen Euro"
+  beschreibung: "Vermögen des reichsten Teilnehmers der HFCS-Befragung, gegenüber tatsächlichen Vermögen im Milliardenbereich"
+  quelle: "kontrast.at, unter Bezug auf die HFCS-Erhebung"
+  url: "https://kontrast.at/wie-ist-das-vermoegen-in-oesterreich-verteilt/"
+  abgerufen: "2026-07-23"
+  konfidenz: mittel
+  sekundaerquelle: true
+  hinweis: "Anschaulichste Einzelzahl des Moduls. Primärbeleg unbedingt nachziehen."
+
+
+# ===========================================================================
+# Ergänzungen zu data/sources.yml — Modul B "Herkunft schlägt Leistung"
+#
+# Teil 1: KORREKTUREN an bestehenden Einträgen (bitte ersetzen)
+# Teil 2: NEUE Einträge
+#
+# Alle Werte am 2026-07-24 gegen die Primärquelle geprüft.
+# Zwei Primärquellen tragen dieses Modul:
+#   OeNB Report 2025/21 (HFCS Austria 2023, Erstergebnisse), Tabelle 7
+#   Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), 21-41
+# ===========================================================================
+
+
+# ---------------------------------------------------------------------------
+# TEIL 1 — Korrekturen
+# Beide Einträge stammten aus Sekundärquellen und halten der Primärquelle
+# nicht stand. Bitte in der bestehenden Registry ersetzen.
+# ---------------------------------------------------------------------------
+
+at_erben_nichts:
+  zahl: 59.3
+  wert: "knapp sechs von zehn"
+  beschreibung: "Anteil der Haushalte in Österreich, die noch nie eine Erbschaft oder größere Schenkung erhalten haben"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Tabelle 7"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12-04"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    KORREKTUR. Der frühere Wert "sieben von zehn" (Quelle moment.at) ist nicht
+    belegbar. Die Primärquelle nennt 40,7 % Haushalte mit Erbschaft oder
+    Schenkung, also 59,3 % ohne. Auch die ältere Welle 2017 lag bei 62 %, nie
+    bei 70 %. Bezugseinheit ist der Haushalt, nicht die Person: Die Quote je
+    Einzelperson liegt niedriger, weil ein Haushalt schon dann als
+    "Erbenhaushalt" zählt, wenn ein Mitglied geerbt hat.
+
+at_erbe_verteilung:
+  wert: "83.300 Euro gegenüber 3,4 Millionen Euro"
+  beschreibung: "Durchschnittliche Erbschaft insgesamt gegenüber der durchschnittlichen Erbschaft im obersten Perzentil der Erbschaftsverteilung, Schätzung für 2025"
+  quelle: "Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), Tabelle 2 und Kapitel 3.1"
+  erhebungsjahr: 2022
+  veroeffentlicht: "2024-04"
+  url: "https://journals.akwien.at/index.php/wug/article/view/230"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    KORREKTUR. Der frühere Wert "124.000 Euro für die unteren 90 Prozent"
+    stammt aus arbeit-wirtschaft.at (2022) und lässt sich in keiner
+    Primärstudie wiederfinden; der Datenstand dahinter ist zudem überholt.
+    Nicht mehr verwenden. Der Vergleichspunkt 3,4 Mio. ist dagegen bestätigt.
+    Siehe at_erbe_durchschnitt und at_erbe_top1, die diesen Eintrag ersetzen.
+
+
+# ---------------------------------------------------------------------------
+# TEIL 2 — Neue Einträge
+# Wer erbt überhaupt (HFCS 2023, Primärquelle OeNB)
+# ---------------------------------------------------------------------------
+
+at_erbquote_haushalte:
+  zahl: 40.7
+  wert: "40,7 Prozent"
+  beschreibung: "Anteil der Haushalte, die jemals eine Erbschaft oder größere Schenkung erhalten haben"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Tabelle 7"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12-04"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Trägt den Einstieg des Moduls. Steigend über die Wellen: 35 % (2010),
+    40 % (2021), 40,7 % (2023). Der Anstieg ist Teil der Aussage und sollte
+    mitgenannt werden.
+
+at_erbquote_quintile:
+  wert: "18,8 Prozent gegenüber 70,2 Prozent"
+  beschreibung: "Anteil der Haushalte mit Erbschaft oder Schenkung im untersten gegenüber dem obersten Fünftel der Nettovermögensverteilung"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Tabelle 7"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12-04"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+
+at_erbe_quintile_hoehe:
+  wert: "33.300 Euro gegenüber 435.600 Euro"
+  beschreibung: "Durchschnittliche Höhe der erhaltenen Erbschaften und Schenkungen im untersten gegenüber dem obersten Vermögensfünftel, Werte wie erhoben"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Tabelle 7"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12-04"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    Nicht mit den aufgewerteten Werten derselben Tabelle vermischen. Die OeNB
+    weist beides aus: Werte wie erhoben (33.300 / 435.600) und Werte mit
+    unterstellter Wertsteigerung von 3 % pro Jahr (71.600 / 635.500). Wir
+    führen durchgehend die nicht aufgewertete, konservativere Variante.
+
+at_erbquote_beruf:
+  wert: "33,9 Prozent gegenüber 84,2 Prozent"
+  beschreibung: "Anteil der Haushalte mit Erbschaft oder Schenkung, Arbeiterhaushalte gegenüber Haushalten in der Landwirtschaft"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Tabelle 7"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12-04"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Weitere Werte derselben Tabelle: Selbstständige 54,7 %, Beamt:innen 42,7 %,
+    Angestellte 35,8 %, Arbeitslose 30,3 %, Pensionist:innen 44,7 %.
+    Der Kontrast Arbeiter/Landwirtschaft ist der schärfste, aber nicht der
+    einzige. Wer den Vorwurf der Rosinenpickerei vermeiden will, nennt die
+    Reihe vollständig.
+
+
+# ---------------------------------------------------------------------------
+# Volumen und Verteilung der Erbschaften (Modellrechnung AK Wien / JRC)
+# ---------------------------------------------------------------------------
+
+at_erbe_durchschnitt:
+  zahl: 83300
+  wert: "rund 83.300 Euro"
+  beschreibung: "Durchschnittliche Erbschaft je erbender Person, Schätzung für das Jahr 2025"
+  quelle: "Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), Tabelle 2"
+  erhebungsjahr: 2022
+  veroeffentlicht: "2024-04"
+  url: "https://journals.akwien.at/index.php/wug/article/download/230/217/2393"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    IMMER gemeinsam mit dem Median von rund 20.000 Euro nennen. Der Abstand
+    zwischen beiden ist die eigentliche Aussage. Der Durchschnitt allein wirkt
+    hoch und lädt zum Gegenargument ein, dass ohnehin alle ordentlich erben.
+    Basis ist eine Simulation auf HFCS-2017-Daten, keine Messung.
+
+at_erbe_median:
+  zahl: 20000
+  wert: "rund 20.000 Euro"
+  beschreibung: "Mittlere Erbschaft (Median) je erbender Person, Schätzung für das Jahr 2025"
+  quelle: "Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), Kapitel 3.1"
+  erhebungsjahr: 2022
+  veroeffentlicht: "2024-04"
+  url: "https://journals.akwien.at/index.php/wug/article/download/230/217/2393"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+
+at_erbe_top1:
+  zahl: 3400000
+  wert: "rund 3,4 Millionen Euro"
+  beschreibung: "Durchschnittlich übertragenes Vermögen im obersten Perzentil der Erbschaftsverteilung, Schätzung für 2025"
+  quelle: "Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), Kapitel 3.1"
+  erhebungsjahr: 2022
+  veroeffentlicht: "2024-04"
+  url: "https://journals.akwien.at/index.php/wug/article/download/230/217/2393"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: "Steigt in derselben Simulation bis 2050 auf 4,2 Mio. Euro."
+
+at_erbe_ueber_million_anteil:
+  wert: "weniger als 1 Prozent der Bevölkerung"
+  beschreibung: "Anteil der Bevölkerung, dem Erbschaften über einer Million Euro zufließen"
+  quelle: "Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), Kapitel 3.1"
+  erhebungsjahr: 2022
+  veroeffentlicht: "2024-04"
+  url: "https://journals.akwien.at/index.php/wug/article/download/230/217/2393"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    HERZSTÜCK DES MODULS. Dieser Satz steht wörtlich so in der Primärstudie und
+    ist die empirische Auflösung des Mittelstands-Vorwurfs. Ohne ihn kippt das
+    Modul. Bezugsgröße beachten: Anteil an der BEVÖLKERUNG, nicht an den
+    Erbfällen. Wer die Schwelle aus einer anderen Studie zitiert, muss die
+    Bezugsgröße neu prüfen.
+
+at_erbe_schwelle_million:
+  zahl: 1000000
+  wert: "1.000.000 Euro"
+  beschreibung: "In der Modellrechnung simulierter Freibetrag je erbender Person (Modelle II und IV)"
+  quelle: "Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), Tabelle 1"
+  erhebungsjahr: 2022
+  veroeffentlicht: "2024-04"
+  url: "https://journals.akwien.at/index.php/wug/article/download/230/217/2393"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Kein empirischer Messwert, sondern eine Modellannahme. Wird nur als
+    Referenzlinie in der Grafik geführt. Nie als Forderungshöhe der Kampagne
+    ausgeben, ohne das kenntlich zu machen.
+
+at_erbvolumen_2025_2050:
+  wert: "rund 21,5 Mrd. Euro (2025) auf rund 40,8 Mrd. Euro (2050)"
+  beschreibung: "Geschätztes jährliches Erbvolumen in Österreich"
+  quelle: "Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), Kapitel 3.1"
+  erhebungsjahr: 2022
+  veroeffentlicht: "2024-04"
+  url: "https://journals.akwien.at/index.php/wug/article/download/230/217/2393"
+  abgerufen: "2026-07-24"
+  konfidenz: strittig
+  hinweis: >
+    Modellrechnung, keine Messung. Datengrundlage ist der HFCS 2017, Basisjahr
+    2022, Werte in Preisen von 2022. Das Modell hält die Vermögen über den
+    gesamten Zeitraum konstant und rechnet Inflation heraus; die Autor:innen
+    verstehen ihre Werte deshalb ausdrücklich als Untergrenze. Frühere
+    Schätzungen (Altzinger/Humer 2013) lagen deutlich niedriger. Im Text immer
+    als Schätzung kennzeichnen und die Konstanzannahme mitliefern.
+
+
+# ---------------------------------------------------------------------------
+# Aufkommen und Betroffenheit
+# ---------------------------------------------------------------------------
+
+at_erbst_betroffene_1mio:
+  zahl: 0.2
+  wert: "0,2 Prozent der Erb:innen"
+  beschreibung: "Anteil der Erbinnen und Erben, die bei einem Freibetrag von einer Million Euro je Person steuerpflichtig wären, 2025"
+  quelle: "Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), Tabelle 2"
+  erhebungsjahr: 2022
+  veroeffentlicht: "2024-04"
+  url: "https://journals.akwien.at/index.php/wug/article/download/230/217/2393"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    Steigt bis 2050 auf 0,4 bis 0,5 %, weil die Erbschaften wachsen. Bei
+    Verwendung im Präsens den Bezugszeitpunkt 2025 mitnennen.
+
+at_erbst_betroffene_500k:
+  zahl: 0.9
+  wert: "0,9 Prozent der Erb:innen"
+  beschreibung: "Anteil der Erbinnen und Erben, die bei einem Freibetrag von 500.000 Euro je Person steuerpflichtig wären, 2025"
+  quelle: "Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), Tabelle 2"
+  erhebungsjahr: 2022
+  veroeffentlicht: "2024-04"
+  url: "https://journals.akwien.at/index.php/wug/article/download/230/217/2393"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    Wichtiger Kontrollwert: Selbst bei halbierter Schwelle bleibt die
+    Betroffenheit unter einem Prozent. Entkräftet den Einwand, das Argument
+    hänge an einer willkürlich hoch gewählten Grenze.
+
+at_erbst_aufkommen_1mio:
+  zahl_min: 1.354
+  zahl_max: 1.828
+  wert: "rund 1,35 bis 1,83 Mrd. Euro jährlich"
+  beschreibung: "Geschätztes jährliches Steueraufkommen bei einem Freibetrag von einer Million Euro, 2025, unter Berücksichtigung von Ausweicheffekten"
+  quelle: "Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), Tabelle 2"
+  erhebungsjahr: 2022
+  veroeffentlicht: "2024-04"
+  url: "https://journals.akwien.at/index.php/wug/article/download/230/217/2393"
+  abgerufen: "2026-07-24"
+  konfidenz: strittig
+  hinweis: >
+    ACHTUNG, HÄUFIGER FEHLER. Die im Briefing genannte Größenordnung von
+    500 Mio. Euro ist falsch und vermutlich eine Verwechslung mit dem im selben
+    Papier diskutierten Stiftungsäquivalent (550 bis 700 Mio.). Korrekt:
+    1,354 Mrd. (Modell II, proportional) bis 1,828 Mrd. (Modell IV, progressiv,
+    Betriebsvermögen zu 85 % und Hauptwohnsitz vollständig befreit), jeweils
+    2025 und nach Abzug von Ausweicheffekten. Ohne Ausweicheffekte 1,75 bis
+    2,42 Mrd. Bei 500.000 Euro Freibetrag: 892 Mio. bis 1,43 Mrd.
+    Nie ohne Modellangabe zitieren. Aufkommen ist auf dieser Seite nachgeordnet
+    und darf nie die Überschrift tragen.
+
+
+# ---------------------------------------------------------------------------
+# Wirkung von Erbschaften
+# ---------------------------------------------------------------------------
+
+at_erbe_vermoegenssprung:
+  wert: "Aufstieg um 14 bis 17 Perzentile, für denselben Aufstieg über Einkommen wären mehr als 50 Perzentile nötig"
+  beschreibung: "Durchschnittliche Verschiebung der Position eines Haushalts in der Vermögensverteilung durch den Erhalt einer Erbschaft"
+  quelle: "Fessler/Schürz (2018), Journal of Human Development and Capabilities 19(4), referiert bei OeNB sowie in Grünberger et al. (2024) und Bodner/Disslbacher/Rapp (2024)"
+  erhebungsjahr: 2014
+  url: "https://www.oenb.at/Geldpolitik/Forschung/vermoegenskonzentration-erbschaften-sind-der-schluessel.html"
+  abgerufen: "2026-07-24"
+  konfidenz: strittig
+  hinweis: >
+    Als Spanne führen. Die referierenden Arbeiten nennen unterschiedliche
+    Werte für dieselbe Studie: 17 Perzentile bei Grünberger et al. (2024),
+    14 Prozentpunkte bei Bodner/Disslbacher/Rapp (2024). Die OeNB selbst
+    formuliert es ohne Zahl als "Einkommenssprung über mehr als die Hälfte
+    aller Haushalte". Auf der Website daher die Formulierung der OeNB
+    verwenden, nicht die Perzentilzahl. Beschreibender Zusammenhang, kein
+    kausaler Nachweis.
+
+at_erbanteil_europa:
+  wert: "50 bis 60 Prozent"
+  beschreibung: "Geschätzter Anteil des ererbten am gesamten Vermögensbestand in Europa"
+  quelle: "Alvaredo/Garbinti/Piketty (2017), Economica 84(334), referiert in Grünberger et al. (2024)"
+  erhebungsjahr: 2010
+  url: "https://doi.org/10.1111/ecca.12233"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    Europäischer Wert, kein österreichischer. Nie als Zahl für Österreich
+    ausgeben. Wird in der österreichischen Debatte regelmäßig falsch zitiert.
+
+at_erbschaften_effekt_umstritten:
+  wert: "kein Forschungskonsens"
+  beschreibung: "Frage, ob Erbschaften die Vermögensungleichheit verschärfen oder dämpfen"
+  quelle: "Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), Kapitel 1, mit Verweis auf Adermon et al. (2018), Elinder et al. (2018), De Nardi/Yang (2014)"
+  veroeffentlicht: "2024-04"
+  url: "https://journals.akwien.at/index.php/wug/article/download/230/217/2393"
+  abgerufen: "2026-07-24"
+  konfidenz: strittig
+  hinweis: >
+    GEGENARGUMENT. Gehört verpflichtend in den Kasten "Das sagt die
+    Gegenseite". Kernsatz der Primärquelle: Ein ausgleichender Effekt zeigt
+    sich nur in relativen Verteilungsmaßen, während die absoluten
+    Vermögensunterschiede durch Erbschaften ansteigen. Wer das weglässt,
+    verliert die erste Fachdiskussion.
+
+
+# ---------------------------------------------------------------------------
+# Verlassenschaftsakten Wien — Verwaltungsdaten statt Befragung
+# ---------------------------------------------------------------------------
+
+at_wien_nachlass_top1:
+  zahl: 39
+  wert: "rund 39 Prozent"
+  beschreibung: "Anteil des obersten Prozents der Nachlässe am gesamten Nachlassvermögen in zehn Wiener Gemeindebezirken, 2014 bis 2019"
+  quelle: "Bodner/Disslbacher/Rapp (2024), Erbschaften in Wien: Einsichten aus Verlassenschaftsakten, INEQ/WU Wien im Auftrag der Stadt Wien"
+  erhebungsjahr: 2019
+  veroeffentlicht: "2024-07-01"
+  url: "https://research.wu.ac.at/ws/portalfiles/portal/65069021/erbschaftenwieneinsichtenausverlassenschaftsakten2024.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    NUR MIT GEOGRAFISCHER EINSCHRÄNKUNG VERWENDEN. Die Autor:innen halten
+    ausdrücklich fest, dass auf dieser Basis keine Aussagen über die Verteilung
+    von Erbschaften in Österreich möglich sind. Zehn von 23 Wiener Bezirken,
+    geschichtete Stichprobe mit Oversampling, Perspektive der Erblasser:innen
+    statt der Erb:innen. Weitere Werte: Top 5 % rund 72 %, Top 10 % rund 90 %,
+    Median des Nachlassvermögens 0 Euro, rund die Hälfte der Verstorbenen
+    hinterlässt nach Abzug der Todesfallkosten nichts oder Schulden.
+    Der Wert dieser Quelle für uns liegt in der Methode, nicht in der Höhe:
+    Es ist die einzige österreichische Untersuchung auf Verwaltungsdaten,
+    und sie findet eine höhere Konzentration als die Befragungsdaten.
+
+
+# ---------------------------------------------------------------------------
+# Steuerliche Rahmenwerte
+# ---------------------------------------------------------------------------
+
+at_lohnsteuer_grenze:
+  wert: "13.539 Euro Jahreseinkommen"
+  beschreibung: "Steuerfreigrenze, ab der Lohn- und Einkommensteuer anfällt, Kalenderjahr 2026"
+  quelle: "BMF, Steuertarif und Steuerabsetzbeträge; WKO, Steuerliche Neuerungen 2025 und 2026"
+  erhebungsjahr: 2026
+  url: "https://www.bmf.gv.at/themen/steuern/arbeitnehmerveranlagung/steuertarif-steuerabsetzbetraege/steuertarif-steuerabsetzbetraege.html"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Jährlich zu aktualisieren. 2025 lag der Wert bei 13.308 Euro. Die
+    Tarifstufen werden seit 2023 um zwei Drittel der Inflationsrate angehoben.
+
+at_geringfuegigkeitsgrenze:
+  wert: "551,10 Euro monatlich"
+  beschreibung: "Geringfügigkeitsgrenze, ab deren Überschreiten Sozialversicherungsbeiträge anfallen, 2026"
+  quelle: "ÖGK, Sozialversicherungswerte 2026, § 5 Abs. 2 ASVG"
+  erhebungsjahr: 2026
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Für 2026 gegenüber 2025 unverändert (Budgetbegleitgesetz 2025).
+    NICHT als "ab dem ersten Euro" formulieren. Unterhalb dieser Grenze fallen
+    weder Beiträge noch Lohnsteuer an. Die korrekte, immer noch starke
+    Formulierung lautet: Arbeitseinkommen wird ab 551,10 Euro im Monat mit
+    Beiträgen belastet, Erbschaften in keiner Höhe.
+
+
+at_oecd_erbschaftsteuern:
+  wert: "24 von 36 OECD-Staaten"
+  beschreibung: "Zahl der OECD-Staaten, die eine Erbschaft- oder Nachlasssteuer einheben"
+  quelle: "OECD (2021), Inheritance Taxation in OECD Countries, referiert in Grünberger et al. (2024)"
+  erhebungsjahr: 2021
+  url: "https://doi.org/10.1787/e2879a7d-en"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    Datenstand 2021, die OECD hat inzwischen 38 Mitglieder. Vor dem Livegang
+    auf den aktuellen OECD-Stand prüfen und die Zahl der Mitgliedsstaaten
+    entsprechend anpassen.
+
+
+# === Modul C ===
+# ===========================================================================
+# Ergänzungen zu data/sources.yml — Modul C "Wem gehört, worauf du angewiesen bist"
+#
+# Teil 1: KORREKTUR an einem bestehenden Eintrag (bitte ersetzen)
+# Teil 2: NEUE Einträge
+#
+# Alle Werte am 2026-07-24 gegen die Primärquelle geprüft.
+# Drei Primärquellen tragen dieses Modul:
+#   OeNB Report 2025/21 (HFCS Austria 2023, Erstergebnisse) — Tabellen 1, 2, 3, 6
+#   Statistik Austria, Pressemitteilung "Wohnen 2025" vom 2026-06-10 (EU-SILC/Mikrozensus)
+#   Statistik Austria, Pressemitteilung "Wohnen 2025 Q4" vom 2026-03-13 (Mikrozensus)
+# ===========================================================================
+
+
+# ---------------------------------------------------------------------------
+# TEIL 1 — Korrektur
+# Der Eintrag bleibt inhaltlich bestehen, war aber nicht als Sekundärquelle
+# gekennzeichnet und hatte kein numerisches Feld für die Grafik.
+# ---------------------------------------------------------------------------
+
+at_anteil_betriebsvermoegen_top10:
+  zahl: 95
+  wert: "95 Prozent"
+  beschreibung: "Anteil des reichsten Zehntels der Haushalte am gesamten Betriebs- bzw. Unternehmensvermögen der privaten Haushalte"
+  quelle: "EZB, Distributional Wealth Accounts; Auswertung Momentum Institut"
+  erhebungsjahr: 2024
+  veroeffentlicht: "2024-09"
+  url: "https://news.momentum-institut.at/p/ezbdaten-sterreich-hat-hchste-konzentration-von-betriebsvermgen"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  sekundaerquelle: true
+  hinweis: >
+    KORREKTUR: sekundaerquelle ergänzt, zahl ergänzt (wird von der Grafik
+    "betriebsvermoegen" gebraucht). Das Momentum Institut steht der
+    Arbeiterkammer nahe; die Zahl ist eine Eigenauswertung der DWA und in den
+    von der EZB publizierten Tabellen nicht unmittelbar nachvollziehbar, weil
+    die EZB einzelne Vermögensarten nicht nach Vermögensgruppen ausweist
+    (siehe at_dwa_keine_komponenten_top5). Datenstand der Auswertung: DWA-
+    Aktualisierung 2024, unverändert wiederholt im Mai 2025.
+    Vor dem Livegang versuchen, den Wert direkt aus den DWA-Rohdaten der EZB
+    zu reproduzieren. Gelingt das nicht, im Text weiterhin gemeinsam mit
+    at_beteiligung_betriebsvermoegen führen — die OeNB-Primärzahl (5,2 % der
+    Haushalte halten überhaupt Betriebsvermögen) stützt die Aussage
+    unabhängig und ist nicht angreifbar.
+
+
+# ---------------------------------------------------------------------------
+# TEIL 2 — Neue Einträge
+# Wer besitzt überhaupt was (OeNB HFCS 2023, Tabelle 1)
+# ---------------------------------------------------------------------------
+
+at_beteiligung_betriebsvermoegen:
+  zahl: 5.2
+  wert: "5,2 Prozent"
+  beschreibung: "Anteil der Haushalte mit einer Investition in ein eigenes Unternehmen oder einen Betrieb, einschließlich landwirtschaftlicher Betriebe"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Tabelle 1"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Die primärquellengestützte Gegenzahl zu den 95 Prozent. Erfasst wird
+    direkt gehaltenes Betriebsvermögen von Haushalten. Beteiligungen, die
+    über Stiftungen oder Holdingkonstruktionen gehalten werden, sind im HFCS
+    praktisch nicht abgebildet (siehe at_privatstiftungen) — der Wert ist
+    also eher eine Unter- als eine Obergrenze der tatsächlichen
+    Eigentümerkonzentration.
+
+at_betriebsvermoegen_werte:
+  wert: "Median 196.800 Euro, Mittelwert 710.500 Euro"
+  beschreibung: "Wert des Betriebsvermögens bei jenen Haushalten, die welches besitzen"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Tabelle 1"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Bedingte Werte, also nur für Haushalte mit dieser Position. Das
+    Verhältnis Mittelwert zu Median beträgt 3,6 und ist das höchste aller
+    Sachvermögensarten. NIE ohne den Median nennen.
+
+at_beteiligung_hauptwohnsitz:
+  zahl: 48.2
+  wert: "48,2 Prozent"
+  beschreibung: "Anteil der Haushalte, denen ihr Hauptwohnsitz zumindest teilweise gehört"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Tabelle 1"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Haushaltsbezogen und deshalb nicht identisch mit der Eigentumsquote der
+    Wohnstatistik (47,3 % laut Mikrozensus, siehe at_rechtsverhaeltnis_2025).
+    Unterschiedliche Erhebungen, unterschiedliche Definitionen. Nicht
+    gegeneinander ausspielen, im Text jeweils die passende Quelle nennen.
+
+at_beteiligung_weitere_immobilien:
+  zahl: 11.9
+  wert: "11,9 Prozent"
+  beschreibung: "Anteil der Haushalte mit Immobilienbesitz außer dem eigenen Hauptwohnsitz"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Tabelle 1"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Bedingter Median 200.000 Euro, bedingter Mittelwert 392.400 Euro.
+    Enthält Zweitwohnsitze, Erbanteile und Grundstücke, nicht nur vermietete
+    Objekte. Daraus lässt sich also NICHT ableiten, dass 11,9 % der Haushalte
+    vermieten. Diese Zahl liegt niedriger und wird nicht erhoben.
+
+
+# ---------------------------------------------------------------------------
+# Funktion und Ertrag von Vermögen (OeNB HFCS 2023)
+# ---------------------------------------------------------------------------
+
+at_vermoegensfunktionen:
+  wert: "Vorsorge in der unteren Hälfte, Wohnnutzung in der Mitte, Kapitalfunktion ab dem obersten Zehntel"
+  beschreibung: "Beschreibung der OeNB, wozu Vermögen an unterschiedlichen Stellen der Verteilung dient"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Kapitel 1.1 zu Chart 6; methodisch Fessler/Schürz (2022), NBER Chapters"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    TRÄGT DEN ZENTRALEN ABSATZ DES MODULS. Der Wortlaut der Primärquelle:
+    Oberhalb des 90. Perzentils verbreitern sich die Portfolios um weitere
+    Immobilien, Betriebsvermögen und riskante Finanzanlagen, und Vermögen
+    nimmt eine "capital function" an, die laufendes Einkommen und
+    Wertzuwächse erzeugt. Wichtig: Das ist eine beschreibende Einordnung
+    durch die Notenbank, keine kausale Aussage. Im Text nicht zu einer
+    Wirkungsbehauptung ausbauen.
+
+at_kapitaleinkommen_dezile:
+  wert: "höchstens 100 Euro pro Jahr in den unteren vier Zehnteln, rund 5.900 Euro im obersten Zehntel"
+  beschreibung: "Durchschnittliches jährliches Kapitaleinkommen der Haushalte nach Nettovermögenszehnteln"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Tabelle 6"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Kapitaleinkommen ist in der Quelle definiert als Einkommen aus
+    Vermietung, aus Finanzanlagen und aus Unternehmensbeteiligungen.
+    Die anschaulichste Zahl des Moduls, weil sie Vermögen in einen laufenden
+    Zufluss übersetzt. Zum Vergleich aus derselben Tabelle: Arbeitseinkommen
+    steigt von 26.800 Euro im untersten auf 94.800 Euro im obersten Zehntel —
+    Faktor 3,5, während der Faktor beim Kapitaleinkommen bei rund 59 liegt.
+    Diese Gegenüberstellung ist stark, aber nur mit beiden Zahlen zulässig.
+
+at_anteil_top10_hfcs:
+  zahl: 51.4
+  wert: "51,4 Prozent"
+  beschreibung: "Anteil des reichsten Zehntels am gesamten Nettovermögen laut HFCS-Rohdaten"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Tabelle 3"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Wird hier nur als Vergleichsmaßstab zu den 95 % beim Betriebsvermögen
+    verwendet. Wie at_anteil_top1_roh ein Erhebungswert ohne Hinzuschätzung
+    der Spitze und daher eine Untergrenze. Zeitreihe: 61,1 % (2010),
+    55,5 % (2014), 56,4 % (2017), 51,5 % (2021), 51,4 % (2023).
+
+at_nettovermoegen_berufsgruppen:
+  wert: "949.000 Euro (Selbstständige), 1.584.000 Euro (Landwirtschaft), 219.000 Euro (Arbeiterhaushalte)"
+  beschreibung: "Durchschnittliches Nettovermögen der Haushalte nach beruflicher Stellung der Referenzperson"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Tabelle 2"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    Mittelwerte, keine Mediane — bei so schiefen Verteilungen nach oben
+    verzerrt. Weitere Werte derselben Tabelle: Beamt:innen 389.600,
+    Angestellte 329.700, Pensionist:innen 304.200, Arbeitslose 66.400 Euro.
+    ACHTUNG, HÄUFIGER FEHLER: Aus dieser Tabelle lässt sich NICHT ablesen,
+    dass Selbstständige höher verschuldet sind als andere Gruppen. Ihre
+    durchschnittliche Verschuldung liegt mit 30.800 Euro sogar leicht unter
+    jener der Angestelltenhaushalte (32.100 Euro). Wer das Risikoargument
+    der Gegenseite mit Schuldenzahlen beantworten will, findet hier keine
+    Stütze — ehrlicher ist der Hinweis, dass unternehmerisches Risiko in
+    Bestandsdaten überhaupt nicht abgebildet wird.
+
+
+# ---------------------------------------------------------------------------
+# Die Datenlücke, angewandt auf Vermögensarten
+# ---------------------------------------------------------------------------
+
+at_dwa_keine_komponenten_top5:
+  wert: "keine Aufgliederung einzelner Vermögensarten unterhalb des obersten Zehntels"
+  beschreibung: "Die EZB stellt in den Distributional Wealth Accounts den Anteil der reichsten 5 Prozent nur für das Nettovermögen insgesamt bereit, nicht für einzelne Vermögensbestandteile wie Unternehmensanteile"
+  quelle: "Momentum Institut, Auswertung der Distributional Wealth Accounts, Aussage von Joel Tölgyes/Oliver Schuster"
+  veroeffentlicht: "2024-09"
+  url: "https://news.momentum-institut.at/p/ezbdaten-sterreich-hat-hchste-konzentration-von-betriebsvermgen"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  sekundaerquelle: true
+  hinweis: >
+    Ergänzt at_dwa_grenze_top5 aus Modul A um die Vermögensarten und trägt
+    die dritte Zeile von "In 20 Sekunden". Vor dem Livegang gegen die
+    Datenbeschreibung der EZB selbst prüfen
+    (data.ecb.europa.eu, Datensatz DWA) und den Eintrag dann auf die
+    Primärquelle umstellen. Inhaltlich unstrittig, aber wir belegen eine
+    Aussage über die EZB derzeit mit einer parteinahen Quelle — genau der
+    Vorwurf, den wir uns nicht leisten können.
+
+at_hfcs_kein_oversampling:
+  wert: "keine Überrepräsentation vermögender Haushalte in der Stichprobe"
+  beschreibung: "Feststellung der OeNB, dass die österreichische HFCS-Erhebung anders als in mehreren anderen Teilnehmerländern kein Oversampling hoher Vermögen vorsieht und die Spitze der Verteilung deshalb nicht präzise abbilden kann"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Kapitel 6 (Final remarks) und Kapitel 1.2"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    SEHR STARKER BELEG, weil die erhebende Institution selbst die Lücke
+    benennt und ausdrücklich hofft, dass die sechste Welle — durchgeführt
+    von Statistik Austria — gezielte Verbesserungen der Stichprobe bringt.
+    Diesen Eintrag überall dort verwenden, wo der Vorwurf kommt, die
+    Transparenzlücke sei von uns konstruiert.
+
+
+# ---------------------------------------------------------------------------
+# Wohnen: Struktur des Bestands (Statistik Austria, Mikrozensus 2025)
+# ---------------------------------------------------------------------------
+
+at_rechtsverhaeltnis_2025:
+  wert: "47,3 Prozent Eigentum, 43,1 Prozent Hauptmiete, 9,7 Prozent sonstige Rechtsverhältnisse"
+  beschreibung: "Verteilung der Hauptwohnsitzwohnungen nach Rechtsverhältnis, 2025"
+  quelle: "Statistik Austria, Pressemitteilung 14 197-116/26 zur Publikation Wohnen 2025, Mikrozensus"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2026-06-10"
+  url: "https://www.statistik.at/fileadmin/announcement/2026/06/20260610Wohnen2025.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Aufgliederung: Hauseigentum 35,5 %, Wohnungseigentum 11,8 %, private
+    Hauptmiete 19,5 %, Genossenschaft 17,0 %, Gemeinde 6,5 %. Die
+    Mietquote inklusive Untermiete weist Statistik Austria separat mit
+    43,8 % aus. Immer den Datenstand mitnennen, die Werte verschieben sich
+    jährlich um Zehntelprozentpunkte.
+
+at_mietsegmente_2025:
+  wert: "39,3 Prozent Genossenschaft, 14,9 Prozent Gemeinde, 31,2 Prozent private Hauptmiete am freien Markt"
+  beschreibung: "Verteilung der rund 1,8 Millionen Hauptmietwohnungen nach Mietverhältnis, 2025"
+  quelle: "Statistik Austria, Pressemitteilung 14 136-055/26, Tabelle 2, Mikrozensus 2025"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2026-03-13"
+  url: "https://www.statistik.at/fileadmin/announcement/2026/03/20260313Wohnen2025Q4.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT. Beleg für den großen sozialen Wohnbau und gehört
+    verpflichtend in den Kasten "Das sagt die Gegenseite". Restliche
+    Anteile: Richtwertmietzins 13,4 %, Kategoriemietzins 1,3 %. Gemeinde
+    plus Genossenschaft ergibt 54,2 % des Mietbestands. Große regionale
+    Unterschiede: Wien 25,9 % Gemeinde, Vorarlberg 55,4 % private
+    Hauptmiete am freien Markt. Wer nur den Österreich-Schnitt nennt,
+    beschreibt für einzelne Bundesländer etwas Falsches.
+
+at_vermieterstruktur_unbekannt:
+  wert: "keine amtliche Unterscheidung zwischen privaten und gewerblichen Vermietern"
+  beschreibung: >
+    In der amtlichen Wohnstatistik umfasst die Kategorie "andere bzw. private
+    Hauptmiete" Wohnungen, die von einer Privatperson oder einer sonstigen
+    juristischen Person, etwa einer Bank oder Versicherung, vermietet werden.
+    Beide werden nicht getrennt ausgewiesen.
+  quelle: "Statistik Austria, Definitionen zur Mikrozensus-Wohnungserhebung, Pressemitteilung 14 136-055/26"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2026-03-13"
+  url: "https://www.statistik.at/fileadmin/announcement/2026/03/20260313Wohnen2025Q4.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Das Wohn-Pendant zur Transparenzlücke des Projekts, belegt aus der
+    Definition der amtlichen Statistik selbst. Vorsicht bei der
+    Formulierung: Es gibt sehr wohl Registerdaten zum Eigentum an GEBÄUDEN
+    (Gebäude- und Wohnungszählung, Merkmal Eigentumsverhältnis, zuletzt
+    Abgestimmte Erwerbsstatistik 2024). Die Aussage stimmt für die Frage,
+    wer VERMIETETE WOHNUNGEN hält. Nicht zu "über Immobilieneigentum gibt es
+    keine Daten" verkürzen, das wäre falsch und leicht zu widerlegen.
+
+at_wien_vermieter_gewerblich:
+  wert: "52 Prozent Privatpersonen, 42 Prozent Unternehmen"
+  beschreibung: "Art der Vermietung im privaten Mietsegment in Wien, nach Angabe der befragten Mieterinnen und Mieter"
+  quelle: "OGM research & communication im Auftrag der MA 50 der Stadt Wien, Befragung von Mieter*innen zum Mietrecht im privaten Wohnungssegment, Endbericht 2024, Abbildung 7"
+  erhebungsjahr: 2024
+  veroeffentlicht: "2024-05"
+  url: "https://www.wien.gv.at/spezial/studien/ma50/mieterinnenbefragungendbericht2024.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: strittig
+  hinweis: >
+    NUR MIT VOLLSTÄNDIGER EINSCHRÄNKUNG VERWENDEN. Vier Einschränkungen,
+    alle vier gehören in den Text oder unmittelbar daneben:
+    (1) nur Wien, (2) nur das private Mietsegment, das rund 45 % der Wiener
+    Mietwohnungen ausmacht, (3) Selbstauskunft der Mieter:innen, nicht
+    Grundbuch — 5 % wissen es selbst nicht, (4) Online-Panel-Quotenstichprobe
+    mit N=507, Schwankungsbreite bis 4,4 Prozentpunkte.
+    Zusatzbefund: private Vermietung überwiegt im Altbau, gewerbliche im
+    Neubau. Diese Zahl trägt kein Argument, sie illustriert nur, dass wir
+    nichts Besseres haben. Wenn im Lektorat Zweifel bestehen, ersatzlos
+    streichen und nur at_vermieterstruktur_unbekannt stehen lassen.
+
+
+# ---------------------------------------------------------------------------
+# Wohnen: Zugang zu Eigentum (OeNB HFCS 2023)
+# ---------------------------------------------------------------------------
+
+at_eigentumsquote_vermoegenshaelften:
+  wert: "92 Prozent gegenüber 4 Prozent"
+  beschreibung: "Anteil der Haushalte mit Eigentum am Hauptwohnsitz in der vermögenderen gegenüber der ärmeren Hälfte der Nettovermögensverteilung, 2023"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Kapitel 2.1"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    2010 lagen dieselben Werte bei 87 und 9 Prozent. Die OeNB bezeichnet das
+    Muster ausdrücklich als über die Zeit ausgeprägter geworden. Das ist die
+    einzige Stelle des Moduls, an der eine Verschärfung über die Zeit sauber
+    belegt ist — sie deshalb nicht überdehnen und keine Trendfortschreibung
+    daraus machen. Achtung, Zirkularität: Wohneigentum ist selbst
+    Bestandteil des Nettovermögens, nach dem die Hälften gebildet werden.
+    Der Zusammenhang ist teilweise definitorisch. Wer das nicht dazusagt,
+    wird in der ersten Fachdiskussion darauf gestoßen.
+
+at_mieter_eigenmittel:
+  wert: "rund 12 Prozent für ein Haus, rund 16 Prozent für eine Wohnung"
+  beschreibung: "Anteil der Mieterhaushalte, deren Nettovermögen für die erforderlichen Eigenmittel beim Kauf einer durchschnittlich großen Immobilie ausreichen würde"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Chart 10"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    Modellrechnung, keine Messung. Annahme der OeNB: 20 Prozent
+    Eigenmittelanteil zuzüglich 10 Prozent Nebenkosten, Kaufpreise nach
+    Statistik Austria 2024, Flächen 140 m² (Haus) und 70 m² (Wohnung) aus den
+    HFCS-Medianen. Mietfrei wohnende Haushalte sind in der Gruppe der
+    Mieter:innen enthalten. Im Text immer als Schätzung kennzeichnen.
+
+at_erbe_eigentumszugang:
+  wert: "in jedem Lebensalter höhere Eigentumsquote bei Haushalten mit Erbschaft oder Schenkung"
+  beschreibung: "Zusammenhang zwischen erhaltenen Vermögensübertragungen und Eigentum am Hauptwohnsitz über den Lebensverlauf"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Chart 16 und Kapitel 2.1"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    Der größte Abstand liegt zwischen 35 und 60 Jahren. Ergänzende Zahlen aus
+    derselben Quelle: Haushalte mit besichertem Kredit haben zu 51 Prozent
+    geerbt oder etwas geschenkt bekommen, Haushalte mit nur unbesicherter
+    Verschuldung zu 33 Prozent; die Mediane der Übertragungen liegen bei
+    79.900 gegenüber 34.200 Euro.
+    BESCHREIBENDER ZUSAMMENHANG, KEIN KAUSALER NACHWEIS. Die OeNB formuliert
+    vorsichtig ("often provides the decisive step"). Wir bleiben mindestens
+    genauso vorsichtig.
+
+
+# ---------------------------------------------------------------------------
+# Wohnen: Kosten und Vertragslage (Statistik Austria)
+# ---------------------------------------------------------------------------
+
+at_befristungen_2025:
+  wert: "50 Prozent der privaten Hauptmietverhältnisse befristet"
+  beschreibung: "Anteil befristeter Verträge und durchschnittliche Vertragsdauer nach Mietsegment, 2025"
+  quelle: "Statistik Austria, Pressemitteilung 14 197-116/26 zur Publikation Wohnen 2025, Mikrozensus"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2026-06-10"
+  url: "https://www.statistik.at/fileadmin/announcement/2026/06/20260610Wohnen2025.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Weitere Werte derselben Quelle: durchschnittliche Vertragsdauer private
+    Hauptmiete 7 Jahre, Genossenschaft 12,4 Jahre, Gemeinde 16,7 Jahre;
+    Befristungsquote Genossenschaft 4,9 %, Gemeinde 3,8 %.
+    Die anschaulichste Zahl des Wohn-Teils, weil sie Verfügungsgewalt in
+    Alltagserfahrung übersetzt, ohne über Preise zu argumentieren.
+
+at_miete_vertragsdauer:
+  wert: "12,4 Euro je Quadratmeter bei Verträgen unter zwei Jahren, 6,5 Euro ab 30 Jahren"
+  beschreibung: "Durchschnittliche Miete inklusive Betriebskosten nach bisheriger Dauer des Mietverhältnisses, 2025"
+  quelle: "Statistik Austria, Pressemitteilung 14 197-116/26 zur Publikation Wohnen 2025, Mikrozensus"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2026-06-10"
+  url: "https://www.statistik.at/fileadmin/announcement/2026/06/20260610Wohnen2025.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Gesamtdurchschnitt 2025: 10,2 Euro je Quadratmeter inklusive
+    Betriebskosten, im 4. Quartal 10,4 Euro. Die Spreizung nach Vertragsalter
+    ist kein reiner Preiseffekt, sondern hängt auch an Lage, Baujahr und
+    Mietrechtsregime der jeweiligen Bestände. Nicht als
+    "Neumieter zahlen doppelt" verkürzen.
+
+at_wohnkosten_anstieg_10jahre:
+  wert: "rund 35 Prozent insgesamt, knapp 40 Prozent bei Mietverhältnissen"
+  beschreibung: "Anstieg der monatlichen Wohnkosten von 2015 bis 2025"
+  quelle: "Statistik Austria, Pressemitteilung 14 197-116/26, EU-SILC"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2026-06-10"
+  url: "https://www.statistik.at/fileadmin/announcement/2026/06/20260610Wohnen2025.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Nominal, nicht inflationsbereinigt. Der Verbraucherpreisindex ist im
+    selben Zeitraum ebenfalls deutlich gestiegen — wer die 35 Prozent ohne
+    diesen Hinweis nennt, suggeriert einen realen Anstieg in dieser Höhe.
+    Immer gemeinsam mit at_wohnkostenanteil_stabil führen.
+
+at_wohnkostenanteil_stabil:
+  wert: "15 Prozent (2025) gegenüber 16 Prozent (2015)"
+  beschreibung: "Anteil der Wohnkosten am verfügbaren Haushaltseinkommen, Mittelwert über alle Privathaushalte"
+  quelle: "Statistik Austria, Pressemitteilung 14 197-116/26, EU-SILC"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2026-06-10"
+  url: "https://www.statistik.at/fileadmin/announcement/2026/06/20260610Wohnen2025.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT. Gehört verpflichtend in den Kasten "Das sagt die
+    Gegenseite". Die stärkste Einzelzahl gegen eine dramatisierende
+    Wohnkostenerzählung, und sie kommt von der amtlichen Statistik.
+    Wer sie weglässt und stattdessen nur den Anstieg von 35 Prozent nennt,
+    verliert die Diskussion beim ersten Faktencheck.
+
+at_wohnkosten_belastung_gruppen:
+  wert: "29 Prozent bei Ein-Eltern-Haushalten, 28 Prozent bei alleinlebenden Frauen"
+  beschreibung: "Anteil der Wohnkosten am verfügbaren Haushaltseinkommen bei besonders belasteten Haushaltstypen, 2025"
+  quelle: "Statistik Austria, Pressemitteilung 14 197-116/26, EU-SILC"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2026-06-10"
+  url: "https://www.statistik.at/fileadmin/announcement/2026/06/20260610Wohnen2025.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Gegengewicht zum Durchschnittswert von 15 Prozent. Rund 80 Prozent der
+    Ein-Eltern-Haushalte sind Mutter-Kind-Konstellationen; mehr als die
+    Hälfte berichtet von starker Belastung durch die Wohnkosten. Ursache ist
+    laut Quelle wesentlich die Wohnform: Mütter mit Kindern leben zu
+    54,0 Prozent zur Miete, Väter mit Kindern zu 38,6 Prozent.
+
+at_baukosten_index:
+  wert: "130,9 Indexpunkte im Dezember 2025, Basis 2020 = 100"
+  beschreibung: "Baukostenindex für den Wohnhaus- und Siedlungsbau, Gesamtbaukosten"
+  quelle: "Statistik Austria, Baukostenindex Wohnhaus- und Siedlungsbau, Statistik im Fokus 2.12, Dezember 2025"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2026-01"
+  url: "https://www.statistik.at/fileadmin/publications/SB_2-12_Wohnhaus_Siedlungsbau_Dezember_2025.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: mittel
+  hinweis: >
+    GEGENARGUMENT. Beleg für den Einwand, dass Wohnkosten auch von der
+    Kostenseite getrieben werden. Vorläufiger Wert. Im Text als
+    "rund ein Drittel über dem Niveau von 2020" führen, nicht als exakte
+    Prozentzahl — der Index misst Kosten der Bauunternehmen, nicht
+    Baupreise für Bauherren, und die Publikationsreihe endet mit dem
+    Basisjahr 2020. Ab dem Basisjahr 2025 sind die Werte nur noch online
+    verfügbar, der Eintrag ist deshalb ab 2027 zu prüfen.
+
+at_bodenwert_oeffentliche_investition:
+  wert: "Wertzuwächse durch öffentliche Infrastruktur fallen bei den Eigentümern an"
+  beschreibung: >
+    Feststellung der OeNB, dass Grundstückswerte durch öffentliche
+    Investitionen in Verkehr, Schulen und Gesundheitseinrichtungen steigen,
+    der Nutzungswert selbst bewohnten Eigentums in Österreich nicht besteuert
+    wird und Grundsteuern niedrig sind.
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Kapitel 5; ausführlich Fessler/Schürz (2018), Journal of Human Development and Capabilities 19(4)"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    Qualitative Aussage der Notenbank, keine bezifferte Wirkung. Nicht zu
+    einer Zahl ausbauen und nicht als Forderung nach einer bestimmten Steuer
+    lesen. Der Wert für uns liegt darin, dass eine staatliche Institution den
+    Zusammenhang zwischen öffentlicher Investition und privatem
+    Vermögenszuwachs selbst benennt.
+
+at_sozialstaat_ersetzt_vermoegen:
+  wert: "Sozialstaat ersetzt private Vorsorge in der unteren Hälfte"
+  beschreibung: "Einordnung der OeNB, dass gemessene Vermögensungleichheit in Ländern mit ausgebautem Sozialstaat nicht direkt als Maß wirtschaftlicher Unsicherheit gelesen werden kann"
+  quelle: "OeNB, HFCS Austria 2023, OeNB Report 2025/21, Kapitel 1.2 und Kapitel 6; Fessler/Schürz (2018)"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-12"
+  url: "https://www.oenb.at/dam/jcr:c9b54df1-dd15-4722-9e81-cf78abb57d35/report-2025-21-hfcs-first-results.pdf"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT, und das gewichtigste des ganzen Projekts. Die OeNB nennt
+    drei Ebenen: Pensionsversicherung, Gesundheitsversorgung und
+    Arbeitslosenversicherung ersetzen private Vorsorge unten; Wohnbau- und
+    Eigentumsförderung stützen die Mitte; günstige steuerliche Behandlung von
+    Kapital und Kriseninterventionen stabilisieren oben. Der Satz gilt also
+    nicht nur gegen uns — die dritte Ebene ist unser eigenes Argument.
+    Beide Hälften des Zitats verwenden, sonst ist die Wiedergabe unfair.
+
+
+# === Modul D ===
+
+at_vermoegenssteuern_oecd_rang:
+  zahl: 1
+  wert: "rund 1 Prozent des gesamten Steueraufkommens, Platz 35 von 38 OECD-Staaten"
+  beschreibung: "Aufkommen aus vermögensbezogenen Steuern im OECD-Vergleich"
+  quelle: "OECD Revenue Statistics, Auswertung Momentum Institut"
+  erhebungsjahr: 2024
+  url: "https://www.momentum-institut.at/grafik/18094-2/"
+  abgerufen: "2026-07-30"
+  konfidenz: mittel
+  sekundaerquelle: true
+  hinweis: >
+    KORREKTUR. Früherer Wert "fünftletzter Platz" beruhte auf Stand 2021.
+    Aktuell 2024: Platz 35 von 38. EU-Schnitt 3,4 Prozent. Vor Livegang aus
+    OECD Revenue Statistics 2025 primär belegen. Kategorie umfasst praktisch nur
+    Grund- und Grunderwerbsteuer; KESt zählt als Ertragsteuer nicht dazu.
+
+at_privatstiftungen:
+  wert: "knapp 3.000 Privatstiftungen"
+  beschreibung: "Privatstiftungen in Österreich, in den HFCS-Daten praktisch nicht erfasst"
+  quelle: "Österreichischer Stiftungsverband; Aufbereitung im A&W-Blog (AK Wien)"
+  url: "https://www.stiftungsverband.at/"
+  abgerufen: "2026-07-30"
+  konfidenz: mittel
+  sekundaerquelle: true
+  hinweis: >
+    KORREKTUR. Anzahl unstrittig (Verband knapp 3.000, Firmenbuch rund 2.900).
+    Früheres "100 Mrd." strittig: PwC schätzt rund 70 Mrd. Keine amtliche
+    Statistik - Teil der Aussage. Auf der Website Spanne 70 bis 100 Mrd. oder ohne Betrag.
+
+at_erbschaftsteuer_2008:
+  zahl: 0
+  wert: "seit 2008 keine Erbschaft- und Schenkungsteuer"
+  beschreibung: "Auslaufen der österreichischen Erbschaft- und Schenkungsteuer"
+  quelle: "Grünberger/Derndorfer/Schnetzer (2024), Wirtschaft und Gesellschaft 50(1), Kapitel 1 und Conclusio"
+  erhebungsjahr: 2008
+  url: "https://journals.akwien.at/index.php/wug/article/download/230/217/2393"
+  abgerufen: "2026-07-24"
+  konfidenz: hoch
+  hinweis: >
+    KORREKTUR: Feld "zahl" ergänzt (Steuersatz null, von Grafik gebraucht).
+    VfGH stellte 2007 Gleichheitswidrigkeit fest; Reparaturfrist verstrich,
+    Steuer lief 2008 aus. Grunderwerbsteuer bei unentgeltlichen Übertragungen bleibt.
+
+at_lohnsteuer_quellenabzug:
+  wert: "Einbehalt durch den Arbeitgeber vor der Auszahlung"
+  beschreibung: "Erhebungsform der Lohnsteuer: Der Arbeitgeber behält die Steuer bei jeder Lohnzahlung ein und führt sie an das Finanzamt ab"
+  quelle: "§ 47 EStG 1988; BMF, Lohnsteuer und Arbeitnehmerveranlagung"
+  url: "https://www.bmf.gv.at/themen/steuern/arbeitnehmerveranlagung/steuertarif-steuerabsetzbetraege/steuertarif-steuerabsetzbetraege.html"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: >
+    TRÄGT DEN ZENTRALEN ABSATZ. Rechtstatsache. Punkt ist nicht die Höhe,
+    sondern dass der Abzug ohne Wahlmöglichkeit erfolgt. Gegengewicht: auch Entlastung.
+
+at_einkommensteuer_eingangssatz:
+  zahl: 20
+  wert: "20 Prozent"
+  beschreibung: "Niedrigster Grenzsteuersatz der Einkommensteuer oberhalb der Steuerfreigrenze"
+  quelle: "BMF, Steuertarif und Steuerabsetzbeträge"
+  erhebungsjahr: 2026
+  url: "https://www.bmf.gv.at/themen/steuern/arbeitnehmerveranlagung/steuertarif-steuerabsetzbetraege/steuertarif-steuerabsetzbetraege.html"
+  abgerufen: "2026-07-30"
+  konfidenz: mittel
+  hinweis: "Gilt oberhalb 13.539 Euro. SV-Beiträge nicht enthalten. Jährlich prüfen."
+
+at_einkommensteuer_spitzensatz:
+  zahl: 55
+  wert: "55 Prozent"
+  beschreibung: "Höchster Grenzsteuersatz der Einkommensteuer, für Einkommensteile über einer Million Euro im Jahr"
+  quelle: "BMF, Steuertarif und Steuerabsetzbeträge"
+  erhebungsjahr: 2026
+  url: "https://www.bmf.gv.at/themen/steuern/arbeitnehmerveranlagung/steuertarif-steuerabsetzbetraege/steuertarif-steuerabsetzbetraege.html"
+  abgerufen: "2026-07-30"
+  konfidenz: mittel
+  hinweis: >
+    Befristet, mehrfach verlängert. Vor Livegang prüfen, sonst 50 Prozent.
+    GRENZsteuersatz, kein Durchschnitt - muss im Text stehen.
+
+at_kest_kapitalertraege:
+  zahl: 27.5
+  wert: "27,5 Prozent"
+  beschreibung: "Kapitalertragsteuer auf Dividenden, Ausschüttungen und realisierte Kursgewinne, mit dem Abzug ist die Einkommensteuer abgegolten"
+  quelle: "BMF, Besteuerung inländischer sowie im Inland bezogener Kapitalerträge"
+  erhebungsjahr: 2026
+  url: "https://www.bmf.gv.at/themen/steuern/sparen-veranlagen/besteuerung-kapitalertraege-inland.html"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: >
+    KEIN Reichenprivileg. Gilt ab dem ersten Euro gleich. Aussage: flach und
+    endbesteuert, steigt nicht mit der Höhe.
+
+at_kest_zinsen:
+  zahl: 25
+  wert: "25 Prozent"
+  beschreibung: "Kapitalertragsteuer auf Zinsen aus Spareinlagen und Geldeinlagen bei Banken"
+  quelle: "BMF, Besteuerung inländischer sowie im Inland bezogener Kapitalerträge"
+  erhebungsjahr: 2026
+  url: "https://www.bmf.gv.at/themen/steuern/sparen-veranlagen/besteuerung-kapitalertraege-inland.html"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: "Seit 2016: 25 Prozent Bankeinlagen, 27,5 Prozent übrige Kapitalerträge."
+
+at_koest_satz:
+  zahl: 23
+  wert: "23 Prozent"
+  beschreibung: "Körperschaftsteuer auf den Gewinn einer Kapitalgesellschaft, unabhängig davon, ob ausgeschüttet wird"
+  quelle: "WKO, Körperschaftsteuer; USP, Steuerbelastung im Vergleich zur Einkommensteuer"
+  erhebungsjahr: 2026
+  url: "https://www.wko.at/steuern/koest-koerperschaftsteuer"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: >
+    Seit 2024. Belastung eines im Unternehmen bleibenden Gewinns; KESt erst bei
+    Ausschüttung. Stundung, keine Befreiung. Anhebung ab 2028 geplant - prüfen.
+
+at_gesamtbelastung_ausschuettung:
+  zahl: 44.18
+  wert: "44,18 Prozent"
+  beschreibung: "Gesamtsteuerbelastung eines Unternehmensgewinns, der erwirtschaftet und anschließend an eine natürliche Person ausgeschüttet wird (23 Prozent Körperschaftsteuer, danach 27,5 Prozent Kapitalertragsteuer auf den Rest)"
+  quelle: "USP/BMF, Steuerbelastung im Vergleich zur Einkommensteuer; WKO, Wahl der Rechtsform aus steuerlicher Sicht"
+  erhebungsjahr: 2026
+  url: "https://www.usp.gv.at/themen/steuern-finanzen/koerperschaftsteuer-ueberblick/weitere-informationen-zur-koerperschaftsteuer/steuerbelastung-im-vergleich-zur-einkommensteuer.html"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT, stark. In Kasten UND Grafik. Sätze werden nicht addiert:
+    KESt fällt auf den um die KöSt verminderten Gewinn.
+
+at_unrealisierte_wertzuwaechse:
+  zahl: 0
+  wert: "keine laufende Besteuerung"
+  beschreibung: "Wertsteigerungen von Kapitalvermögen werden erst besteuert, wenn sie realisiert werden; ein bloßer Wertzuwachs löst keine Steuer aus"
+  quelle: "BMF, Besteuerung inländischer sowie im Inland bezogener Kapitalerträge"
+  erhebungsjahr: 2026
+  url: "https://www.bmf.gv.at/themen/steuern/sparen-veranlagen/besteuerung-kapitalertraege-inland.html"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: >
+    NICHT "steuerfrei". Bei Realisierung 27,5 Prozent. Betrifft den Zeitpunkt,
+    nicht die Höhe. Realisationsprinzip international Standard. Wegzugsbesteuerung existiert.
+
+at_beteiligungsertragsbefreiung:
+  wert: "keine Kapitalertragsteuer bei Ausschüttungen zwischen inländischen Körperschaften"
+  beschreibung: "Gewinnausschüttungen an eine inländische Kapitalgesellschaft oder Genossenschaft sind von der Kapitalertragsteuer befreit; besteuert wird erst, wenn der Gewinn bei einer natürlichen Person ankommt"
+  quelle: "WKO, Körperschaftsteuer; USP, Körperschaftsteuer im Überblick"
+  erhebungsjahr: 2026
+  url: "https://www.wko.at/steuern/koest-koerperschaftsteuer"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: >
+    NICHT als Schlupfloch. Zweck: Vermeidung von Mehrfachbelastung im Konzern,
+    üblich. Wirkung: Bündelung in einer Holding ohne zwischenzeitliche Steuer.
+
+at_stiftung_besteuerung_2026:
+  wert: "3,5 Prozent Stiftungseingangssteuer, 27,5 Prozent Zwischensteuer"
+  beschreibung: "Besteuerung von Privatstiftungen ab dem Kalenderjahr 2026: Eingangssteuer bei der Vermögenswidmung, Zwischensteuer auf Zinsen und realisierte Wertsteigerungen, 27,5 Prozent Kapitalertragsteuer auf Zuwendungen an Begünstigte"
+  quelle: "WKO, Die Besteuerung von Privatstiftungen; Budgetsanierungsmaßnahmengesetz 2025"
+  erhebungsjahr: 2026
+  url: "https://www.wko.at/steuern/besteuerung-privatstiftungen"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT. In den Kasten. Beide Sätze zum 1.1.2026 angehoben. Zwischensteuer
+    ist Vorwegbesteuerung, wird bei Zuwendung gutgeschrieben. Verbleibender Vorteil:
+    Bindung über Generationen ohne Übertragungsvorgang.
+
+at_milliardaersvermoegen_weltbip:
+  wert: "rund 3 Prozent (1987) auf rund 13 Prozent (2024)"
+  beschreibung: "Vermögen der reichsten 0,0001 Prozent der erwachsenen Weltbevölkerung, 2024 in etwa die Gruppe der Dollar-Milliardäre, im Verhältnis zur weltweiten Wirtschaftsleistung"
+  quelle: "Zucman (2024), A blueprint for a coordinated minimum effective taxation standard for ultra-high-net-worth individuals, Bericht für die brasilianische G20-Präsidentschaft"
+  erhebungsjahr: 2024
+  veroeffentlicht: "2024-06"
+  url: "https://gabriel-zucman.eu/files/report-g20.pdf"
+  abgerufen: "2026-07-30"
+  konfidenz: mittel
+  hinweis: >
+    KORREKTUR am Briefing: rund 13 Prozent des Welt-BIP (14,4 Bio USD), nicht
+    "14 Prozent". Forbes-Liste plus Interpolation - Schätzung, Methodenkritik wie
+    at_anteil_top1_hochgeschaetzt. Nicht mit späteren 17-Prozent-Angaben mischen.
+
+at_milliardaere_effektivsteuer:
+  wert: "rund 0,3 Prozent des Vermögens"
+  beschreibung: "Von Milliardärinnen und Milliardären gezahlte Steuern im Verhältnis zu ihrem Vermögen, weltweit"
+  quelle: "Zucman (2024), Bericht für die brasilianische G20-Präsidentschaft"
+  erhebungsjahr: 2024
+  veroeffentlicht: "2024-06"
+  url: "https://gabriel-zucman.eu/files/report-g20.pdf"
+  abgerufen: "2026-07-30"
+  konfidenz: strittig
+  hinweis: >
+    Kein Steuersatz im üblichen Sinn: Bezugsgröße Vermögen, nicht Einkommen.
+    Vergleich mit Lohnsteuersatz unzulässig. Für Österreich KEINE vergleichbare
+    Untersuchung - Lücke benennen, globale Zahl nicht übertragen.
+
+at_abgabenquote_at:
+  zahl: 43.8
+  wert: "43,8 Prozent des BIP (2024)"
+  beschreibung: "Steuer- und Abgabenquote Österreichs, Steuern und Sozialbeiträge im Verhältnis zur Wirtschaftsleistung"
+  quelle: "Eurostat, Tax revenue statistics, Datensatz gov_10a_taxag"
+  erhebungsjahr: 2024
+  veroeffentlicht: "2025-10-31"
+  url: "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20251031-2"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT. In den Kasten. KORREKTUR: nicht "höher nur FR und DK". 2024
+    über Österreich: Dänemark 45,8, Frankreich 45,3, Belgien 45,1. Österreich
+    vierthöchster EU-Wert. Datenstand 2024 führen.
+
+at_abgaben_arbeit:
+  wert: "23,7 Prozent des BIP (2023)"
+  beschreibung: "Abgaben auf den Faktor Arbeit in Österreich, bei einer gesamten Abgabenquote von 43,5 Prozent im selben Jahr"
+  quelle: "Budgetdienst des Parlaments, Abgabenquote in Österreich und im internationalen Vergleich, Anfragebeantwortung vom 19.12.2024"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2024-12-19"
+  url: "https://www.parlament.gv.at/dokument/budgetdienst/analysen-auf-anfrage/BD-Abgabenquote-in-Oesterreich-und-im-internationalen-Vergleich.pdf"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: >
+    Beste Zahl für die Zusammensetzung, vom Parlament. Beide Werte gemeinsam
+    nennen. NICHT zu "acht von zehn Euro von Arbeitnehmern" verkürzen.
+
+at_oecd_vermoegensteuern_rueckgang:
+  wert: "von zwölf (1990) auf vier (2017)"
+  beschreibung: "Zahl der OECD-Staaten, die eine laufende Steuer auf das Nettovermögen von Privatpersonen einheben"
+  quelle: "OECD (2018), The Role and Design of Net Wealth Taxes in the OECD, OECD Tax Policy Studies No. 26, Kapitel 1"
+  erhebungsjahr: 2017
+  veroeffentlicht: "2018-04"
+  url: "https://www.oecd.org/en/publications/the-role-and-design-of-net-wealth-taxes-in-the-oecd_9789264290303-en/full-report/component-4.html"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT, gewichtigstes. In den Kasten. Abschaffung: AT 1994, DK/DE 1997,
+    NL 2001, FI/IS/LU 2006, SE 2007. 2017 verblieben FR, NO, ES, CH. Für unsere
+    Linie Begründung: wir fordern Übertragungssteuer, keine laufende.
+
+at_oecd_erbschaft_vor_vermoegensteuer:
+  wert: "begrenzte Argumente für eine laufende Vermögensteuer neben Kapitalertragsteuern und gut gestalteten Erbschaftsteuern"
+  beschreibung: "Schlussfolgerung der OECD zum Verhältnis von laufender Vermögensteuer, Kapitalertragsteuer und Erbschaftsteuer"
+  quelle: "OECD (2018), The Role and Design of Net Wealth Taxes in the OECD, Executive Summary"
+  veroeffentlicht: "2018-04"
+  url: "https://www.oecd.org/en/publications/the-role-and-design-of-net-wealth-taxes-in-the-oecd_9789264290303-en.html"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: >
+    Sauberste Antwort auf das Mobilitätsargument, von der OECD. Fair: kein
+    Argument für eine HOHE Erbschaftsteuer, nur für die Wahl des Instruments.
+
+at_norwegen_wegzuege:
+  wert: "261 Wegzüge (2022) und 254 (2023)"
+  beschreibung: "Wegzüge von Personen mit mehr als zehn Millionen Kronen Vermögen aus Norwegen nach der Erhöhung der Vermögensteuer auf bis zu 1,1 Prozent"
+  quelle: "Denkfabrik Civita, referiert bei Reuters"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2025-11"
+  abgerufen: "2026-07-30"
+  konfidenz: strittig
+  sekundaerquelle: true
+  hinweis: >
+    GEGENARGUMENT. Nur vollständig verwenden. Wegzüge mehr als doppelt so hoch,
+    Einnahmen stiegen trotzdem (rund 0,6 Prozent BIP), SSB sieht ausreichend
+    Liquidität. Guardian-600-Mrd.-Zahl NICHT zitieren.
+
+at_frankreich_ifi:
+  wert: "seit 2018 nur noch auf Immobilienvermögen ab 1,3 Mio. Euro"
+  beschreibung: "Umstellung der französischen Vermögensteuer ISF auf die Immobilienvermögensteuer IFI"
+  quelle: "Französisches Steuerrecht (Code général des impôts, IFI)"
+  erhebungsjahr: 2018
+  abgerufen: "2026-07-30"
+  konfidenz: mittel
+  sekundaerquelle: true
+  hinweis: >
+    GEGENARGUMENT. Rechtsänderung unstrittig, derzeit nur über Kanzleien belegt.
+    Vor Livegang gegen impots.gouv.fr oder OECD belegen. Nur Rechtsänderung nennen.
+
+at_oecd_erbschaftsteuer_vermeidung:
+  wert: "Mehrheit der Nachlässe bleibt in vielen Ländern unbesteuert"
+  beschreibung: "Befund der OECD zur tatsächlichen Wirkung bestehender Erbschaft- und Nachlasssteuern"
+  quelle: "OECD (2021), Inheritance Taxation in OECD Countries, OECD Tax Policy Studies No. 28, Kapitel 3"
+  veroeffentlicht: "2021-05"
+  url: "https://doi.org/10.1787/e2879a7d-en"
+  abgerufen: "2026-07-30"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT gegen die eigene Forderung - in den Kasten. Gründe: Freibeträge,
+    Begünstigungen, Schenkungen, Stiftungen, günstige Bewertung. Schnitt 0,5
+    Prozent. Schluss: Erbschaftsteuer wirkt nur so gut wie ihre Bemessungsgrundlage.
+
+at_bewertung_unternehmensanteile:
+  wert: "Bewertungsregeln und Bewertungsabschläge als eine der zentralen Ausweichmöglichkeiten"
+  beschreibung: "Einordnung der OECD, dass die Bewertung von Vermögen und insbesondere von über Gesellschaften gehaltenem Privatvermögen eine wesentliche Quelle von Steuerplanung ist"
+  quelle: "OECD (2021), Inheritance Taxation in OECD Countries, Kapitel 3; OECD (2018), The Role and Design of Net Wealth Taxes in the OECD"
+  veroeffentlicht: "2021-05"
+  url: "https://doi.org/10.1787/e2879a7d-en"
+  abgerufen: "2026-07-30"
+  konfidenz: mittel
+  hinweis: >
+    GEGENARGUMENT. OECD nennt Halten über Gesellschaften und Bewertungsregeln
+    unter den Ausweichwegen. NICHT behaupten, Bewertung sei unmöglich oder einfach.
+    Als offene Schwierigkeit führen.
+
+at_grundstueckswert_verfahren:
+  wert: "normiertes Bewertungsverfahren für Grundstücke, keines für nicht börsennotierte Anteile"
+  beschreibung: "Für die Grunderwerbsteuer besteht in Österreich ein in einer eigenen Verordnung geregeltes Verfahren zur Ermittlung des Grundstückswerts; ein vergleichbares allgemein verbindliches Verfahren für Anteile an nicht börsennotierten Unternehmen besteht nicht"
+  quelle: "Grundstückswertverordnung; WKO, Grunderwerbsteuer und Besteuerung von Privatstiftungen"
+  erhebungsjahr: 2026
+  url: "https://www.wko.at/steuern/besteuerung-privatstiftungen"
+  abgerufen: "2026-07-30"
+  konfidenz: mittel
+  hinweis: >
+    Erster Halbsatz gut belegt, zweiter schwerer. Vor Livegang steuerrechtlich
+    gegenlesen. Im Zweifel auf ersten Halbsatz kürzen.
+
+
+# === Modul E ===
+# ---------------------------------------------------------------------------
+# Modul E - "Du bildest dir das nicht ein"
+# Anhaengen an data/sources.yml.
+#
+# HINWEIS zur Benennung: Diese Eintraege beschreiben weltweite Werte und
+# tragen deshalb das Praefix "welt_" statt "at_". Falls der Build die IDs
+# gegen ein Muster prueft, das "at_" erzwingt, hier umbenennen.
+# ---------------------------------------------------------------------------
+
+
+# --- Die Kurve selbst ------------------------------------------------------
+
+welt_gic_datenbasis:
+  wert: "rund 120 Länder, 1988 bis 2008"
+  beschreibung: "Datenbasis der Elefantenkurve: harmonisierte Haushaltsbefragungen, kaufkraftbereinigt, jedes Land in Dezile geteilt"
+  quelle: "Lakner/Milanović (2016), Global Income Distribution: From the Fall of the Berlin Wall to the Great Recession, World Bank Economic Review 30(2), 203-232"
+  erhebungsjahr: 2008
+  veroeffentlicht: "2016"
+  url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2366598"
+  abgerufen: "2026-07-31"
+  konfidenz: hoch
+  hinweis: >
+    Die Erstfassung erschien 2013 als World-Bank-Arbeitspapier, die zitierte
+    Fassung 2016 begutachtet. Eine noch frühere Version von 2012 zeigte bei
+    Punkt B sogar einen Rückgang; diese Fassung NICHT verwenden, sie kursiert
+    aber weiterhin.
+
+welt_gic_median:
+  zahl: 75
+  perzentil: 50
+  wert: "rund 75 Prozent"
+  kurzwert: "rund +75 %"
+  beschreibung: "Kumuliertes reales Einkommenswachstum rund um den globalen Median zwischen 1988 und 2008"
+  quelle: "Lakner/Milanović (2016), dargestellt und nachgerechnet vom Center for Global Development"
+  erhebungsjahr: 2008
+  url: "https://www.cgdev.org/blog/chart-week-1-elephant-graph-flattening-out"
+  abgerufen: "2026-07-31"
+  konfidenz: mittel
+  sekundaerquelle: true
+  hinweis: >
+    Der Punktwert stammt aus der Nachrechnung des CGD ("roughly 75 percent
+    cumulative income growth", knapp 3 Prozent pro Jahr). Lakner/Milanović
+    selbst beschreiben den Bereich verbal. Vor Livegang gegen Abbildung 1
+    der WBER-Fassung prüfen. Nur gemeinsam mit welt_wachstum_konstantbev
+    verwenden - einzeln suggeriert der Wert eine Präzision, die die
+    Methodenkritik nicht trägt.
+
+welt_gic_p80:
+  zahl: 0
+  perzentil: 80
+  wert: "nahe null"
+  kurzwert: "nahe null"
+  spanne: "sehr geringes bis nahezu null Wachstum, je nach Perzentil zwischen 80 und 90"
+  beschreibung: "Reales Einkommenswachstum rund um das 80. globale Perzentil zwischen 1988 und 2008, dort überwiegend untere und mittlere Einkommensgruppen der reichen Länder"
+  quelle: "Milanović (2024), The three eras of global inequality 1820-2020, World Development 177, 106516; Lakner/Milanović (2016)"
+  erhebungsjahr: 2008
+  veroeffentlicht: "2024-01"
+  url: "https://doi.org/10.1016/j.worlddev.2023.106516"
+  abgerufen: "2026-07-31"
+  konfidenz: strittig
+  hinweis: >
+    NIE als exakte Null darstellen. Die Quellen formulieren "very sluggish,
+    or almost zero" beziehungsweise "almost negligible around the 85th-90th
+    global percentiles". Das Feld "zahl" dient allein der Positionierung in
+    der Grafik, beschriftet wird mit dem Feld "wert". Genau dieser Punkt ist
+    der methodisch am stärksten angegriffene der ganzen Kurve, siehe
+    welt_kritik_corlett_schluss.
+
+welt_gic_top1:
+  zahl: 60
+  perzentil: 99
+  wert: "rund 60 Prozent"
+  kurzwert: "rund +60 %"
+  spanne: "60 bis 65 Prozent je nach Darstellung"
+  beschreibung: "Kumuliertes reales Einkommenswachstum des reichsten Prozents weltweit zwischen 1988 und 2008"
+  quelle: "Lakner/Milanović (2016); Einordnung bei Corlett (2016), Resolution Foundation"
+  erhebungsjahr: 2008
+  url: "https://www.resolutionfoundation.org/app/uploads/2016/09/Examining-an-elephant.pdf"
+  abgerufen: "2026-07-31"
+  konfidenz: strittig
+  hinweis: >
+    Corlett weist darauf hin, dass die relative Leistung des globalen
+    obersten Prozents in der Originalgrafik überzeichnet ist, unter anderem
+    weil der Originalcode ungleich große Perzentile erzeugt. Gleichzeitig
+    erfassen Haushaltsbefragungen die allerhöchsten Einkommen schlecht, was
+    in die andere Richtung wirkt. Deshalb Spanne, nie Punktwert im Text.
+
+
+# --- Die Kritik, quantifiziert ---------------------------------------------
+
+welt_wachstum_original:
+  zahl: 24
+  wert: "24 Prozent"
+  beschreibung: "Durchschnittliches reales Wachstum des weltweiten Pro-Kopf-Einkommens 1988 bis 2008, wie in der Originalfassung der Elefantenkurve ausgewiesen"
+  quelle: "Lakner/Milanović (2016), nachgerechnet bei Corlett (2016), Examining an elephant, Resolution Foundation"
+  erhebungsjahr: 2008
+  veroeffentlicht: "2016-09"
+  url: "https://www.resolutionfoundation.org/app/uploads/2016/09/Examining-an-elephant.pdf"
+  abgerufen: "2026-07-31"
+  konfidenz: hoch
+  hinweis: "Nur im Dreiervergleich mit welt_wachstum_konsistent und welt_wachstum_konstantbev verwenden."
+
+welt_wachstum_konsistent:
+  zahl: 32
+  wert: "32 Prozent"
+  beschreibung: "Dasselbe Wachstum, gerechnet mit einem in beiden Jahren identischen Länderkreis"
+  quelle: "Corlett (2016), Examining an elephant, Resolution Foundation, Abschnitt 3"
+  erhebungsjahr: 2008
+  veroeffentlicht: "2016-09"
+  url: "https://www.resolutionfoundation.org/app/uploads/2016/09/Examining-an-elephant.pdf"
+  abgerufen: "2026-07-31"
+  konfidenz: mittel
+  hinweis: >
+    Grund für die Differenz: 2008 sind Länder enthalten, die 1988 fehlen,
+    darunter Russland, Vietnam, Südafrika, DR Kongo. Sie haben
+    unterdurchschnittliche Einkommen und drücken das Wachstum. Preis der
+    Korrektur: nur noch 60 statt 130 Länder, dadurch größeres Gewicht von
+    China und Indien. Fair bleiben und das mitsagen.
+
+welt_wachstum_konstantbev:
+  zahl: 41
+  wert: "41 Prozent"
+  beschreibung: "Dasselbe Wachstum, gerechnet mit identischem Länderkreis und zusätzlich konstant gehaltenen Bevölkerungsanteilen der Länder"
+  quelle: "Corlett (2016), Examining an elephant, Resolution Foundation, Abbildung 8"
+  erhebungsjahr: 2008
+  veroeffentlicht: "2016-09"
+  url: "https://www.resolutionfoundation.org/app/uploads/2016/09/Examining-an-elephant.pdf"
+  abgerufen: "2026-07-31"
+  konfidenz: mittel
+  hinweis: >
+    KERNZAHL DES MODULS. Corlett zeigt, dass der reine Bevölkerungseffekt
+    ohne jedes Einkommenswachstum die Kurve rund um das 75. Perzentil um bis
+    zu ein Viertel nach unten zieht. In dieser Rechnung liegt das
+    Mindestwachstum über die Verteilung bei 26 Prozent, ausgenommen das
+    unterste Prozent. Es ist eine Illustration des Effekts, keine
+    Alternativmessung - so auch im Text kennzeichnen.
+
+welt_wachstum_reifeoekonomien:
+  wert: "rund 52 Prozent über zwanzig Jahre, etwa 2 Prozent pro Jahr"
+  beschreibung: "Durchschnittliches Einkommenswachstum in den reifen Volkswirtschaften 1988 bis 2008, ohne Japan und ohne die Nachfolge- und Satellitenstaaten der Sowjetunion"
+  quelle: "Corlett (2016), Examining an elephant, Resolution Foundation, Abschnitt 3"
+  erhebungsjahr: 2008
+  veroeffentlicht: "2016-09"
+  url: "https://www.resolutionfoundation.org/app/uploads/2016/09/Examining-an-elephant.pdf"
+  abgerufen: "2026-07-31"
+  konfidenz: mittel
+  hinweis: >
+    Japan fällt wegen der geplatzten Blase heraus und weil Corlett die
+    zugrunde liegenden Japan-Daten für fehlerhaft hält (minus 24 Prozent
+    Realeinkommen 2002 bis 2008 bei gleichzeitig steigendem BIP pro Kopf).
+    Die osteuropäischen Staaten fallen wegen des Einbruchs nach 1989
+    heraus. Beide Ausschlüsse sind begründet, aber Eingriffe - im Text
+    offenlegen, nicht als neutrale Bereinigung darstellen. Österreich ist
+    in der verbleibenden Gruppe enthalten.
+
+welt_kritik_corlett_schluss:
+  wert: "von den Daten nicht getragen, mit Ausnahme der USA"
+  beschreibung: "Schlussfolgerung der Resolution Foundation zur These, die Einkommen der unteren Mittelschicht der reichen Länder hätten zwischen 1988 und 2008 stagniert"
+  quelle: "Corlett (2016), Examining an elephant, Resolution Foundation, Abschnitt 5"
+  veroeffentlicht: "2016-09"
+  url: "https://www.resolutionfoundation.org/app/uploads/2016/09/Examining-an-elephant.pdf"
+  abgerufen: "2026-07-31"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT, das gewichtigste des Moduls. Verpflichtend in den Kasten.
+    Corlett bestreitet ausdrücklich NICHT, dass die Gewinne innerhalb der
+    Länder ungleich verteilt waren. Sein Punkt ist enger: keine Stagnation
+    über die Gesamtperiode. Lakner und Milanović haben 2016 geantwortet;
+    diese Erwiderung vor Livegang beschaffen und ergänzen.
+
+welt_gic_deutung_offen:
+  wert: "mit beiden Erklärungen vereinbar"
+  beschreibung: "Einordnung von Branko Milanović, dass die Elefantenkurve sowohl eine internationale Deutung (Abstand zwischen globaler Mitte und 80. Perzentil) als auch eine innerstaatliche Deutung (Abstand zwischen 80. Perzentil und Spitze) zulässt und die Daten zwischen beiden nicht entscheiden"
+  quelle: "Milanović (2024), The three eras of global inequality 1820-2020, World Development 177, 106516, Abschnitt 2.2"
+  veroeffentlicht: "2024-01"
+  url: "https://doi.org/10.1016/j.worlddev.2023.106516"
+  abgerufen: "2026-07-31"
+  konfidenz: hoch
+  hinweis: >
+    TRÄGT DEN KERN DES MODULS und ist die Absicherung gegen Regel 8. Als
+    innerstaatliche Faktoren nennt Milanović niedrigere Besteuerung hoher
+    Einkommen, qualifikationsverzerrten technischen Fortschritt und
+    ungewöhnlich hohe Kapitalrenditen. Er nennt sie als mögliche Ursachen,
+    nicht als belegte. Diesen Unterschied im Text halten.
+
+
+# --- Nach 2008 -------------------------------------------------------------
+
+welt_gic_2008_2018:
+  wert: "rund 1,3 Prozent pro Jahr an der Spitze, rund 7 Prozent pro Jahr im ärmsten Fünftel"
+  beschreibung: "Reales Einkommenswachstum 2008 bis 2018: reichstes Prozent weltweit gegenüber dem ärmsten Fünftel der Weltbevölkerung"
+  quelle: "Milanović (2024), The three eras of global inequality 1820-2020, World Development 177, 106516, Abschnitt 2.2 und Tabelle 1"
+  erhebungsjahr: 2018
+  veroeffentlicht: "2024-01"
+  url: "https://doi.org/10.1016/j.worlddev.2023.106516"
+  abgerufen: "2026-07-31"
+  konfidenz: mittel
+  hinweis: >
+    GEGENARGUMENT. In den Kasten. Der Wert für das unterste Fünftel beträgt
+    in Tabelle 1 genau 7,4 Prozent und ist quasi nicht-anonym gerechnet.
+    Milanović selbst relativiert ihn: ein Teil der Verbesserung entsteht
+    dadurch, dass die chinesische Landbevölkerung das unterste Fünftel
+    verlassen hat und andere nachgerückt sind. Diese Einschränkung
+    mitliefern, sonst ist die Zahl zu gut, um wahr zu sein. Der niedrige
+    Wert an der Spitze geht wesentlich auf die Finanzkrise in den USA zurück.
+
+welt_position_deutschland:
+  wert: "vom 81. auf das 75. globale Perzentil"
+  beschreibung: "Verschiebung der Position des untersten Einkommenszehntels in Deutschland innerhalb der weltweiten Einkommensverteilung zwischen 1993 und 2018"
+  quelle: "Milanović (2024), The three eras of global inequality 1820-2020, World Development 177, 106516, Abbildung 7"
+  erhebungsjahr: 2018
+  veroeffentlicht: "2024-01"
+  url: "https://doi.org/10.1016/j.worlddev.2023.106516"
+  abgerufen: "2026-07-31"
+  konfidenz: mittel
+  hinweis: >
+    Deutschland statt Österreich, weil Milanović für Österreich keine
+    entsprechende Auswertung ausweist. Im Text als deutscher Wert
+    kennzeichnen, NICHT auf Österreich übertragen. Basisjahr ist 1993, weil
+    die Daten für 1988 nur Westdeutschland abdecken. Vergleichbare Werte:
+    Italien, unterstes Zehntel, minus rund 20 Perzentile; Frankreich vom 73.
+    auf das 69. Perzentil; USA minus 7 Perzentile.
+
+welt_position_bedeutung:
+  wert: "kein realer Einkommensverlust"
+  beschreibung: "Klarstellung, dass ein Absinken in der weltweiten Rangordnung nicht bedeutet, dass das reale Einkommen gesunken ist; in vielen Fällen ist es gestiegen"
+  quelle: "Milanović (2024), The three eras of global inequality 1820-2020, World Development 177, 106516, Schlussabschnitt"
+  veroeffentlicht: "2024-01"
+  url: "https://doi.org/10.1016/j.worlddev.2023.106516"
+  abgerufen: "2026-07-31"
+  konfidenz: hoch
+  hinweis: >
+    PFLICHT. Ohne diesen Satz wird aus dem Positionsargument eine
+    Verlusterzählung, und das wäre sachlich falsch. Immer unmittelbar nach
+    welt_position_deutschland setzen, nie getrennt davon.
+
+welt_gini_1988_2018:
+  wert: "von 69 auf 60 Gini-Punkte"
+  beschreibung: "Weltweite Einkommensungleichheit zwischen allen Menschen, gemessen als Gini-Koeffizient auf Basis von Haushaltsbefragungen und kaufkraftbereinigten Einkommen"
+  quelle: "Milanović (2024), The three eras of global inequality 1820-2020, World Development 177, 106516, Tabelle A2"
+  erhebungsjahr: 2018
+  veroeffentlicht: "2024-01"
+  url: "https://doi.org/10.1016/j.worlddev.2023.106516"
+  abgerufen: "2026-07-31"
+  konfidenz: mittel
+  hinweis: >
+    GEGENARGUMENT. In den Kasten. Zwischenwert 2008: 66. Der Rückgang ist
+    fast vollständig auf die Annäherung der Länder untereinander
+    zurückzuführen, nicht auf sinkende Ungleichheit innerhalb der Länder -
+    die ist im selben Zeitraum in vielen großen Ländern gestiegen. Andere
+    Autoren finden kleinere Rückgänge (5 bis 10 Punkte). Zu Marktkursen
+    statt Kaufkraftparitäten liegt das Niveau rund 10 Punkte höher.
+    Milanović weist ausserdem darauf hin, dass die absoluten Einkommens-
+    abstände im selben Zeitraum gewachsen sind.
+
+welt_armut_1990_2024:
+  wert: "von rund 2,3 Milliarden (1990) auf 847 Millionen Menschen (2024)"
+  beschreibung: "Zahl der Menschen weltweit in extremer Armut, gemessen an der internationalen Armutsgrenze von 3,00 Dollar pro Tag in Kaufkraftparitäten von 2021"
+  quelle: "Weltbank, Poverty and Inequality Platform, Aktualisierung März 2026"
+  erhebungsjahr: 2024
+  veroeffentlicht: "2026-03"
+  url: "https://blogs.worldbank.org/en/opendata/march-2026-global-poverty-update-from-the-world-bank--new-data-a"
+  abgerufen: "2026-07-31"
+  konfidenz: mittel
+  hinweis: >
+    GEGENARGUMENT, prominent. In den Kasten und nicht kleinreden. Entspricht
+    10,4 Prozent der Weltbevölkerung 2024. ACHTUNG Datenstand: Die Weltbank
+    hat die Armutsgrenze im Juni 2025 von 2,15 auf 3,00 Dollar angehoben,
+    ältere Zahlen sind damit nicht vergleichbar. Die Werte werden
+    halbjährlich revidiert, zuletzt nach oben. Datenstand immer mitnennen.
+
+welt_armut_hoehere_grenze:
+  wert: "knapp die Hälfte der Weltbevölkerung unter 8,30 Dollar pro Tag"
+  beschreibung: "Anteil der Weltbevölkerung unterhalb der Armutsgrenze für Länder mit gehobenem mittlerem Einkommen"
+  quelle: "Weltbank, Measuring Poverty"
+  erhebungsjahr: 2024
+  url: "https://www.worldbank.org/ext/en/topic/poverty/measuring-poverty"
+  abgerufen: "2026-07-31"
+  konfidenz: mittel
+  hinweis: >
+    Gegengewicht zu welt_armut_1990_2024, gehört direkt daneben. Milanović
+    formuliert denselben Punkt: bei einer Schwelle um 7.000 Kaufkraftdollar
+    im Jahr fällt der Rückgang der Armut deutlich bescheidener aus. Beide
+    Zahlen sind richtig, sie messen Verschiedenes.
+
+
+# --- Oesterreich -----------------------------------------------------------
+
+at_medianeinkommen_real_1998_2023:
+  wert: "brutto 2 Prozent unter dem Wert von 1998, netto auf dem Niveau von 1998"
+  beschreibung: "Inflationsbereinigte Entwicklung des mittleren Jahreseinkommens aller unselbständig Erwerbstätigen in Österreich zwischen 1998 und 2023"
+  quelle: "Rechnungshof und Statistik Austria, Allgemeiner Einkommensbericht 2024, Tabelle 9"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2024-12-19"
+  url: "https://www.rechnungshof.gv.at/rh/home/home_1/home_1/Allgemeiner_Einkommensbericht_2024_BF.pdf"
+  abgerufen: "2026-07-31"
+  konfidenz: hoch
+  hinweis: >
+    Index 1998 = 100, Wert 2023 brutto 98, netto 100. Nominell plus 76,2
+    Prozent bei einer Teuerung von 79,5 Prozent. IMMER beide Werte nennen,
+    brutto und netto - nur den Bruttowert zu zeigen wäre selektiv. Frauen
+    liegen brutto bei 107, Männer bei 98. Der Median über alle
+    Erwerbstätigen wird ausserdem von der Verschiebung zur Teilzeit
+    gedrückt, siehe at_teilzeit_strukturwandel. Ohne diesen Zusatz ist die
+    Zahl angreifbar.
+
+at_vollzeit_real_2004_2023:
+  wert: "real plus 5 Prozent brutto, plus 7 Prozent netto"
+  beschreibung: "Inflationsbereinigte Entwicklung des mittleren Jahreseinkommens der ganzjährig Vollzeitbeschäftigten in Österreich zwischen 2004 und 2023"
+  quelle: "Rechnungshof und Statistik Austria, Allgemeiner Einkommensbericht 2024, Tabelle 10"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2024-12-19"
+  url: "https://www.rechnungshof.gv.at/rh/home/home_1/home_1/Allgemeiner_Einkommensbericht_2024_BF.pdf"
+  abgerufen: "2026-07-31"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT gegen die eigene Ausgangszahl. In den Kasten. Basisjahr ist
+    2004, nicht 1998 - für Vollzeitbeschäftigte liegen erst ab 2004 Daten
+    vor. Die beiden Zeiträume sind daher NICHT direkt vergleichbar. Frauen
+    plus 15 Prozent, Männer plus 1 Prozent.
+
+at_teilzeit_strukturwandel:
+  wert: "ganzjährige Teilzeit seit 2004 um rund 80 Prozent gestiegen, Anteil ganzjähriger Vollzeit von 54,8 auf 48,7 Prozent gesunken"
+  beschreibung: "Veränderung der Beschäftigungsstruktur in Österreich zwischen 2004 und 2023 als Erklärung dafür, warum der Median über alle unselbständig Erwerbstätigen schwächer wächst als der Median der Vollzeitbeschäftigten"
+  quelle: "Rechnungshof und Statistik Austria, Allgemeiner Einkommensbericht 2024, Tabelle 5 und Kapitel 1.1.1"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2024-12-19"
+  url: "https://www.rechnungshof.gv.at/rh/home/home_1/home_1/Allgemeiner_Einkommensbericht_2024_BF.pdf"
+  abgerufen: "2026-07-31"
+  konfidenz: hoch
+  hinweis: >
+    Das österreichische Gegenstück zum Kompositionseffekt der
+    Elefantenkurve und deshalb für dieses Modul zentral: Dieselbe
+    Methodenkritik, die wir gegen die Kurve vorbringen, gilt gegen unsere
+    eigene Ausgangszahl. Das offen zu sagen ist der Punkt des Moduls.
+    KEINE Aussage darüber treffen, ob die Teilzeit freiwillig ist - die
+    Gründe sind im Bericht ausgewiesen und uneinheitlich.
+
+at_einkommensspreizung_1998_2023:
+  wert: "nominell plus 41 Prozent unten, plus 81 Prozent oben; unterstes Zehntel real bei 78 Prozent des Werts von 1998"
+  beschreibung: "Auseinanderentwicklung hoher und niedriger Bruttojahreseinkommen der unselbständig Erwerbstätigen in Österreich zwischen 1998 und 2023, gemessen am 10-Prozent- und am 90-Prozent-Quantil"
+  quelle: "Rechnungshof und Statistik Austria, Allgemeiner Einkommensbericht 2024, Tabelle 15 und Kapitel 1.1.1"
+  erhebungsjahr: 2023
+  veroeffentlicht: "2024-12-19"
+  url: "https://www.rechnungshof.gv.at/rh/home/home_1/home_1/Allgemeiner_Einkommensbericht_2024_BF.pdf"
+  abgerufen: "2026-07-31"
+  konfidenz: mittel
+  hinweis: >
+    ACHTUNG, Einschränkung mitliefern: Der Rechnungshof weist selbst darauf
+    hin, dass das unterste Quantil stark von der Zahl der Bezugstage abhängt
+    und dass die Schere ab etwa 2015 wieder kleiner wird, unter anderem durch
+    kollektivvertragliche Mindestlohnerhöhungen ab 2017. Der Sprung 2020
+    ist ein Struktureffekt der Pandemie, kein Einkommensanstieg. Ohne diese
+    Hinweise ist die Zahl überzeichnet.
+
+at_lohnquote_verlauf:
+  wert: "bis 2007 gesunken, seither steigend, zuletzt markant"
+  beschreibung: "Entwicklung des Anteils der Arbeitnehmerentgelte am Volkseinkommen in Österreich"
+  quelle: "Bittschi/Schiman-Vukan (2025), Die Lohnquote in Österreich, Wirtschaft und Gesellschaft 51(3), 67-97"
+  erhebungsjahr: 2024
+  veroeffentlicht: "2025-11-25"
+  url: "https://doi.org/10.59288/wug513.304"
+  abgerufen: "2026-07-31"
+  konfidenz: strittig
+  hinweis: >
+    BEWUSST OHNE PUNKTWERTE. Die häufig zitierten Zahlen (Höchstwert 77,2
+    Prozent 1978, 68,4 Prozent 2017, also minus 9 Prozentpunkte) stammen aus
+    dem A&W-Blog der AK und sind damit parteinah; ausserdem hängt das
+    Ergebnis stark vom Messkonzept ab, insbesondere von der Bereinigung um
+    die Struktur der Erwerbstätigen. Vor Livegang aus AMECO oder Statistik
+    Austria selbst rechnen und dann Punktwerte ergänzen.
+    ZWEITER TEIL IST GEGENARGUMENT und gehört in den Kasten: Die Lohnquote
+    ist seit dem Inflationsschock 2022/23 deutlich gestiegen, in Österreich
+    stärker als in vielen anderen Ländern. Wer aus dem langfristigen
+    Rückgang eine Richtungsaussage ableitet, ignoriert das.
+    KEINE Kausalaussage zur Einkommensstagnation - die Studie stützt sie
+    nicht.
+
+
+# === Modul F ===
+# ===========================================================================
+# Modul F - "Was zu tun waere"
+# Anhaengen an data/sources.yml.
+#
+# HINWEIS zur Benennung: Eintraege mit Praefix "eu_" beziehen sich auf die
+# Studie fuer die Europaeische Kommission, "welt_" auf globale Werte. Falls
+# der Build IDs gegen ein Muster prueft, das "at_" erzwingt, hier umbenennen.
+#
+# PATCH an einem bestehenden Eintrag, noetig fuer die Grafik:
+#   at_erbst_aufkommen_1mio braucht zwei numerische Felder. Bitte dort
+#   ergaenzen (Werte stehen bereits im Text des Eintrags):
+#     zahl_min: 1.354
+#     zahl_max: 1.828
+# ===========================================================================
+
+
+# --- Bezugsgroesse ---------------------------------------------------------
+
+at_bva_2026_auszahlungen:
+  zahl: 125.9
+  wert: "125,9 Mrd. Euro (2026)"
+  beschreibung: "Im Bundesvoranschlag 2026 veranschlagte Auszahlungen des Bundes"
+  quelle: "Budgetdienst des Parlaments, Budgetanalyse 2025 und 2026"
+  erhebungsjahr: 2026
+  veroeffentlicht: "2025-05-31"
+  url: "https://www.parlament.gv.at/fachinfos/budgetdienst/Budgetanalyse-2025-und-2026"
+  abgerufen: "2026-08-01"
+  konfidenz: hoch
+  hinweis: >
+    Bezugsgröße für den zentralen Absatz und die Grafik. Bewusst der
+    BUNDESHAUSHALT, nicht der Gesamtstaat - der Bund ist die Ebene, auf der
+    über diese Steuern entschieden wird, und die kleinere Zahl. Wer die
+    günstigere Bezugsgröße wählt, macht sich angreifbar.
+    Einzahlungen 2026: 107,6 Mrd., Nettofinanzierungssaldo -18,3 Mrd.
+    Quelle ist der parlamentarische Budgetdienst, also überparteilich -
+    für diese Zahl wichtiger als Schnelligkeit.
+
+
+# --- Forderung 1: Register -------------------------------------------------
+
+at_kontenregister:
+  wert: "zentrales Register aller Konten, Depots und Schließfächer, ohne Kontostände"
+  beschreibung: "In Österreich seit 2016 bestehendes Kontenregister: erfasst Konten, Depots und Schließfächer aller Privatpersonen und Unternehmen; enthält keine Kontostände und keine Bewegungen; Zweckbindung, Vier-Augen-Prinzip bei der Abfrage, Verständigung der betroffenen Person über FinanzOnline"
+  quelle: "Kontenregister- und Konteneinschaugesetz (KontRegG), BGBl. I Nr. 116/2015 idgF; BMF, Kontenregister und Konteneinschau"
+  erhebungsjahr: 2026
+  url: "https://www.bmf.gv.at/themen/betrugsbekaempfung/kontenregister-konteneinschau.html"
+  abgerufen: "2026-08-01"
+  konfidenz: hoch
+  hinweis: >
+    TRÄGT DEN ZENTRALEN ABSATZ ZUR ERSTEN FORDERUNG. Rechtstatsache, kein
+    Schätzwert. Der Punkt ist die Präzedenz: Ein zweckgebundenes zentrales
+    Register über Vermögenspositionen existiert bereits und gilt nicht als
+    Überwachung.
+    WICHTIGE EINSCHRÄNKUNG, die im Text stehen MUSS: Das Kontenregister
+    enthält KEINE Kontostände. Es kann Vermögen also nicht messen. Wer
+    behauptet, das Register mache ein Vermögensregister überflüssig oder
+    liefere die fehlenden Daten, irrt. Die Aussage ist ausschliesslich:
+    Rechtsform und Datenschutzarchitektur sind erprobt. Nicht mehr.
+    Ergänzend bestehen Grundbuch, Firmenbuch und das Register der
+    wirtschaftlichen Eigentümer (WiEReG, BGBl. I Nr. 136/2017).
+
+eu_studie_register:
+  wert: "umfassende Vermögensregister und Meldepflichten Dritter als notwendige Voraussetzung"
+  beschreibung: "Befund der Studie für die Europäische Kommission, dass umfassende Vermögensregister, Meldepflichten Dritter, automatischer Informationsaustausch und Digitalisierung der Finanzverwaltung mit höherer Steuerehrlichkeit und besserem Vollzug einhergehen"
+  quelle: "Europäische Kommission, CASE, Robaszewski, A., Skowronek, A., Płonka, H. u. a., Wealth Taxation, Including Net Wealth, Capital and Exit Taxes: Executive Summary, Publications Office of the European Union, Luxemburg 2026, Abschnitte Cross-cutting insights und Key take-aways"
+  veroeffentlicht: "2026-04-15"
+  url: "https://op.europa.eu/en/publication-detail/-/publication/61fca3fa-3872-11f1-be39-01aa75ed71a1"
+  abgerufen: "2026-08-01"
+  konfidenz: hoch
+  hinweis: >
+    Der beste verfügbare Beleg für die Hauptforderung, weil er nicht von
+    einer Kampagne stammt. WIFO war Konsortialführer, CASE Projektleiter.
+    ZUSCHREIBUNG GENAU NEHMEN: Es ist eine Studie IM AUFTRAG der Kommission,
+    keine Position der Kommission. Der Rechtstext sagt ausdrücklich, dass
+    die Ansichten die der Autorinnen und Autoren sind. Formulierung im Text
+    daher "Studie für die Europäische Kommission", nie "die EU-Kommission
+    fordert".
+
+at_eugh_transparenzregister:
+  wert: "öffentlicher Zugang für ungültig erklärt, Register selbst nicht beanstandet"
+  beschreibung: "Urteil des Europäischen Gerichtshofs vom 22.11.2022, wonach der Zugang aller Mitglieder der Öffentlichkeit zu den Daten wirtschaftlicher Eigentümer ein schwerwiegender Eingriff in die Grundrechte auf Achtung des Privatlebens und auf Schutz personenbezogener Daten ist (Art. 7 und 8 GRC)"
+  quelle: "EuGH (Große Kammer), Urteil vom 22.11.2022, verbundene Rechtssachen C-37/20 und C-601/20"
+  erhebungsjahr: 2022
+  veroeffentlicht: "2022-11-22"
+  abgerufen: "2026-08-01"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT, das stärkste zur Hauptforderung. Gehört in den Kasten
+    und darf nicht kleingeredet werden - es ist ein Urteil, keine Meinung.
+    ENTSCHEIDENDE UNTERSCHEIDUNG, ohne die die Wiedergabe unfair wäre:
+    Für ungültig erklärt wurde Art. 1 Nr. 15 lit. c der Richtlinie (EU)
+    2018/843, also die Pflicht zum Zugang OHNE Nachweis eines berechtigten
+    Interesses. Die Register selbst und der Zugang von Behörden und
+    Verpflichteten blieben unberührt. Österreich hat die öffentliche
+    Einsicht daraufhin sofort eingestellt.
+    DARAUS FOLGT FÜR UNSERE FORDERUNG: Ein öffentlich einsehbares
+    Vermögensregister NIE fordern. Das wäre nach dieser Rechtsprechung
+    nicht haltbar und würde die Forderung insgesamt beschädigen.
+    Belegt derzeit über Kanzleipublikationen; vor Livegang die Urteils-
+    fundstelle (curia.europa.eu) direkt setzen.
+
+
+# --- Forderung 3: koordinierte Mindeststeuer -------------------------------
+
+welt_zucman_mindeststeuer:
+  wert: "effektive Mindestbesteuerung von 2 Prozent des Nettovermögens"
+  beschreibung: "Vorschlag für einen international koordinierten Mindeststeuerstandard für sehr vermögende Personen; die Wahl des Instruments bleibt den einzelnen Staaten überlassen, bereits gezahlte Einkommensteuern werden angerechnet"
+  quelle: "Zucman (2024), A blueprint for a coordinated minimum effective taxation standard for ultra-high-net-worth individuals, Bericht für die brasilianische G20-Präsidentschaft"
+  veroeffentlicht: "2024-06"
+  url: "https://gabriel-zucman.eu/files/report-g20.pdf"
+  abgerufen: "2026-08-01"
+  konfidenz: hoch
+  hinweis: >
+    Konfidenz "hoch" bezieht sich auf Existenz und Inhalt des VORSCHLAGS,
+    nicht auf dessen Wirkung. Im Text sauber trennen.
+    HÄUFIGSTER FEHLER, auch bei Befürwortern: Der Vorschlag schreibt keine
+    Vermögensteuer vor. Er formuliert eine Untergrenze für die effektive
+    Gesamtbelastung; ein Staat kann sie über Kapitalertrag-, Einkommen-
+    oder Vermögensteuern erreichen. Wer bereits substanziell Einkommen-
+    steuer zahlt, zahlt nichts zusätzlich. Wer das als "globale
+    Vermögensteuer" wiedergibt, gibt es falsch wieder.
+    Zum G20-Kontext: 2024 unter brasilianischer Präsidentschaft auf der
+    Agenda. Eine Verpflichtung ist daraus NICHT entstanden. Nicht mehr
+    behaupten, als da ist.
+
+welt_zucman_variante_frankreich:
+  wert: "Nationalversammlung dafür, Senat dagegen"
+  beschreibung: "Abstimmung der französischen Nationalversammlung im Februar 2025 über eine Mindeststeuer von 2 Prozent auf Nettovermögen über 100 Millionen Euro; die Vorlage fand im Senat keine Mehrheit"
+  quelle: "Europäische Kommission, CASE u. a., Wealth Taxation: Volume 2, Kapitel 3.8 (Frankreich)"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2026-04-15"
+  url: "https://op.europa.eu/en/publication-detail/-/publication/61fca3fa-3872-11f1-be39-01aa75ed71a1"
+  abgerufen: "2026-08-01"
+  konfidenz: hoch
+  hinweis: >
+    IMMER BEIDE KAMMERN NENNEN. Die Zahl der Publikationen, die nur die
+    Zustimmung der Nationalversammlung berichten und das Scheitern im Senat
+    weglassen, ist groß. Wer das übernimmt, wird korrigiert und verliert
+    die Glaubwürdigkeit für den ganzen Abschnitt. Betroffen wären nach
+    französischen Angaben rund 1.800 Haushalte.
+
+at_mindeststeuer_100mio:
+  zahl: 1.9
+  wert: "rund 1,9 Mrd. Euro bei 2 Prozent, rund 3,4 Mrd. Euro bei 3 Prozent"
+  spanne: "1,9 Mrd. (2 Prozent) bis 3,4 Mrd. (3 Prozent), jeweils Vermögen über 100 Mio. Euro"
+  beschreibung: "Geschätztes jährliches Aufkommen einer effektiven Mindeststeuer auf Nettovermögen über 100 Millionen Euro in Österreich"
+  quelle: "Parrinello, Q., Varaschin, G., Zucman, G. (2025), Resources for a Safe and Resilient Europe: The Case for Minimum Taxation of Ultra-High-Net-Worth Individuals in the EU, EU Tax Observatory, Tabelle 1, Zeile Österreich"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2025-03"
+  url: "https://www.taxobservatory.eu/www-site/uploads/2025/03/Resources-for-a-Safe-and-Resilient-Europe_The-Case-for-Minimum-Taxation-of-Ultra-High-Net-Worth-Individuals-in-the-EU-1.pdf"
+  abgerufen: "2026-08-01"
+  konfidenz: strittig
+  hinweis: >
+    KORREKTUR AM BRIEFING. Die Zahl stimmt, die Zuschreibung war falsch.
+    Sie stammt NICHT aus der Studie der EU-Kommission und nicht vom WIFO,
+    sondern aus einer Auswertung des EU Tax Observatory vom März 2025.
+    Österreich-Zeile: 10 Milliardäre, 72,0 Mrd. USD bzw. 68,6 Mrd. EUR,
+    daraus 1,9 Mrd. bei 2 Prozent (davon 1,2 Mrd. von Milliardären) und
+    3,4 Mrd. bei 3 Prozent. Auf der Website daher NIE "laut EU-Kommission"
+    oder "laut WIFO" - das wäre angreifbar und sachlich unrichtig.
+    METHODENKRITIK, gehört offengelegt:
+    (a) Datengrundlage ist die Forbes-Echtzeitliste, abgerufen am 3.3.2025.
+    Reichenliste, keine Erhebung - dieselbe Kritik wie bei
+    at_anteil_top1_hochgeschaetzt. Das ist kein Nachteil für uns: Es ist
+    das Argument für das Register.
+    (b) Der Wert für Centi-Millionäre ist KEINE eigenständige Schätzung,
+    sondern der Milliardärswert multipliziert mit einem aus Zucman (2024)
+    übernommenen Faktor (1,55 bei 2 Prozent, 1,79 bei 3 Prozent). Also eine
+    Hochrechnung auf eine Hochrechnung.
+    (c) Unterstellt wird eine derzeitige effektive Belastung von 0,2 Prozent
+    des Vermögens - eine Annahme für alle EU-Staaten gleich, nicht für
+    Österreich gemessen.
+    (d) Statische Rechnung OHNE Verhaltensreaktionen. Bei
+    at_erbst_aufkommen_1mio sind Ausweicheffekte abgezogen, hier nicht. Die
+    beiden Werte sind daher nicht sauber addierbar. Wenn addiert wird, dann
+    ausdrücklich nur als Größenordnung und mit diesem Hinweis.
+    (e) NIE ohne die Schwelle nennen. "1,9 Mrd." ohne "ab 100 Mio." ist die
+    Vorlage für den Mittelstands-Vorwurf.
+
+at_milliardaere_anzahl:
+  zahl: 10
+  wert: "10 Personen mit zusammen rund 68,6 Mrd. Euro"
+  beschreibung: "Zahl der Personen mit einem Vermögen über einer Milliarde US-Dollar in Österreich und deren geschätztes Gesamtvermögen"
+  quelle: "Parrinello, Q., Varaschin, G., Zucman, G. (2025), EU Tax Observatory, Tabelle 1, auf Basis der Forbes-Echtzeitliste vom 3.3.2025"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2025-03"
+  url: "https://www.taxobservatory.eu/www-site/uploads/2025/03/Resources-for-a-Safe-and-Resilient-Europe_The-Case-for-Minimum-Taxation-of-Ultra-High-Net-Worth-Individuals-in-the-EU-1.pdf"
+  abgerufen: "2026-08-01"
+  konfidenz: strittig
+  hinweis: >
+    Reichenlisten-Wert, keine amtliche Zahl. Andere Listen kommen auf andere
+    Zahlen, und genau das ist der Punkt: Für diese Gruppe existiert keine
+    Statistik. Nur zusammen mit diesem Hinweis verwenden.
+    KEINE NAMEN, unter keinen Umständen. Der Betreiber haftet persönlich.
+    Umrechnung im Original: 72,0 Mrd. USD = 68,6 Mrd. EUR.
+
+
+# --- Politischer Stand -----------------------------------------------------
+
+at_nr_ablehnung_2026:
+  wert: "am 25. Februar 2026 mehrheitlich abgelehnt"
+  beschreibung: "Ablehnung eines Dringlichen Antrags auf Wiedereinführung von Erbschafts- und Schenkungssteuern für hohe Vermögen sowie einer Erbersatzsteuer für Privatstiftungen im Nationalrat"
+  quelle: "Parlamentskorrespondenz Nr. 135 vom 25.02.2026; Antrag 693/A(E), XXVIII. GP"
+  erhebungsjahr: 2026
+  veroeffentlicht: "2026-02-25"
+  url: "https://www.parlament.gv.at/aktuelles/pk/jahr_2026/pk0135"
+  abgerufen: "2026-08-01"
+  konfidenz: hoch
+  hinweis: >
+    PFLICHT. Gehört in den Abschnitt "Was offen zuzugeben ist", nicht in
+    eine Fussnote. Wer den aktuellen politischen Stand verschweigt, wirkt
+    unehrlich, sobald ihn jemand nachschlägt.
+    TON: als demokratisches Ergebnis darstellen, nicht als Skandal. Der
+    Antrag fand keine Mehrheit, weil ihn keine andere Fraktion unterstützte.
+    IM SICHTBAREN TEXT KEINE PARTEI- UND PERSONENNAMEN. Das ist eine
+    bewusste Entscheidung: Die Kampagne will auch Menschen erreichen, deren
+    Partei dagegen gestimmt hat. Die Sachargumente referieren, nicht die
+    Lager. Für die Belegseite hier festgehalten: abgelehnt bzw. nicht
+    unterstützt von allen anderen Fraktionen; der Finanzminister sprach
+    sich in der Debatte für eine Millionenerbschaftssteuer aus, erwartete
+    aber keine Mehrheit in dieser Legislaturperiode und nannte eine
+    Größenordnung von deutlich über einer Milliarde Euro jährlich.
+    Gegner nannten hohen Verwaltungsaufwand, Betriebsübergaben und
+    Standortwirkungen; eine Gegenrechnung im Plenum bezifferte das
+    diskutierte Modell mit rund 1,5 Mrd. Euro bzw. 0,7 Prozent der
+    Steuereinnahmen. Diese 0,7 Prozent stützen unseren eigenen zentralen
+    Absatz - sie stammen von der Gegenseite und sind deshalb besonders
+    brauchbar.
+
+at_zustimmung_vermoegensteuer:
+  wert: "im Schnitt rund 71 Prozent Zustimmung"
+  beschreibung: "Durchschnittliche Zustimmung zur Wiedereinführung einer Vermögensteuer in Österreich über zwölf Umfragen zwischen 2009 und 2016"
+  quelle: "Elsässer/Fastenrath/Rehm (2023), European Political Science Review 15(2), referiert in Europäische Kommission, CASE u. a., Wealth Taxation: Volume 2, Kapitel 1.9 (Österreich)"
+  erhebungsjahr: 2016
+  veroeffentlicht: "2026-04-15"
+  url: "https://doi.org/10.1017/S1755773922000510"
+  abgerufen: "2026-08-01"
+  konfidenz: mittel
+  hinweis: >
+    VORSICHTIG VERWENDEN. Datenstand ist alt (2009 bis 2016) und die Frage
+    lautete auf "Vermögensteuer", nicht auf unsere Forderungen. Nie als
+    Zustimmung zu diesem Forderungskatalog ausgeben.
+    KEIN ARGUMENT FÜR SICH. Nur als Kontrast zum Abstimmungsergebnis
+    verwenden und ausdrücklich dazusagen, dass eine Umfrage eine
+    parlamentarische Mehrheit nicht ersetzt. Sonst kippt der Abschnitt ins
+    Populistische, und das ist genau der Ton, den diese Seite vermeidet.
+    Ergänzend aus derselben Quelle: In einer Befragung von Fessler u. a.
+    (2023) lag die Zustimmung bei 74 Prozent, wenn gleichzeitig die
+    Einkommensteuer gesenkt würde. Die Medienberichterstattung zu
+    Vermögensteuern ist überwiegend ablehnend (Dammerer u. a. 2023).
+
+
+# --- Wirkungen und Grenzen -------------------------------------------------
+
+eu_studie_aufkommen_gering:
+  wert: "derzeit in den meisten Mitgliedstaaten keine nennenswerten Einnahmen"
+  beschreibung: "Querschnittsbefund der Studie für die Europäische Kommission, dass keine der untersuchten vermögensbezogenen Steuern in den meisten Mitgliedstaaten substanzielle Einnahmen erbringt, bei langfristig eher sinkendem Aufkommen trotz wachsender Privatvermögen"
+  quelle: "Europäische Kommission, CASE u. a., Wealth Taxation: Executive Summary, Abschnitt Cross-cutting insights"
+  veroeffentlicht: "2026-04-15"
+  url: "https://op.europa.eu/en/publication-detail/-/publication/61fca3fa-3872-11f1-be39-01aa75ed71a1"
+  abgerufen: "2026-08-01"
+  konfidenz: hoch
+  hinweis: >
+    DOPPELT VERWENDBAR, und beides ist beabsichtigt. Als Gegenargument im
+    Kasten und als Beleg für den zentralen Absatz: Ja, das Aufkommen ist
+    klein - das ist der Punkt, nicht der Einwand.
+    Begründung der Studie: hohe Freibeträge, breite Ausnahmen,
+    Begünstigungen, teils sinkende Sätze. Also eine Aussage über die
+    AUSGESTALTUNG, nicht über das Instrument. Diese Hälfte immer
+    mitliefern, sonst ist die Wiedergabe unfair.
+
+eu_studie_investitionen:
+  wert: "Effekte in der Regel moderat, Befundlage zur internationalen Mobilität dünn"
+  beschreibung: "Einschätzung der Studie für die Europäische Kommission zu den Wirkungen vermögensbezogener Steuern auf Sparen, Investitionen und Unternehmertum sowie zur Abwanderung sehr vermögender Personen"
+  quelle: "Europäische Kommission, CASE u. a., Wealth Taxation: Executive Summary, Abschnitte Net wealth taxes und Key take-aways"
+  veroeffentlicht: "2026-04-15"
+  url: "https://op.europa.eu/en/publication-detail/-/publication/61fca3fa-3872-11f1-be39-01aa75ed71a1"
+  abgerufen: "2026-08-01"
+  konfidenz: mittel
+  hinweis: >
+    BEIDE HÄLFTEN VERWENDEN, sonst ist es Rosinenpickerei.
+    Günstig für uns: Effekte auf Sparen, Investitionen und Unternehmertum
+    fallen laut Studie in der Regel moderat aus; gut ausgestaltete Steuern
+    können produktivere Vermögensverwendung fördern; Mobilitäts-
+    reaktionen werden häufig überschätzt.
+    Ungünstig für uns und ebenso wichtig: Zur internationalen Mobilität
+    sehr vermögender Personen ist die Evidenz ausdrücklich begrenzt. Die
+    Studie spricht sich zudem NICHT für eine breite laufende Vermögen-
+    steuer aus, sondern hält gut funktionierende Kapitalertrag- und
+    Erbschaftsteuern für das Rückgrat.
+    KEINE Kausalaussage daraus ableiten, die über "nicht abschliessend
+    geklärt" hinausgeht.
+
+eu_studie_simulation_oesterreich:
+  wert: "5,6 bis 6,8 Mrd. Euro je nach Ausgestaltung"
+  beschreibung: "Im Österreich-Kapitel der Studie referierte Simulation des möglichen Aufkommens einer laufenden Nettovermögensteuer sowie Befunde zur früheren österreichischen Vermögensteuer"
+  quelle: "Heck/Hornykewycz/Kapeller/Wildauer (2024), referiert in Europäische Kommission, CASE u. a., Wealth Taxation: Volume 2, Kapitel 1.5 und 1.9 (Österreich)"
+  erhebungsjahr: 2024
+  veroeffentlicht: "2026-04-15"
+  url: "https://op.europa.eu/en/publication-detail/-/publication/61fca3fa-3872-11f1-be39-01aa75ed71a1"
+  abgerufen: "2026-08-01"
+  konfidenz: strittig
+  hinweis: >
+    NUR für den Abschnitt "Aufkommensschätzungen schwanken stark" und für
+    den Kasten. NICHT als Forderung der Kampagne ausgeben - wir fordern
+    keine laufende Vermögensteuer.
+    Werte: 1 Prozent ab 1 Mio. ergibt 5,6 Mrd. (starke Ausweichreaktionen)
+    bis 6,3 Mrd. (schwache); progressiv 0,5 / 1 / 2 Prozent ab 1 / 10 /
+    50 Mio. ergibt 6,1 bis 6,8 Mrd. Schwelle ab 1 Mio. - also eine deutlich
+    größere Gruppe als unsere Forderungen. Bei Verwendung MUSS die
+    Schwelle mitgenannt werden.
+    Zweiter Teil ist GEGENARGUMENT: Die alte österreichische Vermögensteuer
+    (1 Prozent, abgeschafft 1994) brachte zuletzt 0,47 Prozent des BIP,
+    scheiterte an veralteten Einheitswerten, Bankgeheimnis und
+    Selbstdeklaration; 1993 entfielen rund 71 Prozent des Aufkommens auf
+    Unternehmen, nicht auf Privatvermögen.
+
+at_keine_empirie_vermoegensteuer:
+  wert: "keine empirischen Befunde für Österreich"
+  beschreibung: "Feststellung der Studie für die Europäische Kommission, dass zu wirtschaftlich relevanten Verhaltensreaktionen auf die frühere österreichische Vermögensteuer keine empirische Evidenz existiert und es keine Hinweise auf steuerbedingte Abwanderung gibt"
+  quelle: "Europäische Kommission, CASE u. a., Wealth Taxation: Volume 2, Kapitel 1.6 (Österreich)"
+  veroeffentlicht: "2026-04-15"
+  url: "https://op.europa.eu/en/publication-detail/-/publication/61fca3fa-3872-11f1-be39-01aa75ed71a1"
+  abgerufen: "2026-08-01"
+  konfidenz: hoch
+  hinweis: >
+    Belegt die Formulierung "empirisch nicht geklärt" - und zwar in BEIDE
+    Richtungen. Es gibt keine Belege für Abwanderung, aber auch keine
+    dagegen. Die Studie erklärt das fehlende Abwanderungsproblem damit,
+    dass die Steuer ohnehin leicht zu umgehen war. Das ist kein Argument
+    für Wirksamkeit. NICHT zu "Abwanderung findet nicht statt" verkürzen.
+
+welt_abwanderung_evidenz:
+  wert: "0,003 bis 0,03 Prozent jährlicher Rückgang je Prozentpunkt"
+  beschreibung: "Geschätzte Reaktion der Zahl sehr vermögender Steuerpflichtiger in Frankreich auf eine Erhöhung ihrer Besteuerung um einen Prozentpunkt; nach der Umstellung von der Vermögensteuer auf die Immobilienvermögensteuer gingen die Wegzüge zurück"
+  quelle: "Bach, L., Bozio, A., Grimprel, N., Guillouzouic, A., Landais, C., Malgouyres, C. (2025), Conseil d'Analyse Économique, Focus Nr. 118; France Stratégie (2023), referiert in Wealth Taxation: Volume 2, Kapitel 3.6"
+  erhebungsjahr: 2025
+  veroeffentlicht: "2026-04-15"
+  url: "https://www.cae-eco.fr/static/pdf/Focus_118_emigration_fiscale_250725_v2.pdf"
+  abgerufen: "2026-08-01"
+  konfidenz: mittel
+  hinweis: >
+    GEGENGEWICHT zu at_norwegen_wegzuege, gehört direkt daneben. Beide
+    Fälle nennen oder keinen.
+    Zusatzbefunde aus derselben Quelle: 2018 bis 2021 im Schnitt 380
+    Rückkehrer gegen 260 Wegzüge pro Jahr, davor 370 gegen 950. Die
+    Mobilität an der Spitze der Kapitaleinkommensverteilung liegt bei etwa
+    der Hälfte des landesweiten Durchschnitts.
+    EINSCHRÄNKUNG MITLIEFERN: Frankreich ist nicht Österreich, und die
+    Studie kann nicht klären, wie viele Wegzüge tatsächlich steuerlich
+    motiviert waren. Kein Beweis, dass Abwanderung kein Thema ist.
+
+at_verfassung_vermoegensteuer:
+  wert: "Bewertungsreform nötig; Endbesteuerungsgesetz mit Verfassungsrang"
+  beschreibung: "Verfassungsrechtliche Hürden für vermögensbezogene Steuern in Österreich: die Unterbewertung von Grundvermögen, wegen der der Verfassungsgerichtshof 2007 die Erbschaftssteuer aufhob, sowie das Endbesteuerungsgesetz, das Finanzvermögen mit kapitalertragsteuerpflichtigen Erträgen einer Vermögensteuer entzieht"
+  quelle: "Europäische Kommission, CASE u. a., Wealth Taxation: Volume 2, Kapitel 1.8 (Österreich); Endbesteuerungsgesetz, BGBl. Nr. 11/1993"
+  veroeffentlicht: "2026-04-15"
+  url: "https://op.europa.eu/en/publication-detail/-/publication/61fca3fa-3872-11f1-be39-01aa75ed71a1"
+  abgerufen: "2026-08-01"
+  konfidenz: hoch
+  hinweis: >
+    GEGENARGUMENT, und das präziseste im Kasten. Wer hier unsauber
+    formuliert, wird von jeder Steuerrechtlerin zerlegt.
+    DIE UNTERSCHEIDUNG IST ENTSCHEIDEND und stützt unsere Reihenfolge:
+    Für die ERBSCHAFTSSTEUER ist die Hürde eine Bewertungsreform, also
+    einfachgesetzlich lösbar. Für eine LAUFENDE VERMÖGENSTEUER auf
+    Finanzvermögen braucht es eine Verfassungsänderung, weil das
+    Endbesteuerungsgesetz Verfassungsrang hat. Genau deshalb steht in
+    diesem Modul die Übertragungssteuer und keine laufende Vermögensteuer.
+    NICHT behaupten, das Register brauche eine Verfassungsänderung - dafür
+    gibt es keinen Beleg, und das Kontenregister spricht dagegen.
+    
+de_erbst_verschonung_betriebsvermoegen:
+  wert: >-
+    85 Prozent Regelverschonung für begünstigtes Betriebsvermögen, auf Antrag
+    100 Prozent Optionsverschonung; gebunden an Behaltensfristen von fünf bzw.
+    sieben Jahren und Mindestlohnsummen von 400 bzw. 700 Prozent; Obergrenze
+    26 Millionen Euro je Erwerber
+  quelle: >-
+    § 13a Erbschaftsteuer- und Schenkungsteuergesetz (Deutschland),
+    https://www.gesetze-im-internet.de/erbstg_1974/__13a.html
+  abgerufen: "2026-08-02"
+
+de_erbst_aufkommen_2024:
+  wert: >-
+    13,3 Mrd. Euro festgesetzte Erbschaft- und Schenkungsteuer in Deutschland
+    (2024), davon 8,5 Mrd. Euro Erbschaftsteuer
+  zahl: 13.3
+  quelle: >-
+    Statistisches Bundesamt (Destatis), Pressemitteilung Nr. 320 vom 3. September 2025,
+    https://www.destatis.de/DE/Presse/Pressemitteilungen/2025/08/PD25_320_736.html
+  abgerufen: "2026-08-02"
+  
+  # ---------------------------------------------------------------------------
+# Modul D — warum der progressive Tarif an der Spitze ins Leere greift
+# ---------------------------------------------------------------------------
+
+at_wegzugsbesteuerung_kapitalanteile:
+  wert: "fiktive Veräußerung von Kapitalanteilen beim Wegzug, Sondersteuersatz 27,5 Prozent; bei Wegzug in einen EU- oder EWR-Staat auf Antrag Aufschub bis zur tatsächlichen Veräußerung"
+  quelle: "§ 27 Abs 6 EStG 1988, Rechtsinformationssystem des Bundes"
+  abgerufen: "2026-08-07"
+
+welt_uhnw_wenig_steuerbares_einkommen:
+  wert: "sehr große Vermögen erzeugen wenig steuerbares Einkommen, weil Gewinne in Holdinggesellschaften einbehalten und Wertzuwächse nicht realisiert werden"
+  quelle: "Gabriel Zucman, A Blueprint for a Coordinated Minimum Effective Taxation Standard for Ultra-High-Net-Worth Individuals, EU Tax Observatory für die brasilianische G20-Präsidentschaft, Juni 2024"
+  abgerufen: "2026-08-07"
+  strittig: true
+  hinweis: "Beschreibung eines Mechanismus, keine Messung für Österreich. Gegenposition siehe at_ihs_kapitaleinkommen_effektiv."
+
+welt_zucman_zweck_einkommensteuer:
+  wert: "keine Vermögensteuer, sondern ein Instrument zur Stärkung der Einkommensteuer"
+  quelle: "Gabriel Zucman, A Blueprint for a Coordinated Minimum Effective Taxation Standard for Ultra-High-Net-Worth Individuals, EU Tax Observatory, Juni 2024"
+  abgerufen: "2026-08-07"
+
+at_ihs_kapitaleinkommen_effektiv:
+  wert: "Kapitaleinkommen im Durchschnitt effektiv nicht niedriger besteuert als Arbeitseinkommen, einzelne Formen sogar höher"
+  quelle: "Institut für Höhere Studien, Zur Besteuerung von Vermögen in Österreich, Projektbericht (Keuschnigg u. a.)" # TODO: Erscheinungsjahr ergänzen
+  abgerufen: "2026-08-07"
+  strittig: true
+  hinweis: "Gegenposition zu Auswertungen, die für die Vermögensspitze eine regressive Wirkung annehmen. In der Fachdiskussion kein Konsens; wir führen beide Seiten."
+
+at_scheingewinnbesteuerung:
+  wert: "bei 4 Prozent nominaler und 2 Prozent realer Rendite entspricht eine Kapitalertragsteuer von 25 Prozent der Hälfte des realen Ertrags"
+  quelle: "Institut für Höhere Studien, Zur Besteuerung von Vermögen in Österreich, Projektbericht (Keuschnigg u. a.)" # TODO: Erscheinungsjahr ergänzen
+  abgerufen: "2026-08-07"
+  strittig: true
+  hinweis: "Rechenbeispiel des Instituts, keine Messung. Die Größenordnung hängt vollständig an den unterstellten Renditen und der unterstellten Inflation."
+
+# ---------------------------------------------------------------------------
+# Modul F — Mobilität der Personen gegenüber Ortsgebundenheit der Werte
+# ---------------------------------------------------------------------------
+
+welt_zucman_wegzug_massnahmen:
+  wert: "ausgeweitete Wegzugsbesteuerung sowie Mechanismen nach dem Vorbild der Mindestbesteuerung für Konzerne, mit denen teilnehmende Staaten unterbesteuerte Fälle aus nicht teilnehmenden Staaten erfassen können"
+  quelle: "Gabriel Zucman, A Blueprint for a Coordinated Minimum Effective Taxation Standard for Ultra-High-Net-Worth Individuals, EU Tax Observatory, Juni 2024, Zusammenfassung"
+  abgerufen: "2026-08-07"
+
+welt_zucman_wirtschaftliche_eigentuemer:
+  wert: "Aufnahme wirtschaftlicher Eigentümer ab einem Anteil von 1 Prozent in die länderbezogene Berichterstattung der Konzerne"
+  quelle: "Gabriel Zucman, A Blueprint for a Coordinated Minimum Effective Taxation Standard for Ultra-High-Net-Worth Individuals, EU Tax Observatory, Juni 2024, Zusammenfassung"
+  abgerufen: "2026-08-07"
+
+welt_frankreich_nachlauf_fuenf_jahre:
+  wert: "Steuerpflicht bleibt fünf Jahre über den Wegzug hinaus bestehen"
+  quelle: "Proposition de loi „Impôt plancher sur le patrimoine des ultra-riches“, Assemblée nationale, erste Lesung 20. Februar 2025; Darstellung franceinfo"
+  abgerufen: "2026-08-07"
+  strittig: true
+  hinweis: "Die Ausgestaltung unterschied sich zwischen den Fassungen, teils mit der Voraussetzung von zehn Jahren vorheriger Ansässigkeit. Der Text wurde vom Senat abgelehnt und ist nicht in Kraft."
+
+welt_staatsbuergerschaftsbesteuerung:
+  wert: "weltweit nur in den USA und in Eritrea; Eritrea erhebt eine pauschale Diasporasteuer von 2 Prozent, die der UN-Sicherheitsrat 2011 gerügt hat"
+  quelle: "Resolution 2023 (2011) des UN-Sicherheitsrats; Übersichtsdarstellung Tax Policy Associates, Juli 2026"
+  abgerufen: "2026-08-07"
+
+welt_eugh_wegzugsbesteuerung:
+  wert: "Wegzugsbesteuerung grundsätzlich zulässig, aber Aufschub bis zur tatsächlichen Realisierung erforderlich"
+  quelle: "EuGH 11.3.2004, C-9/02 (Hughes de Lasteyrie du Saillant); EuGH 29.11.2011, C-371/10 (National Grid Indus)"
+  abgerufen: "2026-08-07"
+  hinweis: "National Grid Indus betraf die Sitzverlegung einer Gesellschaft, de Lasteyrie du Saillant den Wegzug einer natürlichen Person. Die Übertragbarkeit auf eine laufende Mindestbesteuerung ist nicht entschieden."
+
+at_dba_immobilienklausel:
+  wert: "Besteuerungsrecht an Anteilen an Gesellschaften, deren Vermögen überwiegend aus unbeweglichem Vermögen besteht, liegt beim Belegenheitsstaat"
+  quelle: "Art 13 Abs 2 DBA Österreich–Deutschland; Art 13 Abs 4 OECD-Musterabkommen"
+  abgerufen: "2026-08-07"
